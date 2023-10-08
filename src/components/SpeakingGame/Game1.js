@@ -14,7 +14,8 @@ import SpeechToTextMic from '../SpeechToTextMic/SpeechToTextMic';
 // import Voice from 'react-native-voice';
 import Video from 'react-native-video';
 import SpeakingBackgroundCustom from './SpeakingBackgroundCustom';
-import {ratioH} from '../../utils/utils';
+import {CommonSize, ratioH} from '../../utils/utils';
+import {CommonActions} from '@react-navigation/native';
 
 const Game1 = ({navigation}) => {
   const [isPauseAudio, setPauseAudio] = useState(true);
@@ -23,12 +24,12 @@ const Game1 = ({navigation}) => {
 
   const [audioUrl, setAudioUrl] = useState('');
 
-  console.log({audioUrl});
   return (
-    <SpeakingBackgroundCustom
+    <SpeakingBackground
       title={'단어 말하기'}
       question={'소리를 듣고 따라말한 후 비교해보자!'}
-      onClickSpeakingButton={() => {}}>
+      onClickSpeakingButton={() => {}}
+      speakingButtonShown={false}>
       <View
         style={{
           flexDirection: 'row',
@@ -61,12 +62,7 @@ const Game1 = ({navigation}) => {
           />
         </View>
       </View>
-      <View
-        style={{
-          position: 'absolute',
-          zIndex: 1000,
-          bottom: ratioH(65),
-        }}>
+      <View>
         <SpeechToTextMic
           // isOnlyWhisper={isOnlyWhisper}
           // setOnlyWhisper={setOnlyWhisper}
@@ -105,7 +101,7 @@ const Game1 = ({navigation}) => {
           style={{width: 0, height: 0}}
         />
       )}
-    </SpeakingBackgroundCustom>
+    </SpeakingBackground>
   );
   // return (
   //   <>

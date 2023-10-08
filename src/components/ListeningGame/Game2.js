@@ -144,14 +144,14 @@ const Game2 = ({navigation}) => {
           />
         </View>
       </View>
-      {/* <Video
+      <Video
         source={require('../../../assets/audio/SentenceTraining.mp3')}
         paused={isPauseAudio}
         audioOnly={true}
         repeat={Platform.OS === 'ios'}
         onEnd={() => setPauseAudio(true)}
         style={{height: 0, width: 0}}
-      /> */}
+      />
       <SpeakingModalDialog
         modalVisible={correctModalShown}
         setModalVisible={setCorrectModalShown}
