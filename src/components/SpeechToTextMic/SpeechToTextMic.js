@@ -105,6 +105,7 @@ const SpeechToTextMic = ({
     audioRecordUri.current = audioFile;
     console.log({recordFileUri});
     if (isOnlyRecord) {
+      setRecording(false);
       onFinalMessage({
         text: null,
         audioUrl: audioRecordUri.current,

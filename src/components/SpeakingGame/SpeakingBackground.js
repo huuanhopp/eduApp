@@ -22,6 +22,8 @@ const SpeakingBackground = ({
   children,
   onClickSpeakingButton,
   speakingButtonShown = true,
+  indexSelected,
+  handleFinishRecording,
 }) => {
   const navigation = useNavigation();
   const [width, setWidth] = useState(CommonSize.srcWidthDefault);
@@ -67,6 +69,8 @@ const SpeakingBackground = ({
               destination={destination}
               navigation={navigation}
               onPress={onClickSpeakingButton}
+              indexSelected={indexSelected}
+              handleFinishRecording={handleFinishRecording}
             />
           )}
         </View>

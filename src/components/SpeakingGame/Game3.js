@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect, useMemo} from 'react';
 import {
   StyleSheet,
   View,
@@ -11,7 +11,7 @@ import SpeakingBackground from './SpeakingBackground';
 import RecordButton from '../../core/Button/RecordButton';
 import AnswerButton from '../../core/Button/AnswerButton';
 import {StackActions, useNavigation} from '@react-navigation/native';
-import { compareSentences, ratioH } from "../../utils/utils";
+import {compareSentences, ratioH} from '../../utils/utils';
 
 const widthScreen = Dimensions.get('screen').height * 1.431;
 
@@ -30,6 +30,7 @@ const Game3 = () => {
 
   const [anwsOptions, setAnwsOptions] = useState([
     {
+      id: 1,
       content: '숙제',
       top: 530,
       left: widthScreen * 0.26,
@@ -37,6 +38,7 @@ const Game3 = () => {
       isCorrect: true,
     },
     {
+      id: 2,
       content: '색깔',
       top: 530,
       left: widthScreen * 0.48,
@@ -44,6 +46,7 @@ const Game3 = () => {
       isCorrect: false,
     },
     {
+      id: 3,
       content: '친구',
       top: 530,
       left: widthScreen * 0.7,
@@ -51,6 +54,7 @@ const Game3 = () => {
       isCorrect: false,
     },
     {
+      id: 4,
       content: '내일',
       top: 500,
       left: widthScreen * 0.37,
@@ -58,6 +62,7 @@ const Game3 = () => {
       isCorrect: false,
     },
     {
+      id: 5,
       content: '토스트',
       top: 500,
       left: widthScreen * 0.59,
@@ -66,6 +71,10 @@ const Game3 = () => {
     },
   ]);
 
+  const indexSelected = useMemo(() => {
+    return anwsOptions?.findIndex(e => e?.selected == true);
+  }, [anwsOptions]);
+  console.log({indexSelected});
   const handleOneChoice = index => {
     if (anwsOptions[index].selected) {
       setIsCorrect(anwsOptions[index].isCorrect);
@@ -93,6 +102,13 @@ const Game3 = () => {
       question="문장의 빈 칸에 들어갈 알맞은 단어를 찾은 후 문장을 직접 읽어보자!"
       destination="SpeakingGame4"
       navigation={navigation}
+      indexSelected={indexSelected}
+      handleFinishRecording={audioUrl => {
+        navigation.navigate('SpeakingGame3Result', {
+          isCorrect: isCorrect,
+          audioUrl: audioUrl,
+        });
+      }}
       onClickSpeakingButton={onSelectRecordButton}>
       <View style={{flex: 1, justifyContent: 'center'}}>
         <Image
