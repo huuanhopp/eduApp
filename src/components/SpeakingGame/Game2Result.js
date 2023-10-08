@@ -13,10 +13,11 @@ import SpeakingTwoButton from '../../core/Button/SpeakingTwoButton';
 import Video from 'react-native-video';
 import {ratioH} from '../../utils/utils';
 
-const Game2Result = ({navigation}) => {
+const Game2Result = ({navigation, audioUrl, isCorrect}) => {
   const [isPauseAudio, setPauseAudio] = useState(true);
 
   const onShowResult = () => {};
+  console.log({gdfgsdgd: audioUrl})
 
   return (
     <SpeakingBackground
@@ -49,7 +50,7 @@ const Game2Result = ({navigation}) => {
           />
         </TouchableOpacity>
         <Video
-          source={require('../../../assets/audio/notCorrect1.m4a')}
+          source={{uri: audioUrl}}
           paused={isPauseAudio}
           audioOnly={true}
           repeat={Platform.OS === 'ios'}
