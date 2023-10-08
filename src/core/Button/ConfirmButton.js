@@ -6,12 +6,14 @@ const ConfirmButton = ({
   Modal,
   destination,
   navigation,
+  onPress,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <TouchableOpacity
       onPress={() => {
-        setModalVisible(true);
+        onPress();
+        // setModalVisible(true);
         // if (destination) {
         //   navigation.navigate(destination);
         // }

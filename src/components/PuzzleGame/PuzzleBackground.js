@@ -12,7 +12,13 @@ import ConfirmButton from '../../core/Button/ConfirmButton';
 import ListeningModalDialog from '../../core/Modal/ListeningModalDialog';
 import {CommonSize, Images, ratioH, ratioW} from '../../utils/utils';
 import {useNavigation} from '@react-navigation/native';
-const PuzzleBackground = ({title, question, destination, children}) => {
+const PuzzleBackground = ({
+  title,
+  question,
+  destination,
+  children,
+  onCheckResult,
+}) => {
   const navigation = useNavigation();
   const [width, setWidth] = useState(CommonSize.srcWidthDefault);
 
@@ -51,6 +57,7 @@ const PuzzleBackground = ({title, question, destination, children}) => {
             destination={destination}
             navigation={navigation}
             style={styles.confirmButton}
+            onPress={onCheckResult}
           />
         </View>
       </View>

@@ -120,12 +120,15 @@ const Game1 = ({navigation}) => {
     setCards(newCards);
   };
 
+  const onCheckResult = () => {};
+
   return (
     <PuzzleBackground
       title="카드 뒤집기"
       question="주어진 시간 안에 카드를 뒤집어 같은 그림끼리 찾아보자!"
       navigation={navigation}
-      destination="PuzzleGame1">
+      destination="PuzzleGame1"
+      onCheckResult={onCheckResult}>
       <View style={styles.contentView}>
         <View style={{flexDirection: 'row'}}>
           <Card
