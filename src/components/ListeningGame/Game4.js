@@ -11,6 +11,9 @@ import AnswerButton from '../../core/Button/AnswerButton';
 // import { Audio } from 'expo-av';
 import Video from 'react-native-video';
 import {ratioH} from '../../utils/utils';
+import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
+import WrongSpeakingModalDialog from '../../core/Modal/WrongSpeakingModalDialog';
+import {StackActions} from '@react-navigation/native';
 
 const Game4 = ({navigation}) => {
   const [isPauseAudio, setPauseAudio] = useState(true);
@@ -20,16 +23,22 @@ const Game4 = ({navigation}) => {
       top: 590,
       left: 460,
       selected: false,
+      isCorrect: true,
     },
     {
       content: 'X',
       top: 590,
       left: 740,
       selected: false,
+      isCorrect: false,
     },
   ]);
+  const [correctModalShown, setCorrectModalShown] = useState(false);
+  const [wrongModalShown, setWrongModalShown] = useState(false);
+  const [answerSelected, setAnswerSlected] = useState(null);
 
   const handleOneChoice = index => {
+    setAnswerSlected(anwsOptions[index]);
     if (anwsOptions[index].selected) return;
     const newAnsOptions = anwsOptions.map((ans, idx) => {
       return {
@@ -40,21 +49,39 @@ const Game4 = ({navigation}) => {
     setAnwsOptions(newAnsOptions);
   };
 
+  const onNext = () => {
+    setWrongModalShown(false);
+    navigation.dispatch(StackActions.push('ListeningGame5'));
+  };
+
+  const onRetry = () => {
+    setWrongModalShown(false);
+  };
+
+  const onCheckResult = () => {
+    if (answerSelected?.isCorrect) {
+      setCorrectModalShown(true);
+    } else {
+      setWrongModalShown(true);
+    }
+  };
+
   return (
     <ListeningBackground
       title="소음 훈련"
       question="소음을 듣고 그림과 상황이 일치하면 O, 그렇지 않으면 X를 선택해보자!"
       navigation={navigation}
       leftPosContent="25%"
-      destination="ListeningGame5">
+      destination="ListeningGame5"
+      onCheckResult={onCheckResult}>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <TouchableOpacity
-          style={styles.car}
-          onPress={async () => {
+          onPress={() => {
             setPauseAudio(false);
           }}>
           <Image
-            resizeMode="cover"
+            style={styles.car}
+            resizeMode="contain"
             source={require('../../../assets/images/ListeningGame/Game4/Car.png')}
           />
         </TouchableOpacity>
@@ -62,7 +89,8 @@ const Game4 = ({navigation}) => {
           style={{
             flexDirection: 'row',
             justifyContent: 'center',
-            marginTop: 60,
+            alignItems: 'center',
+            marginTop: 30,
           }}>
           <AnswerButton
             content={anwsOptions[0].content}
@@ -91,6 +119,17 @@ const Game4 = ({navigation}) => {
           onEnd={() => setPauseAudio(true)}
           style={{height: 0, width: 0}}
         />
+        <SpeakingModalDialog
+          modalVisible={correctModalShown}
+          setModalVisible={setCorrectModalShown}
+          onNext={onNext}
+        />
+        <WrongSpeakingModalDialog
+          modalVisible={wrongModalShown}
+          setModalVisible={setWrongModalShown}
+          onNext={onNext}
+          onRetry={onRetry}
+        />
       </View>
     </ListeningBackground>
   );
@@ -98,12 +137,12 @@ const Game4 = ({navigation}) => {
 
 const styles = StyleSheet.create({
   car: {
-    width: ratioH(541),
-    height: ratioH(249),
+    width: ratioH(545),
+    height: ratioH(253),
   },
   answerButton: {
     position: 'relative',
-    width: ratioH(258),
+    width: 258,
     height: ratioH(56),
     justifyContent: 'center',
     alignItems: 'center',

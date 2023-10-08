@@ -11,15 +11,22 @@ import BackButton from '../../core/Button/BackButton';
 import ConfirmButton from '../../core/Button/ConfirmButton';
 import ListeningModalDialog from '../../core/Modal/ListeningModalDialog';
 import {CommonSize, Images, ratioH, ratioW} from '../../utils/utils';
+import {useNavigation} from '@react-navigation/native';
 const ListeningBackground = ({
-  navigation,
   title,
   question,
   destination,
   leftPosContent = '32%',
   leftPosTitle = '44.6%',
   children,
+  onCheckResult,
 }) => {
+  const navigation = useNavigation();
+
+  const goBack = () => {
+    navigation.goBack();
+  };
+
   return (
     <ImageBackground
       resizeMode="contain"
@@ -27,7 +34,7 @@ const ListeningBackground = ({
       style={styles.imgBG}>
       <View style={{flex: 1}}>
         <View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={goBack}>
             <Image source={Images.backButton} style={styles.backButton} />
           </TouchableOpacity>
           <View style={styles.topView}>
@@ -45,6 +52,7 @@ const ListeningBackground = ({
             destination={destination}
             navigation={navigation}
             style={styles.confirmButton}
+            onPress={onCheckResult}
           />
         </View>
       </View>

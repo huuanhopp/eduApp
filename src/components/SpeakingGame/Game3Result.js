@@ -97,7 +97,7 @@ const Game4Result = () => {
       />
       <WrongSpeakingModalDialog
         modalVisible={wrongModalShown}
-        setModalVisible={WrongSpeakingModalDialog}
+        setModalVisible={setWrongModalShown}
         onNext={onNext}
         onRetry={onRetry}
       />

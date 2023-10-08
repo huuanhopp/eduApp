@@ -10,6 +10,9 @@ import ListeningBackground from './ListeningBackground';
 import AnswerButton from '../../core/Button/AnswerButton';
 import Video from 'react-native-video';
 import {ratioH} from '../../utils/utils';
+import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
+import WrongSpeakingModalDialog from '../../core/Modal/WrongSpeakingModalDialog';
+import {StackActions} from '@react-navigation/native';
 
 const Game5 = ({navigation}) => {
   const [isPauseAudio, setPauseAudio] = useState(true);
@@ -19,21 +22,25 @@ const Game5 = ({navigation}) => {
       top: 570,
       left: 460,
       selected: false,
+      isCorrect: true,
     },
     {
       content: '빨강 머리',
       top: 570,
       left: 650,
       selected: false,
+      isCorrect: false,
     },
     {
       content: '노랑 머리',
       top: 570,
       left: 840,
       selected: false,
+      isCorrect: false,
     },
   ]);
   const handleOneChoice = index => {
+    setAnswerSlected(anwsOptions[index]);
     if (anwsOptions[index].selected) return;
     const newAnsOptions = anwsOptions.map((ans, idx) => {
       return {
@@ -43,13 +50,34 @@ const Game5 = ({navigation}) => {
     });
     setAnwsOptions(newAnsOptions);
   };
+  const [correctModalShown, setCorrectModalShown] = useState(false);
+  const [wrongModalShown, setWrongModalShown] = useState(false);
+  const [answerSelected, setAnswerSlected] = useState(null);
+
+  const onNext = () => {
+    setWrongModalShown(false);
+    navigation.dispatch(StackActions.push('PuzzleGame1'));
+  };
+
+  const onRetry = () => {
+    setWrongModalShown(false);
+  };
+
+  const onCheckResult = () => {
+    if (answerSelected?.isCorrect) {
+      setCorrectModalShown(true);
+    } else {
+      setWrongModalShown(true);
+    }
+  };
 
   return (
     <ListeningBackground
       title="이야기 훈련"
       question="들려주는 이야기를 듣고 주어진 문제를 풀어보자!"
       navigation={navigation}
-      destination="PuzzleGame1">
+      destination="PuzzleGame1"
+      onCheckResult={onCheckResult}>
       <View style={{flex: 1, justifyContent: 'center'}}>
         <TouchableOpacity
           style={styles.yellowBoard}
@@ -109,6 +137,17 @@ const Game5 = ({navigation}) => {
           repeat={Platform.OS === 'ios'}
           onEnd={() => setPauseAudio(true)}
           style={{height: 0, width: 0}}
+        />
+        <SpeakingModalDialog
+          modalVisible={correctModalShown}
+          setModalVisible={setCorrectModalShown}
+          onNext={onNext}
+        />
+        <WrongSpeakingModalDialog
+          modalVisible={wrongModalShown}
+          setModalVisible={setWrongModalShown}
+          onNext={onNext}
+          onRetry={onRetry}
         />
       </View>
     </ListeningBackground>

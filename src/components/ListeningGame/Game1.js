@@ -3,6 +3,9 @@ import {StyleSheet, View, TouchableOpacity, Image} from 'react-native';
 import AnswerButton from '../../core/Button/AnswerButton';
 import ListeningBackground from './ListeningBackground';
 import {ratioH} from '../../utils/utils';
+import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
+import WrongSpeakingModalDialog from '../../core/Modal/WrongSpeakingModalDialog';
+import {StackActions} from '@react-navigation/native';
 
 const Game1 = ({navigation}) => {
   const [stackChoiceOrder, setStackChoiceOrder] = useState(0);
@@ -33,7 +36,8 @@ const Game1 = ({navigation}) => {
       order: 0,
     },
   ]);
-  const [isCorrect, setisCorrect] = useState(false);
+  const [correctModalShown, setCorrectModalShown] = useState(false);
+  const [wrongModalShown, setWrongModalShown] = useState(false);
   let removedOrderArr = useRef([]);
 
   const handleOrderInButton = (isSelected, index) => {
@@ -64,12 +68,35 @@ const Game1 = ({navigation}) => {
       : setStackChoiceOrder(prevStack => prevStack - 1);
   };
 
+  const onNext = () => {
+    setWrongModalShown(false);
+    navigation.dispatch(StackActions.push('ListeningGame2'));
+  };
+
+  const onRetry = () => {
+    setWrongModalShown(false);
+  };
+
+  const onCheckResult = () => {
+    if (
+      anwsOptions[0].order == 3 &&
+      anwsOptions[1].order == 2 &&
+      anwsOptions[2].order == 1 &&
+      anwsOptions[3].order == 4
+    ) {
+      setCorrectModalShown(true);
+    } else {
+      setWrongModalShown(true);
+    }
+  };
+
   return (
     <ListeningBackground
       title="단어 훈련"
       question="소리를 듣고 순서에 맞춰 단어를 선택해보자!"
       destination="ListeningGame2"
-      navigation={navigation}>
+      navigation={navigation}
+      onCheckResult={onCheckResult}>
       <View style={{flex: 1, justifyContent: 'center'}}>
         <TouchableOpacity
           style={styles.audio}
@@ -140,6 +167,17 @@ const Game1 = ({navigation}) => {
         onEnd={() => setPauseAudio(true)}
         style={{height: 0, width: 0}}
       /> */}
+      <SpeakingModalDialog
+        modalVisible={correctModalShown}
+        setModalVisible={setCorrectModalShown}
+        onNext={onNext}
+      />
+      <WrongSpeakingModalDialog
+        modalVisible={wrongModalShown}
+        setModalVisible={setWrongModalShown}
+        onNext={onNext}
+        onRetry={onRetry}
+      />
     </ListeningBackground>
   );
 };

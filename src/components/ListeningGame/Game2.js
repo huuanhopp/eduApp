@@ -12,6 +12,9 @@ import AnswerButton from '../../core/Button/AnswerButton';
 
 import Video from 'react-native-video';
 import {ratioH} from '../../utils/utils';
+import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
+import WrongSpeakingModalDialog from '../../core/Modal/WrongSpeakingModalDialog';
+import {StackActions} from '@react-navigation/native';
 
 const Game2 = ({navigation}) => {
   const [isPauseAudio, setPauseAudio] = useState(true);
@@ -21,28 +24,36 @@ const Game2 = ({navigation}) => {
       top: 390,
       left: 450,
       selected: false,
+      isCorrect: false,
     },
     {
       content: '나는 내일 워터파크에 가기로 했다',
       top: 460,
       left: 450,
       selected: false,
+      isCorrect: false,
     },
     {
       content: '너는 매일 아침 일찍 운동을 한다',
       top: 530,
       left: 450,
       selected: false,
+      isCorrect: true,
     },
     {
       content: '노는 아이는 일찍 잠에 든다',
       top: 600,
       left: 450,
       selected: false,
+      isCorrect: false,
     },
   ]);
+  const [answerSelected, setAnswerSlected] = useState(null);
+  const [correctModalShown, setCorrectModalShown] = useState(false);
+  const [wrongModalShown, setWrongModalShown] = useState(false);
 
   const handleOneChoice = index => {
+    setAnswerSlected(anwsOptions[index]);
     if (anwsOptions[index].selected) {
       return;
     }
@@ -55,12 +66,30 @@ const Game2 = ({navigation}) => {
     setAnwsOptions(newAnsOptions);
   };
 
+  const onNext = () => {
+    setWrongModalShown(false);
+    navigation.dispatch(StackActions.push('ListeningGame3'));
+  };
+
+  const onRetry = () => {
+    setWrongModalShown(false);
+  };
+
+  const onCheckResult = () => {
+    if (answerSelected?.isCorrect) {
+      setCorrectModalShown(true);
+    } else {
+      setWrongModalShown(true);
+    }
+  };
+
   return (
     <ListeningBackground
       title="문장 훈련"
       question="소리를 듣고 올바른 문장을 선택해보자!"
       navigation={navigation}
-      destination="ListeningGame3">
+      destination="ListeningGame3"
+      onCheckResult={onCheckResult}>
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <TouchableOpacity
           style={styles.audio}
@@ -123,6 +152,17 @@ const Game2 = ({navigation}) => {
         onEnd={() => setPauseAudio(true)}
         style={{height: 0, width: 0}}
       /> */}
+      <SpeakingModalDialog
+        modalVisible={correctModalShown}
+        setModalVisible={setCorrectModalShown}
+        onNext={onNext}
+      />
+      <WrongSpeakingModalDialog
+        modalVisible={wrongModalShown}
+        setModalVisible={setWrongModalShown}
+        onNext={onNext}
+        onRetry={onRetry}
+      />
     </ListeningBackground>
   );
 };
