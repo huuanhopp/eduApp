@@ -6,8 +6,10 @@ import {ratioH} from '../../utils/utils';
 import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
 import WrongSpeakingModalDialog from '../../core/Modal/WrongSpeakingModalDialog';
 import {StackActions} from '@react-navigation/native';
-// import { Audio } from 'expo-av';
+import Video from 'react-native-video';
+
 const Game3 = ({navigation}) => {
+  const [isPauseAudio, setPauseAudio] = useState(true);
   const [anwsOptions, setAnwsOptions] = useState([
     {
       content: '붉은 수건',
@@ -73,7 +75,7 @@ const Game3 = ({navigation}) => {
       destination="ListeningGame4"
       onCheckResult={onCheckResult}>
       <View style={{flex: 1, justifyContent: 'center'}}>
-        <TouchableOpacity style={styles.audio} onPress={async () => {}}>
+        <TouchableOpacity style={styles.audio} onPress={async () => {  setPauseAudio(false);}}>
           <Image
             style={{width: ratioH(165), height: ratioH(165)}}
             resizeMode="cover"
@@ -122,6 +124,14 @@ const Game3 = ({navigation}) => {
         onNext={onNext}
         onRetry={onRetry}
       />
+      <Video
+          source={require('../../../assets/audio/ListenStory.mp3')}
+          paused={isPauseAudio}
+          audioOnly={true}
+          repeat={Platform.OS === 'ios'}
+          onEnd={() => setPauseAudio(true)}
+          style={{height: 0, width: 0}}
+        />
     </ListeningBackground>
   );
 };
