@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import {StyleSheet, View, TouchableOpacity, Image} from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Image, Platform } from "react-native";
 import AnswerButton from '../../core/Button/AnswerButton';
 import ListeningBackground from './ListeningBackground';
 import {ratioH} from '../../utils/utils';

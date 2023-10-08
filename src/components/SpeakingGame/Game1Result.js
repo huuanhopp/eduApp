@@ -13,7 +13,7 @@ import SpeakingTwoButton from '../../core/Button/SpeakingTwoButton';
 import Video from 'react-native-video';
 import {ratioH} from '../../utils/utils';
 
-const Game1Result = ({navigation}) => {
+const Game1Result = ({navigation, handleRePlayAudioRecord}) => {
   const [isPauseAudio, setPauseAudio] = useState(true);
 
   return (
@@ -35,8 +35,8 @@ const Game1Result = ({navigation}) => {
             />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={async () => {
-              setPauseAudio(false);
+            onPress={() => {
+              handleRePlayAudioRecord && handleRePlayAudioRecord();
             }}>
             <Image
               resizeMode="contain"

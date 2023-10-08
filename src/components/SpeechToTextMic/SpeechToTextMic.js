@@ -27,6 +27,8 @@ const SpeechToTextMic = ({
   onGetText,
   onFinalMessage,
   isOnlyWhisper = true,
+  isOnlyRecord = false,
+  audioFileName = null,
   // setOnlyWhisper,
 }) => {
   // nav
@@ -79,6 +81,15 @@ const SpeechToTextMic = ({
       requestPermission();
       return;
     }
+    if (audioFileName) {
+      await AudioRecord.init({
+        sampleRate: 16000, // default 44100
+        channels: 1, // 1 or 2, default 1
+        bitsPerSample: 16, // 8 or 16, default 16
+        audioSource: 6, // android only (see below)
+        wavFile: audioFileName, // default 'audio.wav'
+      });
+    }
     await AudioRecord.start();
     setRecording(true);
     // timeStop.current = setTimeout(() => {
@@ -93,6 +104,14 @@ const SpeechToTextMic = ({
       Platform.OS === 'ios' ? audioFile : 'file://' + audioFile;
     audioRecordUri.current = audioFile;
     console.log({recordFileUri});
+    if (isOnlyRecord) {
+      setRecording(false);
+      onFinalMessage({
+        text: null,
+        audioUrl: audioRecordUri.current,
+      });
+      return;
+    }
     const param = new FormData();
     param.append('model', 'whisper-1');
     param.append('language', 'ko');
@@ -101,11 +120,12 @@ const SpeechToTextMic = ({
       type: Platform.OS === 'ios' ? 'audio' : 'audio/wav',
       name: 'videodub.wav',
     });
+
     axios
       .post('https://api.openai.com/v1/audio/transcriptions', param, {
         headers: {
           Authorization:
-            'Bearer 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',
+            'Bearer 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',
         },
       })
       .then(res => {
