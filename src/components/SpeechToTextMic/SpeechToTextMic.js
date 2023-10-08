@@ -28,6 +28,7 @@ const SpeechToTextMic = ({
   onFinalMessage,
   isOnlyWhisper = true,
   isOnlyRecord = false,
+  audioFileName = null,
   // setOnlyWhisper,
 }) => {
   // nav
@@ -79,6 +80,15 @@ const SpeechToTextMic = ({
     if (!isPermission) {
       requestPermission();
       return;
+    }
+    if (audioFileName) {
+      await AudioRecord.init({
+        sampleRate: 16000, // default 44100
+        channels: 1, // 1 or 2, default 1
+        bitsPerSample: 16, // 8 or 16, default 16
+        audioSource: 6, // android only (see below)
+        wavFile: audioFileName, // default 'audio.wav'
+      });
     }
     await AudioRecord.start();
     setRecording(true);

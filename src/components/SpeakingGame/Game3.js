@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -11,13 +11,23 @@ import SpeakingBackground from './SpeakingBackground';
 import RecordButton from '../../core/Button/RecordButton';
 import AnswerButton from '../../core/Button/AnswerButton';
 import {StackActions, useNavigation} from '@react-navigation/native';
-import {ratioH} from '../../utils/utils';
+import { compareSentences, ratioH } from "../../utils/utils";
 
 const widthScreen = Dimensions.get('screen').height * 1.431;
 
 const Game3 = () => {
   const navigation = useNavigation();
   const [isCorrect, setIsCorrect] = useState(false);
+
+  // Example usage:
+
+  useEffect(() => {
+    const sentence1 = 'This is a sample sentence.';
+    const sentence2 = 'This is a sample';
+    const similarityPercentage = compareSentences(sentence1, sentence2);
+    console.log(`Similarity Percentage: ${similarityPercentage.toFixed(2)}%`);
+  }, []);
+
   const [anwsOptions, setAnwsOptions] = useState([
     {
       content: '숙제',
