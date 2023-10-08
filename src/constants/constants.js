@@ -22,6 +22,9 @@ import SpeakingGame4 from '../screens/SpeakingScreen/SpeakingGame4';
 import SpeakingGame4Result from '../screens/SpeakingScreen/SpeakingGame4Result';
 // import ListeningModalDialog from '../core/Modal/ListeningModalDialog';
 import Stage1Screen from '../screens/Stage1Screen/Stage1Screen';
+import TutorialScreen from '../components/Tutorial/TutorialScreen';
+import {Dimensions} from 'react-native';
+import GuideScreen from '../components/Guide/GuideScreen';
 
 export const stackScreen = [
   {
@@ -116,4 +119,19 @@ export const stackScreen = [
     name: 'SpeakingGame4Result',
     component: SpeakingGame4Result,
   },
+  {
+    name: 'TutorialScreen',
+    component: TutorialScreen,
+  },
+  {
+    name: 'GuideScreen',
+    component: GuideScreen,
+  },
 ];
+
+export const screenSize = {
+  width: Dimensions.get('window').width,
+  height: Dimensions.get('window').height,
+};
+
+export const widthScreen = Dimensions.get('screen').height * 1.431;
