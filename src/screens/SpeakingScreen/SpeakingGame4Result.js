@@ -1,11 +1,14 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import Game4Result from '../../components/SpeakingGame/Game4Result';
-// import ListeningBackground from '../../components/ListeningGame/ListeningBackground';
-const SpeakingGame4 = ({ navigation }) => {
+import {useRoute} from '@react-navigation/native';
+const SpeakingGame4 = ({navigation}) => {
+  const route = useRoute();
+  const isCorrect = route.params?.isCorrect ?? false;
+
   return (
     <View style={styles.container}>
-      <Game4Result navigation={navigation} />
+      <Game4Result navigation={navigation} isCorrect={isCorrect} />
     </View>
   );
 };

@@ -1,102 +1,131 @@
-import React, { useState, useRef } from 'react';
-import { StyleSheet, View, TouchableOpacity, Image, Text, Platform } from "react-native";
+import React, {useState, useRef} from 'react';
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Image,
+  Text,
+  Platform,
+} from 'react-native';
 import SpeakingBackground from './SpeakingBackground';
 import RecordButton from '../../core/Button/RecordButton';
 import SpeakingTwoButton from '../../core/Button/SpeakingTwoButton';
 // import { Audio } from 'expo-av';
 import Video from 'react-native-video';
+import {StackActions, useNavigation, useRoute} from '@react-navigation/native';
+import WrongSpeakingModalDialog from '../../core/Modal/WrongSpeakingModalDialog';
+import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
+import {CommonSize, ratioH} from '../../utils/utils';
 
-
-const Game3Result = ({ navigation }) => {
+const Game4Result = () => {
   const [isPauseAudio, setPauseAudio] = useState(true);
   const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
+  const navigation = useNavigation();
+  const route = useRoute();
+  const isCorrect = route.params?.isCorrect ?? false;
+  const [correctModalShown, setCorrectModalShown] = useState(false);
+  const [wrongModalShown, setWrongModalShown] = useState(false);
 
-  const handleClick = () => {
-    setShowCorrectAnswer(!showCorrectAnswer);
+  const onNext = () => {
+    setWrongModalShown(false);
+    navigation.dispatch(StackActions.push('SpeakingGame4'));
+  };
+
+  const onRetry = () => {
+    navigation.goBack();
+  };
+
+  const onShowResult = () => {
+    if (isCorrect) {
+      setCorrectModalShown(true);
+    } else {
+      setWrongModalShown(true);
+    }
   };
 
   return (
-    <>
-      <SpeakingBackground
-        title="빈칸 채우기"
-        question="문장의 빈 칸에 들어갈 알맞은 단어를 찾은 후 문장을 직접 읽어보자!"
-        destination="SpeakingGame4"
-        navigation={navigation}
-      />
-      <View
-        style={styles.hint}
-      >
+    <SpeakingBackground
+      title="비슷한 발음 찾기"
+      question="제공된 단어와 비슷한 발음을 가지고 있는 단어를 찾아 선택한 후 읽어주세요"
+      destination="ListeningGame1"
+      navigation={navigation}
+      speakingButtonShown={false}>
+      <View style={styles.contentView}>
+        <View style={styles.hint}>
+          <Image
+            resizeMode="contain"
+            source={require('../../../assets/images/SpeakingGame/Game3/hintSmall.png')}
+            style={styles.hintImg}
+          />
+        </View>
         <Image
-          resizeMode="cover"
-          source={require('../../../assets/images/SpeakingGame/Game3/hintSmall.png')}
-        />
-      </View>
-
-      <View
-       style={styles.hint2}
-      >
-        <Image
-
-          resizeMode="cover"
+          resizeMode="contain"
           source={require('../../../assets/images/SpeakingGame/Game3/AnswerSmall.png')}
+          style={styles.answerButtons}
+        />
+        <TouchableOpacity
+          style={styles.fullText}
+          onPress={async () => {
+            setPauseAudio(false);
+          }}>
+          <Image
+            resizeMode="contain"
+            source={require('../../../assets/images/SpeakingGame/Game2/audio.png')}
+            style={styles.audioImg}
+          />
+        </TouchableOpacity>
+        <Video
+          source={require('../../../assets/audio/notCorrect1.m4a')}
+          paused={isPauseAudio}
+          audioOnly={true}
+          repeat={Platform.OS === 'ios'}
+          onEnd={() => setPauseAudio(true)}
+          style={{height: 0, width: 0}}
         />
       </View>
-
-
-
-      <TouchableOpacity
-       style={styles.fullText}
-       onPress={async () => {
-         setPauseAudio(false);
-          // const soundObject = new Audio.Sound();
-          // try {
-          //   await soundObject.loadAsync(
-          //     require('../../../assets/audio/sentenCorrect2.m4a'),
-          //   );
-          //   await soundObject.playAsync();
-          // } catch (error) {
-          //   console.log('Error playing sound:', error);
-          // }
-        }}
-      >
-        <Image
-
-          resizeMode="cover"
-          source={require('../../../assets/images/SpeakingGame/Game2/audio.png')}
+      <View style={styles.bottomView}>
+        <SpeakingTwoButton
+          destination="SpeakingGame4Result"
+          navigation={navigation}
+          onShowResult={onShowResult}
         />
-      </TouchableOpacity>
-
-
-      <SpeakingTwoButton destination="SpeakingGame4" navigation={navigation}/>
-      <Video
-        source={require('../../../assets/audio/sentenCorrect2.m4a')}
-        paused={isPauseAudio}
-        audioOnly={true}
-        repeat={Platform.OS === 'ios'}
-        onEnd={() => setPauseAudio(true)}
-        style={{height: 0, width: 0}}
+      </View>
+      <SpeakingModalDialog
+        modalVisible={correctModalShown}
+        setModalVisible={setCorrectModalShown}
+        onNext={onNext}
       />
-    </>
+      <WrongSpeakingModalDialog
+        modalVisible={wrongModalShown}
+        setModalVisible={WrongSpeakingModalDialog}
+        onNext={onNext}
+        onRetry={onRetry}
+      />
+    </SpeakingBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  hint: {
-    position: 'absolute',
-    top: '34%',
-    zIndex: 3,
+  hint: {},
+  hint2: {},
+  fullText: {},
+  contentView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-
-  fullText: {
-    position: 'absolute',
-    top: '64%',
-    zIndex: 3,
+  hintImg: {
+    height: ratioH(80),
   },
-  hint2: {
-    position: 'absolute',
-    top: '48%',
-    zIndex: 3,
+  answerButtons: {
+    height: 92,
+    marginTop: ratioH(30),
+    marginBottom: ratioH(35),
   },
+  audioImg: {
+    height: ratioH(108),
+  },
+  bottomView: {},
 });
 
-export default Game3Result;
+export default Game4Result;

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { TouchableOpacity, Image, StyleSheet } from 'react-native';
+import React, {useState} from 'react';
+import {TouchableOpacity, Image, StyleSheet} from 'react-native';
 
 const ConfirmButton = ({
   style = styles.absolute,
@@ -16,8 +16,7 @@ const ConfirmButton = ({
         //   navigation.navigate(destination);
         // }
       }}
-      style={style}
-    >
+      style={style}>
       <Image
         resizeMode="cover"
         source={require('../../../assets/images/core/ConfirmButton.png')}

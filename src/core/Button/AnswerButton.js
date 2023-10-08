@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
 const AnswerButton = ({
   content = 'Default text',
@@ -14,6 +14,9 @@ const AnswerButton = ({
   handleOneChoice,
   isUniqueSelected = false,
   id,
+  style,
+  textStyle,
+  buttonStyle,
 }) => {
   const [isSelected, setSelected] = useState(false);
 
@@ -46,16 +49,16 @@ const AnswerButton = ({
   };
 
   return (
-    <View style={[styles.container, { top, left }]}>
+    <View style={style ? [style] : [styles.container, {top, left}]}>
       <TouchableOpacity
         style={[
           styles.button,
           {
-            backgroundColor: !isSelected ? '#FFF' : '#0071FF',
+            backgroundColor: !isSelected ? '#FFF' : '#63A8FF',
           },
+          buttonStyle,
         ]}
-        onPress={handleButtonPress}
-      >
+        onPress={handleButtonPress}>
         <Text
           style={[
             styles.buttonText,
@@ -64,24 +67,16 @@ const AnswerButton = ({
             },
             {
               fontSize: type === 'small' ? 36 : 24,
-              height: customHeight ? customHeight : type === 'small' ? 68 : 36,
-              lineHeight: customHeight
-                ? customHeight
-                : type === 'small'
-                ? 68
-                : 36,
-              width: customWidth ? customWidth : type === 'small' ? 238 : 480,
             },
-          ]}
-        >
+            textStyle,
+          ]}>
           {content}
         </Text>
         {selectedOrder != 0 && (
           <Image
-            style={{ position: 'absolute', right: 13.5, top: 12 }}
+            style={{position: 'absolute', right: 13.5, top: 12}}
             resizeMode="cover"
-            source={sourceImage()}
-          ></Image>
+            source={sourceImage()}></Image>
         )}
       </TouchableOpacity>
     </View>
@@ -96,9 +91,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#63A8FF',
     borderRadius: 10,
-    paddingHorizontal: 40,
-    paddingVertical: 10,
-    // backgroundColor: '#FFF',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonText: {
     textAlign: 'center',

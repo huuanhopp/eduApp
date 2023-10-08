@@ -23,35 +23,39 @@ const Game1 = ({navigation}) => {
 
   const [audioUrl, setAudioUrl] = useState('');
 
-
-  console.log({audioUrl})
+  console.log({audioUrl});
   return (
     <SpeakingBackgroundCustom
       title={'단어 말하기'}
-      subTitle={'소리를 듣고 따라말한 후 비교해보자!'}>
-      <View style={{flexDirection: 'row', marginTop: ratioH(41)}}>
+      question={'소리를 듣고 따라말한 후 비교해보자!'}
+      onClickSpeakingButton={() => {}}>
+      <View
+        style={{
+          flexDirection: 'row',
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
         <TouchableOpacity
           style={{
-            marginRight: ratioH(51),
+            marginRight: 0,
           }}
           onPress={() => {
             setPauseAudio(false);
           }}>
           <Image
-            resizeMode="cover"
+            resizeMode="contain"
             source={require('../../../assets/images/SpeakingGame/Game1/wave.png')}
             style={{
-              height: ratioH(264),
               width: ratioH(424),
             }}
           />
         </TouchableOpacity>
         <View style={{}}>
           <Image
-            resizeMode="cover"
+            resizeMode="contain"
             source={require('../../../assets/images/SpeakingGame/Game1/wave2.png')}
             style={{
-              height: ratioH(264),
               width: ratioH(424),
             }}
           />
@@ -103,28 +107,28 @@ const Game1 = ({navigation}) => {
       )}
     </SpeakingBackgroundCustom>
   );
-  return (
-    <>
-      <SpeakingBackground
-        title="단어 말하기"
-        question="소리를 듣고 따라말한 후 비교해보자!"
-        destination="SpeakingGame1Result"
-        navigation={navigation}
-      />
-      <View style={[StyleSheet.absoluteFill, {}]}>
-        <View style={styles.wave2}>
-          <Image
-            resizeMode="cover"
-            source={require('../../../assets/images/SpeakingGame/Game1/wave2.png')}
-          />
-        </View>
-        <RecordButton
-          destination="SpeakingGame1Result"
-          navigation={navigation}
-        />
-      </View>
-    </>
-  );
+  // return (
+  //   <>
+  //     <SpeakingBackground
+  //       title="단어 말하기"
+  //       question="소리를 듣고 따라말한 후 비교해보자!"
+  //       destination="SpeakingGame1Result"
+  //       navigation={navigation}
+  //     />
+  //     <View style={[StyleSheet.absoluteFill, {}]}>
+  //       <View style={styles.wave2}>
+  //         <Image
+  //           resizeMode="cover"
+  //           source={require('../../../assets/images/SpeakingGame/Game1/wave2.png')}
+  //         />
+  //       </View>
+  //       <RecordButton
+  //         destination="SpeakingGame1Result"
+  //         navigation={navigation}
+  //       />
+  //     </View>
+  //   </>
+  // );
 };
 
 const styles = StyleSheet.create({
