@@ -1,10 +1,34 @@
-import React, {useEffect, useRef, useState} from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, Platform, Image } from "react-native";
+import React, {useEffect, useMemo, useRef, useState} from 'react';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  Platform,
+  Image,
+} from 'react-native';
 import Voice from '@react-native-voice/voice';
-import { ratioH, ratioW } from "../../utils/utils";
+import {ratioH, ratioW, whisper_token} from '../../utils/utils';
+import Permissions from 'react-native-permissions';
+import AudioRecord from 'react-native-audio-record';
+import axios from 'axios';
+
+const options = {
+  sampleRate: 16000, // default 44100
+  channels: 1, // 1 or 2, default 1
+  bitsPerSample: 16, // 8 or 16, default 16
+  audioSource: 6, // android only (see below)
+  wavFile: 'test.wav', // default 'audio.wav'
+};
+
 // import * as ExpoStt from 'expo-stt';
 
-const SpeechToTextMic = ({onGetText, onFinalMessage}) => {
+const SpeechToTextMic = ({
+  onGetText,
+  onFinalMessage,
+  isOnlyWhisper = true,
+  // setOnlyWhisper,
+}) => {
   // nav
   // ref
   // state
@@ -14,20 +38,89 @@ const SpeechToTextMic = ({onGetText, onFinalMessage}) => {
   // main container
   //
   const [textOfSpeech, setTextOfSpeech] = useState('');
-  const [error, setError] = useState('');
   const [isRecording, setRecording] = useState(false);
+  const [isAvailable, setAvailable] = useState(null);
+  const [isPermission, setPermission] = useState(false);
+  const audioRecordUri = useRef(null);
   let silenceTimer = useRef(null);
   const timeOut = 3500;
   const textVoice = useRef('');
 
   const getAvailable = async () => {
-    const isAvailable = await Voice.isAvailable();
-    console.log({isAvailable});
+    const _isAvailable = await Voice.isAvailable();
+    setAvailable(_isAvailable);
   };
+  console.log({isAvailable});
+
+  const isUsingWhisper = useMemo(() => {
+    return isAvailable === false || isOnlyWhisper;
+  }, [isAvailable, isOnlyWhisper]);
 
   useEffect(() => {
     onGetText && onGetText(textOfSpeech);
   }, [textOfSpeech]);
+
+  useEffect(() => {
+    if (!isPermission) {
+      setTimeout(() => {
+        requestPermission();
+      }, 1500);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isPermission) {
+      AudioRecord.init(options);
+    }
+  }, [isPermission]);
+
+  async function handleRecord() {
+    if (!isPermission) {
+      requestPermission();
+      return;
+    }
+    await AudioRecord.start();
+    setRecording(true);
+    // timeStop.current = setTimeout(() => {
+    //   stopRecord();
+    //   clearTimeout(timeStop.current);
+    // }, timeWord);
+  }
+
+  async function handleStopRecord() {
+    const audioFile = await AudioRecord.stop();
+    const recordFileUri =
+      Platform.OS === 'ios' ? audioFile : 'file://' + audioFile;
+    audioRecordUri.current = audioFile;
+    console.log({recordFileUri});
+    const param = new FormData();
+    param.append('model', 'whisper-1');
+    param.append('language', 'ko');
+    param.append('file', {
+      uri: recordFileUri,
+      type: Platform.OS === 'ios' ? 'audio' : 'audio/wav',
+      name: 'videodub.wav',
+    });
+    axios
+      .post('https://api.openai.com/v1/audio/transcriptions', param, {
+        headers: {
+          Authorization:
+            'Bearer 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',
+        },
+      })
+      .then(res => {
+        console.log({res});
+        onFinalMessage({
+          text: res?.data?.text,
+          audioUrl: audioRecordUri.current,
+        });
+        setTextOfSpeech(res?.data?.text);
+      })
+      .catch(e => {
+        console.log({e});
+      });
+    setRecording(false);
+  }
 
   useEffect(() => {
     getAvailable();
@@ -121,30 +214,63 @@ const SpeechToTextMic = ({onGetText, onFinalMessage}) => {
   //   };
   // }, []);
   //
-  const handlePressRecord = async () => {
-    if (!isRecording) {
-      setTextOfSpeech('');
-      //ko-KR
-      await Voice.start('ko-KR', {
-        RECOGNIZER_ENGINE: 'GOOGLE',
-        EXTRA_PARTIAL_RESULTS: true,
-        REQUEST_PERMISSIONS_AUTO: true,
-        EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS: 10000,
-      });
-    } else {
-      await Voice.stop();
-      Voice.destroy().then(Voice.removeAllListeners);
-      onFinalMessage(textOfSpeech);
-      if (silenceTimer?.current) {
-        clearTimeout(silenceTimer.current);
-      }
+
+  const requestPermission = async () => {
+    const p = await Permissions.request(
+      Platform.OS === 'android'
+        ? Permissions.PERMISSIONS.ANDROID.RECORD_AUDIO
+        : Permissions.PERMISSIONS.IOS.MICROPHONE,
+    );
+    if (p === 'granted') {
+      setPermission(true);
+      return p;
     }
-    setRecording(!isRecording);
+    console.log('permission request', p);
+  };
+  const handlePressRecord = async () => {
+    // k co speech to text trong may
+    setTextOfSpeech('');
+    if (isUsingWhisper === true) {
+      if (isRecording) {
+        await handleStopRecord();
+      } else {
+        await handleRecord();
+      }
+    } else {
+      if (!isRecording) {
+        //ko-KR
+        await Voice.start('ko-KR', {
+          RECOGNIZER_ENGINE: 'GOOGLE',
+          EXTRA_PARTIAL_RESULTS: true,
+          REQUEST_PERMISSIONS_AUTO: true,
+          EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS: 10000,
+        });
+      } else {
+        await Voice.stop();
+        Voice.destroy().then(Voice.removeAllListeners);
+        onFinalMessage(textOfSpeech);
+        if (silenceTimer?.current) {
+          clearTimeout(silenceTimer.current);
+        }
+      }
+      setRecording(!isRecording);
+    }
   };
 
+  if (isAvailable === null) {
+    return <View />;
+  }
+  // if (isAvailable === false) {
+  //   return <View />;
+  // }
   return (
     <View style={{alignItems: 'center'}}>
-      <Text style={{color: 'black', fontWeight: 'bold', fontSize: 20}}>
+      <Text
+        style={{
+          color: 'black',
+          fontWeight: 'bold',
+          fontSize: 20,
+        }}>
         {textOfSpeech}
       </Text>
       <TouchableOpacity onPress={handlePressRecord}>
@@ -158,6 +284,36 @@ const SpeechToTextMic = ({onGetText, onFinalMessage}) => {
           }}
         />
       </TouchableOpacity>
+      {/*{isAvailable === true && (*/}
+      {/*  <View*/}
+      {/*    style={{*/}
+      {/*      position: 'absolute',*/}
+      {/*      right: -100,*/}
+      {/*      alignItems: 'center',*/}
+      {/*    }}>*/}
+      {/*    <TouchableOpacity*/}
+      {/*      onPress={() => {*/}
+      {/*        setOnlyWhisper && setOnlyWhisper(!isOnlyWhisper);*/}
+      {/*      }}*/}
+      {/*      style={{*/}
+      {/*        height: 50,*/}
+      {/*        width: 80,*/}
+      {/*        backgroundColor: 'red',*/}
+      {/*        borderRadius: 20,*/}
+      {/*        alignItems: 'center',*/}
+      {/*        justifyContent: 'center',*/}
+      {/*      }}>*/}
+      {/*      <Text*/}
+      {/*        style={{*/}
+      {/*          fontSize: 12,*/}
+      {/*          color: '#ffffff',*/}
+      {/*        }}>*/}
+      {/*        Switch*/}
+      {/*      </Text>*/}
+      {/*    </TouchableOpacity>*/}
+      {/*    <Text>{isOnlyWhisper ? 'Whisper' : 'S2T'}</Text>*/}
+      {/*  </View>*/}
+      {/*)}*/}
     </View>
   );
 };
