@@ -38,3 +38,6 @@ export const CommonSize = {
   srcWidth: width,
   srcHeight: height,
 };
+
+export const whisper_token =
+  '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';

@@ -18,7 +18,13 @@ import {ratioH} from '../../utils/utils';
 
 const Game1 = ({navigation}) => {
   const [isPauseAudio, setPauseAudio] = useState(true);
+  const [isPauseAudioUser, setPauseAudioUser] = useState(true);
+  const [isOnlyWhisper, setOnlyWhisper] = useState(false);
 
+  const [audioUrl, setAudioUrl] = useState('');
+
+
+  console.log({audioUrl})
   return (
     <SpeakingBackgroundCustom
       title={'단어 말하기'}
@@ -57,7 +63,21 @@ const Game1 = ({navigation}) => {
           zIndex: 1000,
           bottom: ratioH(65),
         }}>
-        <SpeechToTextMic onGetText={_text => {}} onFinalMessage={_text => {}} />
+        <SpeechToTextMic
+          // isOnlyWhisper={isOnlyWhisper}
+          // setOnlyWhisper={setOnlyWhisper}
+          onGetText={_text => {}}
+          onFinalMessage={res => {
+            setAudioUrl(res?.audioUrl);
+            setPauseAudioUser(false);
+            // console.log({res})
+            // {
+            //   text: res?.data?.text,
+            //     audioUrl: audioRecordUri.current,
+            // }
+            // tra ve text vao link audio, gan linh audio nay vao video la play dc
+          }}
+        />
       </View>
       <Video
         source={require('../../../assets/audio/SpeakingWoman.mp3')}
@@ -67,6 +87,20 @@ const Game1 = ({navigation}) => {
         onEnd={() => setPauseAudio(true)}
         style={{height: 0, width: 0}}
       />
+      {audioUrl && (
+        <Video
+          source={{uri: audioUrl}}
+          paused={isPauseAudioUser}
+          audioOnly={true}
+          repeat={Platform.OS === 'ios'}
+          onEnd={() => {
+            setPauseAudioUser(true);
+            setAudioUrl('');
+          }}
+          ignoreSilentSwitch={'ignore'}
+          style={{width: 0, height: 0}}
+        />
+      )}
     </SpeakingBackgroundCustom>
   );
   return (
