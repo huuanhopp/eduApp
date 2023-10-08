@@ -1,8 +1,7 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import Game3 from '../../components/ListeningGame/Game3';
-// import ListeningBackground from '../../components/ListeningGame/ListeningBackground';
-const ListeningGame3 = ({ navigation }) => {
+const ListeningGame3 = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Game3 navigation={navigation} />

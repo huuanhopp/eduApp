@@ -37,4 +37,10 @@ export const ratioH = _height => {
 export const CommonSize = {
   srcWidth: width,
   srcHeight: height,
+  srcWidthDefault: (height * 1194) / 834,
+  srcHeightDefault: height,
+};
+
+export const Images = {
+  backButton: require('../../assets/images/core/BackButton.png'),
 };

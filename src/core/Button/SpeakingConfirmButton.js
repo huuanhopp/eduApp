@@ -1,24 +1,22 @@
-import React, { useState } from 'react';
-import { TouchableOpacity, Image, StyleSheet } from 'react-native';
-import { ratioW } from "../../utils/utils";
+import React, {useState} from 'react';
+import {TouchableOpacity, Image, StyleSheet} from 'react-native';
+import {ratioH, ratioW} from '../../utils/utils';
 
 const SpeakingConfirmButton = ({
   style = styles.absolute,
   Modal,
   destination,
   navigation,
+  onPress,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <TouchableOpacity
       onPress={() => {
-        setModalVisible(true);
-        // if (destination) {
-        //   navigation.navigate(destination);
-        // }
+        // setModalVisible(true);
+        onPress();
       }}
-      style={style}
-    >
+      style={style}>
       <Image
         resizeMode="cover"
         source={require('../../../assets/images/SpeakingGame/micButton.png')}
@@ -35,9 +33,8 @@ const SpeakingConfirmButton = ({
 
 const styles = StyleSheet.create({
   absolute: {
-    position: 'absolute',
-    bottom: 75,
-    left: '48%',
+    width: ratioH(90),
+    height: ratioH(90),
   },
 });
 

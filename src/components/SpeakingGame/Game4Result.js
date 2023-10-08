@@ -15,6 +15,7 @@ import Video from 'react-native-video';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import WrongSpeakingModalDialog from '../../core/Modal/WrongSpeakingModalDialog';
 import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
+import {CommonSize, ratioH} from '../../utils/utils';
 
 const Game4Result = () => {
   const [isPauseAudio, setPauseAudio] = useState(true);
@@ -42,51 +43,52 @@ const Game4Result = () => {
   };
 
   return (
-    <>
-      <SpeakingBackground
-        title="비슷한 발음 찾기"
-        question="제공된 단어와 비슷한 발음을 가지고 있는 단어를 찾아 선택한 후 읽어주세요"
-        destination="ListeningGame1"
-        navigation={navigation}
-      />
-      <View style={styles.hint}>
+    <SpeakingBackground
+      title="비슷한 발음 찾기"
+      question="제공된 단어와 비슷한 발음을 가지고 있는 단어를 찾아 선택한 후 읽어주세요"
+      destination="ListeningGame1"
+      navigation={navigation}
+      speakingButtonShown={false}>
+      <View style={styles.contentView}>
+        <View style={styles.hint}>
+          <Image
+            resizeMode="contain"
+            source={require('../../../assets/images/SpeakingGame/Game4/hintSmall.png')}
+            style={styles.hintImg}
+          />
+        </View>
         <Image
-          resizeMode="cover"
-          source={require('../../../assets/images/SpeakingGame/Game4/hintSmall.png')}
-        />
-      </View>
-
-      <View style={styles.hint2}>
-        <Image
-          resizeMode="cover"
+          resizeMode="contain"
           source={require('../../../assets/images/SpeakingGame/Game4/allAnswer.png')}
+          style={styles.answerButtons}
+        />
+        <TouchableOpacity
+          style={styles.fullText}
+          onPress={async () => {
+            setPauseAudio(false);
+          }}>
+          <Image
+            resizeMode="contain"
+            source={require('../../../assets/images/SpeakingGame/Game2/audio.png')}
+            style={styles.audioImg}
+          />
+        </TouchableOpacity>
+        <Video
+          source={require('../../../assets/audio/notCorrect1.m4a')}
+          paused={isPauseAudio}
+          audioOnly={true}
+          repeat={Platform.OS === 'ios'}
+          onEnd={() => setPauseAudio(true)}
+          style={{height: 0, width: 0}}
         />
       </View>
-
-      <TouchableOpacity
-        style={styles.fullText}
-        onPress={async () => {
-          setPauseAudio(false);
-        }}>
-        <Image
-          resizeMode="cover"
-          source={require('../../../assets/images/SpeakingGame/Game2/audio.png')}
+      <View style={styles.bottomView}>
+        <SpeakingTwoButton
+          destination="SpeakingGame4Result"
+          navigation={navigation}
+          onShowResult={onShowResult}
         />
-      </TouchableOpacity>
-
-      <SpeakingTwoButton
-        destination="SpeakingGame4Result"
-        navigation={navigation}
-        onShowResult={onShowResult}
-      />
-      <Video
-        source={require('../../../assets/audio/notCorrect1.m4a')}
-        paused={isPauseAudio}
-        audioOnly={true}
-        repeat={Platform.OS === 'ios'}
-        onEnd={() => setPauseAudio(true)}
-        style={{height: 0, width: 0}}
-      />
+      </View>
       <SpeakingModalDialog
         modalVisible={correctModalShown}
         setModalVisible={setCorrectModalShown}
@@ -98,26 +100,31 @@ const Game4Result = () => {
         onNext={onNext}
         onRetry={onRetry}
       />
-    </>
+    </SpeakingBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  hint: {
-    position: 'absolute',
-    top: '38%',
-    zIndex: 3,
+  hint: {},
+  hint2: {},
+  fullText: {},
+  contentView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  hint2: {
-    position: 'absolute',
-    top: '52%',
-    zIndex: 3,
+  hintImg: {
+    height: ratioH(80),
   },
-  fullText: {
-    position: 'absolute',
-    top: '65%',
-    zIndex: 3,
+  answerButtons: {
+    height: 56,
+    marginTop: ratioH(35),
+    marginBottom: ratioH(55),
   },
+  audioImg: {
+    height: ratioH(108),
+  },
+  bottomView: {},
 });
 
 export default Game4Result;

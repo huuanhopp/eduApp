@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
-import { StyleSheet, TouchableOpacity, Image, Platform } from "react-native";
+import React, {useState} from 'react';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Platform,
+  View,
+} from 'react-native';
 import ListeningBackground from './ListeningBackground';
 import AnswerButton from '../../core/Button/AnswerButton';
-// import { Audio } from 'expo-av';
 import Video from 'react-native-video';
+import {ratioH} from '../../utils/utils';
 
-const Game5 = ({ navigation }) => {
+const Game5 = ({navigation}) => {
   const [isPauseAudio, setPauseAudio] = useState(true);
   const [anwsOptions, setAnwsOptions] = useState([
     {
@@ -27,7 +33,7 @@ const Game5 = ({ navigation }) => {
       selected: false,
     },
   ]);
-  const handleOneChoice = (index) => {
+  const handleOneChoice = index => {
     if (anwsOptions[index].selected) return;
     const newAnsOptions = anwsOptions.map((ans, idx) => {
       return {
@@ -39,98 +45,100 @@ const Game5 = ({ navigation }) => {
   };
 
   return (
-    <>
-      <ListeningBackground
-        title="이야기 훈련"
-        question="들려주는 이야기를 듣고 주어진 문제를 풀어보자!"
-        navigation={navigation}
-        leftPosContent="31.5%"
-        leftPosTitle="42%"
-        destination="PuzzleGame1"
-      />
-      <TouchableOpacity
-        style={styles.yellowBoard}
-        onPress={async () => {
-          setPauseAudio(false);
-          // const soundObject = new Audio.Sound();
-          // try {
-          //   await soundObject.loadAsync(
-          //     require('../../../assets/audio/ListenStory.mp3'),
-          //   );
-          //   await soundObject.playAsync();
-          // } catch (error) {
-          //   console.log('Error playing sound:', error);
-          // }
-        }}
-      >
-        <Image
-          //   style={{ width: 40, height: 40 }}
-          resizeMode="cover"
-          source={require('../../../assets/images/ListeningGame/Game5/YellowBoard.png')}
+    <ListeningBackground
+      title="이야기 훈련"
+      question="들려주는 이야기를 듣고 주어진 문제를 풀어보자!"
+      navigation={navigation}
+      destination="PuzzleGame1">
+      <View style={{flex: 1, justifyContent: 'center'}}>
+        <TouchableOpacity
+          style={styles.yellowBoard}
+          onPress={async () => {
+            setPauseAudio(false);
+          }}>
+          <Image
+            resizeMode="cover"
+            source={require('../../../assets/images/ListeningGame/Game5/YellowBoard.png')}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.audio}
+          onPress={async () => {
+            setPauseAudio(false);
+          }}>
+          <Image
+            style={{width: ratioH(96), height: ratioH(96)}}
+            resizeMode="cover"
+            source={require('../../../assets/images/core/Audio.png')}
+          />
+        </TouchableOpacity>
+        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+          <AnswerButton
+            customWidth={300}
+            content={anwsOptions[0].content}
+            multipleChoice={false}
+            handleOneChoice={index => handleOneChoice(0)}
+            isUniqueSelected={anwsOptions[0].selected}
+            style={styles.answerButton}
+            textStyle={styles.textStyle}
+            buttonStyle={styles.buttonStyle}
+          />
+          <AnswerButton
+            content={anwsOptions[1].content}
+            multipleChoice={false}
+            handleOneChoice={index => handleOneChoice(1)}
+            isUniqueSelected={anwsOptions[1].selected}
+            style={{...styles.answerButton, marginLeft: 24, marginRight: 24}}
+            textStyle={styles.textStyle}
+            buttonStyle={styles.buttonStyle}
+          />
+          <AnswerButton
+            content={anwsOptions[2].content}
+            multipleChoice={false}
+            handleOneChoice={index => handleOneChoice(2)}
+            isUniqueSelected={anwsOptions[2].selected}
+            style={styles.answerButton}
+            textStyle={styles.textStyle}
+            buttonStyle={styles.buttonStyle}
+          />
+        </View>
+        <Video
+          source={require('../../../assets/audio/ListenStory.mp3')}
+          paused={isPauseAudio}
+          audioOnly={true}
+          repeat={Platform.OS === 'ios'}
+          onEnd={() => setPauseAudio(true)}
+          style={{height: 0, width: 0}}
         />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.audio}
-        onPress={async () => {
-          setPauseAudio(false);
-          // const soundObject = new Audio.Sound();
-          // try {
-          //   await soundObject.loadAsync(
-          //     require('../../../assets/audio/ListenStory.mp3'),
-          //   );
-          //   await soundObject.playAsync();
-          // } catch (error) {
-          //   console.log('Error playing sound:', error);
-          // }
-        }}
-      >
-        <Image
-          style={{ width: 94, height: 94 }}
-          resizeMode="cover"
-          source={require('../../../assets/images/core/Audio.png')}
-        />
-      </TouchableOpacity>
-      {anwsOptions.map((item, index) => (
-        <AnswerButton
-          type="long"
-          customWidth={84.3}
-          customHeight={36}
-          key={index}
-          id={index}
-          content={item.content}
-          top={item.top}
-          left={item.left}
-          multipleChoice={false}
-          handleOneChoice={(index) => handleOneChoice(index)}
-          isUniqueSelected={item.selected}
-        />
-      ))}
-      <Video
-        source={require('../../../assets/audio/ListenStory.mp3')}
-        paused={isPauseAudio}
-        audioOnly={true}
-        repeat={Platform.OS === 'ios'}
-        onEnd={() => setPauseAudio(true)}
-        style={{height: 0, width: 0}}
-      />
-    </>
+      </View>
+    </ListeningBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  audio: {
-    position: 'absolute',
-    top: 440,
-    left: '47%',
-    zIndex: 3,
-    // fontWeight: 700,
-  },
   yellowBoard: {
-    position: 'absolute',
-    top: 310,
-    left: '28%',
-    zIndex: 3,
-    // fontWeight: 700,
+    alignSelf: 'center',
+    height: ratioH(93),
+    resizeMode: 'contain',
+  },
+  audio: {
+    alignSelf: 'center',
+    marginVertical: 33,
+  },
+  answerButton: {
+    position: 'relative',
+    width: 164,
+    height: ratioH(56),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textStyle: {
+    lineHeight: null,
+    fontSize: 28,
+  },
+  buttonStyle: {
+    height: ratioH(56),
+    width: 164,
   },
 });
 

@@ -11,6 +11,7 @@ import SpeakingBackground from './SpeakingBackground';
 import RecordButton from '../../core/Button/RecordButton';
 import {StackActions, useNavigation} from '@react-navigation/native';
 import AnswerButton from '../../core/Button/AnswerButton';
+import {ratioH} from '../../utils/utils';
 
 const widthScreen = Dimensions.get('screen').height * 1.431;
 
@@ -60,76 +61,81 @@ const Game4 = () => {
   };
 
   return (
-    <>
-      <SpeakingBackground
-        title="비슷한 발음 찾기"
-        question="주어진 단어와 비슷한 발음을 가지고 있는 단어를 찾아 선택한 후 읽어보자!"
-        destination="ListeningGame1"
-        navigation={navigation}
-      />
-      <View style={styles.hint}>
+    <SpeakingBackground
+      title="비슷한 발음 찾기"
+      question="주어진 단어와 비슷한 발음을 가지고 있는 단어를 찾아 선택한 후 읽어보자!"
+      destination="ListeningGame1"
+      navigation={navigation}
+      onClickSpeakingButton={onSelectRecordButton}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Image
           resizeMode="cover"
           source={require('../../../assets/images/SpeakingGame/Game4/hint.png')}
+          style={styles.hintImg}
         />
-      </View>
-      <View
-        style={{
-          height: 60,
-          position: 'absolute',
-          width: widthScreen,
-          top: widthScreen * 0.38,
-          zIndex: 999,
-        }}>
-        {anwsOptions.map((item, index) => (
+        <View
+          style={{
+            flexDirection: 'row',
+          }}>
+          <AnswerButton
+            content={anwsOptions[0].content}
+            multipleChoice={false}
+            handleOneChoice={index => handleOneChoice(0)}
+            isUniqueSelected={anwsOptions[0].selected}
+            buttonStyle={styles.buttonStyle}
+            textStyle={styles.textStyle}
+            style={styles.answerButton}
+          />
+          <AnswerButton
+            content={anwsOptions[1].content}
+            multipleChoice={false}
+            handleOneChoice={index => handleOneChoice(1)}
+            isUniqueSelected={anwsOptions[1].selected}
+            buttonStyle={styles.buttonStyle}
+            textStyle={styles.textStyle}
+            style={{
+              ...styles.answerButton,
+              marginHorizontal: 24,
+            }}
+          />
           <AnswerButton
             customWidth={135}
-            key={index}
-            id={index}
-            content={item.content}
-            left={item.left}
+            content={anwsOptions[2].content}
             multipleChoice={false}
-            handleOneChoice={index => handleOneChoice(index)}
-            isUniqueSelected={item.selected}
-            customHeight={56}
+            handleOneChoice={index => handleOneChoice(2)}
+            isUniqueSelected={anwsOptions[2].selected}
+            buttonStyle={styles.buttonStyle}
+            textStyle={styles.textStyle}
+            style={styles.answerButton}
           />
-        ))}
+        </View>
       </View>
-      <RecordButton
-        destination="SpeakingGame4Result"
-        navigation={navigation}
-        onPress={onSelectRecordButton}
-      />
-    </>
+    </SpeakingBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  hint: {
-    position: 'absolute',
-    top: '38%',
-    zIndex: 3,
+  hintImg: {
+    alignSelf: 'center',
+    height: ratioH(123),
+    resizeMode: 'contain',
+    marginBottom: ratioH(85),
   },
-
-  ans1: {
-    position: 'absolute',
-    top: '60%',
-    zIndex: 30,
-    left: '32%',
+  buttonStyle: {
+    height: 88,
+    width: 164,
   },
-
-  ans2: {
-    position: 'absolute',
-    top: '60%',
-    zIndex: 30,
-    left: '45%',
+  textStyle: {
+    lineHeight: null,
+    includeFontPadding: false,
+    fontSize: 28,
   },
-
-  ans3: {
-    position: 'absolute',
-    top: '60%',
-    zIndex: 30,
-    left: '58%',
+  answerButton: {
+    position: 'relative',
+    width: 164,
+    height: 88,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

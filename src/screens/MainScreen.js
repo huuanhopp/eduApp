@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
-import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-const MainScreen = ({ navigation }) => {
-  useEffect(() => {
-    navigation.navigate('SpeakingGame1');
-  }, []);
+import React, {useEffect} from 'react';
+import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+const MainScreen = ({navigation}) => {
+  // useEffect(() => {
+  //   navigation.navigate('SpeakingGame1');
+  // }, []);
 
-  return <View />
   return (
     <View style={styles.container}>
       <Image
@@ -17,8 +16,7 @@ const MainScreen = ({ navigation }) => {
         style={styles.searchingBtn}
         onPress={() => {
           navigation.navigate('Progress');
-        }}
-      >
+        }}>
         <Image
           resizeMode="cover"
           source={require('../../assets/images/MainScreen/Searching.png')}
@@ -29,8 +27,7 @@ const MainScreen = ({ navigation }) => {
         style={styles.yellowBtn}
         onPress={() => {
           navigation.navigate('Stage');
-        }}
-      >
+        }}>
         <Image
           resizeMode="cover"
           source={require('../../assets/images/MainScreen/YellowButton.png')}
@@ -40,8 +37,7 @@ const MainScreen = ({ navigation }) => {
         style={styles.listeningGame}
         onPress={() => {
           navigation.navigate('ListeningProgress');
-        }}
-      >
+        }}>
         <Image
           resizeMode="cover"
           source={require('../../assets/images/MainScreen/ListeningGame.png')}
@@ -51,8 +47,7 @@ const MainScreen = ({ navigation }) => {
         style={styles.speakingGame}
         onPress={() => {
           navigation.navigate('SpeakingProgress');
-        }}
-      >
+        }}>
         <Image
           resizeMode="cover"
           source={require('../../assets/images/MainScreen/SpeakingGame.png')}
@@ -62,8 +57,7 @@ const MainScreen = ({ navigation }) => {
         style={styles.puzzleGame}
         onPress={() => {
           navigation.navigate('PuzzleProgress');
-        }}
-      >
+        }}>
         <Image
           resizeMode="cover"
           source={require('../../assets/images/MainScreen/PuzzleGame.png')}

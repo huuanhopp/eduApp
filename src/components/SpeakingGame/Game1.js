@@ -20,32 +20,37 @@ const Game1 = ({navigation}) => {
   const [isPauseAudio, setPauseAudio] = useState(true);
 
   return (
-    <SpeakingBackgroundCustom
+    <SpeakingBackground
       title={'단어 말하기'}
-      subTitle={'소리를 듣고 따라말한 후 비교해보자!'}>
-      <View style={{flexDirection: 'row', marginTop: ratioH(41)}}>
+      question={'소리를 듣고 따라말한 후 비교해보자!'}
+      onClickSpeakingButton={() => {}}>
+      <View
+        style={{
+          flexDirection: 'row',
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
         <TouchableOpacity
           style={{
-            marginRight: ratioH(51),
+            marginRight: 0,
           }}
           onPress={() => {
             setPauseAudio(false);
           }}>
           <Image
-            resizeMode="cover"
+            resizeMode="contain"
             source={require('../../../assets/images/SpeakingGame/Game1/wave.png')}
             style={{
-              height: ratioH(264),
               width: ratioH(424),
             }}
           />
         </TouchableOpacity>
         <View style={{}}>
           <Image
-            resizeMode="cover"
+            resizeMode="contain"
             source={require('../../../assets/images/SpeakingGame/Game1/wave2.png')}
             style={{
-              height: ratioH(264),
               width: ratioH(424),
             }}
           />
@@ -57,7 +62,7 @@ const Game1 = ({navigation}) => {
           zIndex: 1000,
           bottom: ratioH(65),
         }}>
-        <SpeechToTextMic onGetText={_text => {}} onFinalMessage={_text => {}} />
+        {/* <SpeechToTextMic onGetText={_text => {}} onFinalMessage={_text => {}} /> */}
       </View>
       <Video
         source={require('../../../assets/audio/SpeakingWoman.mp3')}
@@ -67,7 +72,7 @@ const Game1 = ({navigation}) => {
         onEnd={() => setPauseAudio(true)}
         style={{height: 0, width: 0}}
       />
-    </SpeakingBackgroundCustom>
+    </SpeakingBackground>
   );
   return (
     <>
