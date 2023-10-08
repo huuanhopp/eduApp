@@ -1,13 +1,62 @@
-import React, { useState, useRef } from 'react';
-import { StyleSheet, View, TouchableOpacity, Image, Text } from 'react-native';
+import React, {useState, useRef} from 'react';
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Image,
+  Text,
+  Dimensions,
+} from 'react-native';
 import SpeakingBackground from './SpeakingBackground';
 import RecordButton from '../../core/Button/RecordButton';
-const Game4 = ({ navigation }) => {
+import {StackActions, useNavigation} from '@react-navigation/native';
+import AnswerButton from '../../core/Button/AnswerButton';
 
-  const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
+const widthScreen = Dimensions.get('screen').height * 1.431;
 
-  const handleClick = () => {
-    setShowCorrectAnswer(!showCorrectAnswer);
+const Game4 = () => {
+  const navigation = useNavigation();
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [anwsOptions, setAnwsOptions] = useState([
+    {
+      content: '숙제',
+      left: widthScreen * 0.19,
+      selected: false,
+      isCorrect: true,
+    },
+    {
+      content: '색깔',
+      left: widthScreen * 0.405,
+      selected: false,
+      isCorrect: false,
+    },
+    {
+      content: '친구',
+      left: widthScreen * 0.62,
+      selected: false,
+      isCorrect: false,
+    },
+  ]);
+
+  const handleOneChoice = index => {
+    if (anwsOptions[index].selected) {
+      setIsCorrect(anwsOptions[index].isCorrect);
+      return;
+    } else {
+      const newAnsOptions = anwsOptions.map((ans, idx) => {
+        return {
+          ...ans,
+          selected: index === idx,
+        };
+      });
+      setAnwsOptions(newAnsOptions);
+      setIsCorrect(anwsOptions[index].isCorrect);
+      return;
+    }
+  };
+
+  const onSelectRecordButton = () => {
+    navigation.dispatch(StackActions.push('SpeakingGame4Result', {isCorrect}));
   };
 
   return (
@@ -18,49 +67,39 @@ const Game4 = ({ navigation }) => {
         destination="ListeningGame1"
         navigation={navigation}
       />
-      <View
-        style={styles.hint}
-      >
+      <View style={styles.hint}>
         <Image
           resizeMode="cover"
           source={require('../../../assets/images/SpeakingGame/Game4/hint.png')}
         />
       </View>
-
-      <View style={styles.ans1}>
-      <TouchableOpacity onPress={handleClick}>
-        {showCorrectAnswer ? (
-          <Image
-            resizeMode="cover"
-            source={require('../../../assets/images/SpeakingGame/Game4/ansCorrect.png')}
-          />
-        ) : (
-          <Image
-            resizeMode="cover"
-            source={require('../../../assets/images/SpeakingGame/Game4/ans1.png')}
-          />
-        )}
-      </TouchableOpacity>
-    </View>
-
       <View
-        style={styles.ans2}
-      >
-        <Image
-          resizeMode="cover"
-          source={require('../../../assets/images/SpeakingGame/Game4/ans2.png')}
-        />
+        style={{
+          height: 60,
+          position: 'absolute',
+          width: widthScreen,
+          top: widthScreen * 0.38,
+          zIndex: 999,
+        }}>
+        {anwsOptions.map((item, index) => (
+          <AnswerButton
+            customWidth={135}
+            key={index}
+            id={index}
+            content={item.content}
+            left={item.left}
+            multipleChoice={false}
+            handleOneChoice={index => handleOneChoice(index)}
+            isUniqueSelected={item.selected}
+            customHeight={56}
+          />
+        ))}
       </View>
-
-      <View
-        style={styles.ans3}
-      >
-        <Image
-          resizeMode="cover"
-          source={require('../../../assets/images/SpeakingGame/Game4/ans3.png')}
-        />
-      </View>
-      <RecordButton destination="SpeakingGame4Result" navigation={navigation}/>
+      <RecordButton
+        destination="SpeakingGame4Result"
+        navigation={navigation}
+        onPress={onSelectRecordButton}
+      />
     </>
   );
 };
@@ -76,24 +115,22 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '60%',
     zIndex: 30,
-    left: "32%"
+    left: '32%',
   },
 
   ans2: {
     position: 'absolute',
     top: '60%',
     zIndex: 30,
-    left: "45%"
-  }, 
+    left: '45%',
+  },
 
   ans3: {
     position: 'absolute',
     top: '60%',
     zIndex: 30,
-    left: "58%"
+    left: '58%',
   },
-
-
 });
 
 export default Game4;

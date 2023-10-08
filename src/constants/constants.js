@@ -21,7 +21,7 @@ import SpeakingGame3Result from '../screens/SpeakingScreen/SpeakingGame3Result';
 import SpeakingGame4 from '../screens/SpeakingScreen/SpeakingGame4';
 import SpeakingGame4Result from '../screens/SpeakingScreen/SpeakingGame4Result';
 // import ListeningModalDialog from '../core/Modal/ListeningModalDialog';
-import Stage1Screen from '../screens/Stage1Screen/Stage1Screen'
+import Stage1Screen from '../screens/Stage1Screen/Stage1Screen';
 
 export const stackScreen = [
   {

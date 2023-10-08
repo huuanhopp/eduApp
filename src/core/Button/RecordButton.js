@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
-import { TouchableOpacity, Image, StyleSheet } from 'react-native';
-import { ratioW } from "../../utils/utils";
+import React, {useState} from 'react';
+import {TouchableOpacity, Image, StyleSheet} from 'react-native';
+import {ratioW} from '../../utils/utils';
 
 const RecordButton = ({
   style = styles.absolute,
   Modal,
   destination,
   navigation,
+  onPress,
 }) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        if (destination) navigation.navigate(destination)
+        // if (destination) navigation.navigate(destination);
+        onPress();
       }}
-      style={style}
-    >
+      style={style}>
       <Image
         resizeMode="cover"
         source={require('../../../assets/images/SpeakingGame/micButton.png')}

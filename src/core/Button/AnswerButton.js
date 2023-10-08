@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
 const AnswerButton = ({
   content = 'Default text',
@@ -46,7 +46,7 @@ const AnswerButton = ({
   };
 
   return (
-    <View style={[styles.container, { top, left }]}>
+    <View style={[styles.container, {top, left}]}>
       <TouchableOpacity
         style={[
           styles.button,
@@ -54,8 +54,7 @@ const AnswerButton = ({
             backgroundColor: !isSelected ? '#FFF' : '#0071FF',
           },
         ]}
-        onPress={handleButtonPress}
-      >
+        onPress={handleButtonPress}>
         <Text
           style={[
             styles.buttonText,
@@ -72,16 +71,14 @@ const AnswerButton = ({
                 : 36,
               width: customWidth ? customWidth : type === 'small' ? 238 : 480,
             },
-          ]}
-        >
+          ]}>
           {content}
         </Text>
         {selectedOrder != 0 && (
           <Image
-            style={{ position: 'absolute', right: 13.5, top: 12 }}
+            style={{position: 'absolute', right: 13.5, top: 12}}
             resizeMode="cover"
-            source={sourceImage()}
-          ></Image>
+            source={sourceImage()}></Image>
         )}
       </TouchableOpacity>
     </View>

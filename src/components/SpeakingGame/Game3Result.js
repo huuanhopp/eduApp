@@ -1,18 +1,44 @@
-import React, { useState, useRef } from 'react';
-import { StyleSheet, View, TouchableOpacity, Image, Text, Platform } from "react-native";
+import React, {useState, useRef} from 'react';
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Image,
+  Text,
+  Platform,
+} from 'react-native';
 import SpeakingBackground from './SpeakingBackground';
 import RecordButton from '../../core/Button/RecordButton';
 import SpeakingTwoButton from '../../core/Button/SpeakingTwoButton';
 // import { Audio } from 'expo-av';
 import Video from 'react-native-video';
+import {StackActions, useNavigation, useRoute} from '@react-navigation/native';
+import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
+import WrongSpeakingModalDialog from '../../core/Modal/WrongSpeakingModalDialog';
 
-
-const Game3Result = ({ navigation }) => {
+const Game3Result = () => {
+  const navigation = useNavigation();
   const [isPauseAudio, setPauseAudio] = useState(true);
   const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
+  const route = useRoute();
+  const isCorrect = route.params?.isCorrect ?? false;
+  const [correctModalShown, setCorrectModalShown] = useState(false);
+  const [wrongModalShown, setWrongModalShown] = useState(false);
 
-  const handleClick = () => {
-    setShowCorrectAnswer(!showCorrectAnswer);
+  const onNext = () => {
+    navigation.dispatch(StackActions.push('SpeakingGame4'));
+  };
+
+  const onRetry = () => {
+    navigation.goBack();
+  };
+
+  const onShowResult = () => {
+    if (isCorrect) {
+      setCorrectModalShown(true);
+    } else {
+      setWrongModalShown(true);
+    }
   };
 
   return (
@@ -23,51 +49,36 @@ const Game3Result = ({ navigation }) => {
         destination="SpeakingGame4"
         navigation={navigation}
       />
-      <View
-        style={styles.hint}
-      >
+      <View style={styles.hint}>
         <Image
           resizeMode="cover"
           source={require('../../../assets/images/SpeakingGame/Game3/hintSmall.png')}
         />
       </View>
 
-      <View
-       style={styles.hint2}
-      >
+      <View style={styles.hint2}>
         <Image
-
           resizeMode="cover"
           source={require('../../../assets/images/SpeakingGame/Game3/AnswerSmall.png')}
         />
       </View>
 
-
-
       <TouchableOpacity
-       style={styles.fullText}
-       onPress={async () => {
-         setPauseAudio(false);
-          // const soundObject = new Audio.Sound();
-          // try {
-          //   await soundObject.loadAsync(
-          //     require('../../../assets/audio/sentenCorrect2.m4a'),
-          //   );
-          //   await soundObject.playAsync();
-          // } catch (error) {
-          //   console.log('Error playing sound:', error);
-          // }
-        }}
-      >
+        style={styles.fullText}
+        onPress={async () => {
+          setPauseAudio(false);
+        }}>
         <Image
-
           resizeMode="cover"
           source={require('../../../assets/images/SpeakingGame/Game2/audio.png')}
         />
       </TouchableOpacity>
 
-
-      <SpeakingTwoButton destination="SpeakingGame4" navigation={navigation}/>
+      <SpeakingTwoButton
+        destination="SpeakingGame4"
+        navigation={navigation}
+        onShowResult={onShowResult}
+      />
       <Video
         source={require('../../../assets/audio/sentenCorrect2.m4a')}
         paused={isPauseAudio}
@@ -75,6 +86,17 @@ const Game3Result = ({ navigation }) => {
         repeat={Platform.OS === 'ios'}
         onEnd={() => setPauseAudio(true)}
         style={{height: 0, width: 0}}
+      />
+      <SpeakingModalDialog
+        modalVisible={correctModalShown}
+        setModalVisible={setCorrectModalShown}
+        onNext={onNext}
+      />
+      <WrongSpeakingModalDialog
+        modalVisible={wrongModalShown}
+        setModalVisible={WrongSpeakingModalDialog}
+        onNext={onNext}
+        onRetry={onRetry}
       />
     </>
   );

@@ -20,11 +20,10 @@ const SpeakingBackground = ({
         style={{
           height: CommonSize.srcHeight,
           width: CommonSize.srcWidth,
-          backgroundColor: 'rgb(224,238,255)'
+          backgroundColor: 'rgb(224,238,255)',
         }}
         resizeMode={'contain'}
         source={require('../../../assets/images/SpeakingGame/SpeakingBackground.png')}
-        // source={require('../../../assets/images/ListeningGame/Game5/FullScreen.png')}
       />
       <View style={[styles.textTitle]}>
         <Text style={{fontSize: ratioW(44), fontWeight: 'bold'}}>{title}</Text>
@@ -32,9 +31,7 @@ const SpeakingBackground = ({
       <View style={[styles.quesContent]}>
         <Text style={{fontSize: ratioW(28)}}>{question}</Text>
       </View>
-      <View>
-
-      </View>
+      <View></View>
       <BackButton navigation={navigation} navigateTo="Progress" />
       <SpeakingConfirmButton
         Modal={ListeningModalDialog}

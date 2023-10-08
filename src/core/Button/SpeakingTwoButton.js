@@ -1,40 +1,33 @@
-import React, { useState } from 'react';
-import { TouchableOpacity, Image, StyleSheet } from 'react-native';
+import React, {useState} from 'react';
+import {TouchableOpacity, Image, StyleSheet} from 'react-native';
 
 const SpeakingTwoButton = ({
   style = styles.absolute,
   Modal,
   destination,
   navigation,
+  onShowResult,
 }) => {
   return (
     <>
-      <TouchableOpacity
-        onPress={() => {
-          if (destination) navigation.navigate(destination);
-        }}
-        style={style}
-      >
+      <TouchableOpacity onPress={onShowResult} style={style}>
         <Image
           resizeMode="cover"
           source={require('../../../assets/images/SpeakingGame/finishButton.png')}
         />
       </TouchableOpacity>
-      
+
       <TouchableOpacity
         onPress={() => {
           navigation.goBack(); // Go back one screen
         }}
-        style={styles.repeatButton}
-      >
+        style={styles.repeatButton}>
         <Image
           resizeMode="cover"
           source={require('../../../assets/images/SpeakingGame/repeatButton.png')} // Add the path to your repeat button image
         />
       </TouchableOpacity>
     </>
-    
-    
   );
 };
 

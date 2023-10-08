@@ -1,5 +1,12 @@
-import React, { useState, useRef } from 'react';
-import { StyleSheet, View, TouchableOpacity, Image, Text, Platform } from "react-native";
+import React, {useState, useRef} from 'react';
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Image,
+  Text,
+  Platform,
+} from 'react-native';
 import ConfirmButton from '../../core/Button/ConfirmButton';
 import BackButton from '../../core/Button/BackButton';
 import ListeningModalDialog from '../../core/Modal/ListeningModalDialog';
@@ -8,8 +15,7 @@ import ListeningBackground from './ListeningBackground';
 // import { Audio } from 'expo-av';
 import Video from 'react-native-video';
 
-
-const Game1 = ({ navigation }) => {
+const Game1 = ({navigation}) => {
   const [stackChoiceOrder, setStackChoiceOrder] = useState(0);
   const [isPauseAudio, setPauseAudio] = useState(true);
   let removedOrderArr = useRef([]);
@@ -56,15 +62,15 @@ const Game1 = ({ navigation }) => {
     let updatedOrder = handleOrderInButton(isSelected, index);
     let newAnwsOptions = anwsOptions.map((item, idx) => {
       if (idx === index) {
-        return { ...item, order: updatedOrder };
+        return {...item, order: updatedOrder};
       }
       return item;
     });
 
     setAnwsOptions(newAnwsOptions);
     isSelected
-      ? setStackChoiceOrder((prevStack) => prevStack + 1)
-      : setStackChoiceOrder((prevStack) => prevStack - 1);
+      ? setStackChoiceOrder(prevStack => prevStack + 1)
+      : setStackChoiceOrder(prevStack => prevStack - 1);
   };
 
   return (
@@ -101,8 +107,7 @@ const Game1 = ({ navigation }) => {
           } catch (error) {
             console.log('Error playing sound:', error);
           }
-        }}
-      >
+        }}>
         <Image
           resizeMode="cover"
           source={require('../../../assets/images/core/Audio.png')}
