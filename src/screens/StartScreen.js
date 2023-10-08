@@ -5,7 +5,7 @@ const StartScreen = ({ navigation }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       // navigation.navigate('AdvertisingScreen');
-      navigation.navigate('Main');
+      navigation.navigate('SpeakingGame2');
     }, 3000);
 
     return () => {
@@ -18,7 +18,7 @@ const StartScreen = ({ navigation }) => {
       <TouchableOpacity
         onPress={() => {
           // navigation.navigate('AdvertisingScreen');
-          navigation.navigate('Main');
+          navigation.navigate('SpeakingGame2');
         }}
       >
         <Image

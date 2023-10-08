@@ -27,39 +27,41 @@ const Game1 = ({navigation}) => {
   return (
     <SpeakingBackgroundCustom
       title={'단어 말하기'}
-      question={'소리를 듣고 따라말한 후 비교해보자!'}
-      onClickSpeakingButton={() => {}}>
-      <View
-        style={{
-          flexDirection: 'row',
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
+      subTitle={'소리를 듣고 따라말한 후 비교해보자!'}>
+      <View style={{flexDirection: 'row', marginTop: ratioH(41)}}>
         <TouchableOpacity
           style={{
-            marginRight: 0,
+            marginRight: ratioH(51),
           }}
           onPress={() => {
             setPauseAudio(false);
           }}>
           <Image
-            resizeMode="contain"
+            resizeMode="cover"
             source={require('../../../assets/images/SpeakingGame/Game1/wave.png')}
             style={{
+              height: ratioH(264),
               width: ratioH(424),
             }}
           />
         </TouchableOpacity>
-        <View style={{}}>
+        <TouchableOpacity
+          onPress={() => {
+            setPauseAudio(false);
+          }}>
           <Image
-            resizeMode="contain"
-            source={require('../../../assets/images/SpeakingGame/Game1/wave2.png')}
+            resizeMode="cover"
+            source={
+              audioUrl
+                ? require('../../../assets/images/common/img_record_success.png')
+                : require('../../../assets/images/SpeakingGame/Game1/wave2.png')
+            }
             style={{
+              height: ratioH(264),
               width: ratioH(424),
             }}
           />
-        </View>
+        </TouchableOpacity>
       </View>
       <View
         style={{
@@ -71,9 +73,15 @@ const Game1 = ({navigation}) => {
           // isOnlyWhisper={isOnlyWhisper}
           // setOnlyWhisper={setOnlyWhisper}
           onGetText={_text => {}}
+          isOnlyRecord={true}
           onFinalMessage={res => {
-            setAudioUrl(res?.audioUrl);
-            setPauseAudioUser(false);
+            // setAudioUrl(res?.audioUrl);
+            navigation.replace('SpeakingGame1Result', {
+              data: {
+                audioUrl: res?.audioUrl,
+              },
+            });
+            // setPauseAudioUser(false);
             // console.log({res})
             // {
             //   text: res?.data?.text,
@@ -107,28 +115,6 @@ const Game1 = ({navigation}) => {
       )}
     </SpeakingBackgroundCustom>
   );
-  // return (
-  //   <>
-  //     <SpeakingBackground
-  //       title="단어 말하기"
-  //       question="소리를 듣고 따라말한 후 비교해보자!"
-  //       destination="SpeakingGame1Result"
-  //       navigation={navigation}
-  //     />
-  //     <View style={[StyleSheet.absoluteFill, {}]}>
-  //       <View style={styles.wave2}>
-  //         <Image
-  //           resizeMode="cover"
-  //           source={require('../../../assets/images/SpeakingGame/Game1/wave2.png')}
-  //         />
-  //       </View>
-  //       <RecordButton
-  //         destination="SpeakingGame1Result"
-  //         navigation={navigation}
-  //       />
-  //     </View>
-  //   </>
-  // );
 };
 
 const styles = StyleSheet.create({

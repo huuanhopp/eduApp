@@ -27,6 +27,7 @@ const SpeechToTextMic = ({
   onGetText,
   onFinalMessage,
   isOnlyWhisper = true,
+  isOnlyRecord = false,
   // setOnlyWhisper,
 }) => {
   // nav
@@ -93,6 +94,13 @@ const SpeechToTextMic = ({
       Platform.OS === 'ios' ? audioFile : 'file://' + audioFile;
     audioRecordUri.current = audioFile;
     console.log({recordFileUri});
+    if (isOnlyRecord) {
+      onFinalMessage({
+        text: null,
+        audioUrl: audioRecordUri.current,
+      });
+      return;
+    }
     const param = new FormData();
     param.append('model', 'whisper-1');
     param.append('language', 'ko');
@@ -101,11 +109,12 @@ const SpeechToTextMic = ({
       type: Platform.OS === 'ios' ? 'audio' : 'audio/wav',
       name: 'videodub.wav',
     });
+
     axios
       .post('https://api.openai.com/v1/audio/transcriptions', param, {
         headers: {
           Authorization:
-            'Bearer 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',
+            'Bearer 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',
         },
       })
       .then(res => {
