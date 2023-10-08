@@ -13,7 +13,7 @@ import Carousel, { Pagination } from "react-native-snap-carousel";
 
 const widthScreen = Dimensions.get("screen").height * 1.431;
 
-const GuideScreen = () => {
+const GuideScreen = ({navigation}) => {
   const guideImages = [
     require("../../../assets/images/GuideScreen/guide1Img.png"),
     require("../../../assets/images/GuideScreen/guide2Img.png"),
@@ -41,7 +41,9 @@ const GuideScreen = () => {
     return () => clearInterval(intervalId);
   }, [currentIndex]);
 
-  const onStartTraining = () => {};
+  const onStartTraining = () => {
+    navigation.navigate('SpeakingGame1');
+  };
 
   const onClose = () => {};
 

@@ -15,7 +15,7 @@ import TutorialItem from "./TutorialItem";
 
 const widthScreen = Dimensions.get("screen").height * 1.431;
 
-const TutorialScreen = () => {
+const TutorialScreen = ({navigation}) => {
   const tutorialImgs = [
     require("../../../assets/images/TutorialScreen/tutorial1Img.png"),
     require("../../../assets/images/TutorialScreen/tutorial2Img.png"),
