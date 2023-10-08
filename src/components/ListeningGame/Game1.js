@@ -6,6 +6,7 @@ import {ratioH} from '../../utils/utils';
 import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
 import WrongSpeakingModalDialog from '../../core/Modal/WrongSpeakingModalDialog';
 import {StackActions} from '@react-navigation/native';
+import Video from 'react-native-video';
 
 const Game1 = ({navigation}) => {
   const [stackChoiceOrder, setStackChoiceOrder] = useState(0);
@@ -159,14 +160,14 @@ const Game1 = ({navigation}) => {
           </View>
         </View>
       </View>
-      {/* <Video
+      <Video
         source={require('../../../assets/audio/Choose4words.mp3')}
         paused={isPauseAudio}
         audioOnly={true}
         repeat={Platform.OS === 'ios'}
         onEnd={() => setPauseAudio(true)}
         style={{height: 0, width: 0}}
-      /> */}
+      />
       <SpeakingModalDialog
         modalVisible={correctModalShown}
         setModalVisible={setCorrectModalShown}
