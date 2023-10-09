@@ -7,29 +7,33 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from "react-native";
-import React, { useState } from "react";
-import Carousel, { Pagination } from "react-native-snap-carousel";
-import { screenSize } from "../../constants/constants";
-import TutorialItem from "./TutorialItem";
+} from 'react-native';
+import React, {useState} from 'react';
+import Carousel, {Pagination} from 'react-native-snap-carousel';
+import {screenSize} from '../../constants/constants';
+import TutorialItem from './TutorialItem';
+import {CommonSize} from '../../utils/utils';
 
-const widthScreen = Dimensions.get("screen").height * 1.431;
+const widthScreen = Dimensions.get('screen').height * 1.431;
 
 const TutorialScreen = ({navigation}) => {
   const tutorialImgs = [
-    require("../../../assets/images/TutorialScreen/tutorial1Img.png"),
-    require("../../../assets/images/TutorialScreen/tutorial2Img.png"),
-    require("../../../assets/images/TutorialScreen/tutorial3Img.png"),
+    require('../../../assets/images/TutorialScreen/tutorial1Img.png'),
+    require('../../../assets/images/TutorialScreen/tutorial2Img.png'),
+    require('../../../assets/images/TutorialScreen/tutorial3Img.png'),
   ];
   const [currentIndex, setCurrentIndex] = useState(1);
+  const [width, setWidth] = useState(CommonSize.srcWidthDefault);
 
   return (
     <View style={styles.rootView}>
       <ImageBackground
-        source={require("../../../assets/images/TutorialScreen/tutorialBGImg1.png")}
-        style={styles.bgImg}
+        source={require('../../../assets/images/TutorialScreen/tutorialBGImg1.png')}
+        style={{...styles.bgImg, width: width, overflow: 'hidden'}}
         resizeMode="contain"
-      >
+        onLayout={e => {
+          setWidth((e.nativeEvent.layout.height * 1194) / 834);
+        }}>
         <View style={styles.topView}>
           {/* <Text style={styles.topText}>
             청능 훈련을 통해 일상생활속의 대화를 연결시켜드려요!
@@ -39,11 +43,11 @@ const TutorialScreen = ({navigation}) => {
         <View style={styles.contentView}>
           <Carousel
             data={tutorialImgs}
-            renderItem={({ item }) => <TutorialItem item={item} />}
+            renderItem={({item}) => <TutorialItem item={item} />}
             sliderWidth={widthScreen}
             itemWidth={widthScreen * 0.4}
             initialNumToRender={1}
-            onSnapToItem={(index) => setCurrentIndex(index)}
+            onSnapToItem={index => setCurrentIndex(index)}
           />
           <Pagination
             dotsLength={3}
@@ -57,10 +61,9 @@ const TutorialScreen = ({navigation}) => {
         <View style={styles.bottomView}>
           <TouchableOpacity
             style={styles.startButton}
-            onPress={() => Alert.alert("Show new screen")}
-          >
+            onPress={() => Alert.alert('Show new screen')}>
             <Image
-              source={require("../../../assets/images/TutorialScreen/startButton.png")}
+              source={require('../../../assets/images/TutorialScreen/startButton.png')}
               style={styles.startImgButton}
               resizeMode="contain"
             />
@@ -75,14 +78,13 @@ export default TutorialScreen;
 
 const styles = StyleSheet.create({
   bgImg: {
-    height: "100%",
-    width: "100%",
-    alignItems: "center",
+    height: '100%',
+    width: '100%',
+    alignItems: 'center',
   },
   rootView: {
     flex: 1,
-    width: widthScreen,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   startButton: {},
   startImgButton: {
@@ -91,9 +93,9 @@ const styles = StyleSheet.create({
   },
   topView: {
     flex: 1,
-    justifyContent: "flex-end",
+    justifyContent: 'flex-end',
     paddingBottom: 40,
-    alignItems: "center",
+    alignItems: 'center',
   },
   bottomView: {
     flex: 0.8,
@@ -104,28 +106,28 @@ const styles = StyleSheet.create({
   },
   topText: {
     fontSize: 36,
-    color: "#002443",
-    fontWeight: "700",
+    color: '#002443',
+    fontWeight: '700',
   },
   bottomText: {
     fontSize: 24,
-    color: "#2D4967",
-    fontWeight: "500",
+    color: '#2D4967',
+    fontWeight: '500',
   },
   dotView: {
     width: 32,
     height: 10,
     borderRadius: 5,
-    backgroundColor: "rgba(255, 255, 255, 0.92)",
-    shadowColor: "#0069D666",
+    backgroundColor: 'rgba(255, 255, 255, 0.92)',
+    shadowColor: '#0069D666',
     elevation: 5,
   },
   inactiveDotView: {
     width: 10,
     height: 10,
     borderRadius: 5,
-    backgroundColor: "rgba(255, 255, 255, 0.92)",
-    shadowColor: "#0069D666",
+    backgroundColor: 'rgba(255, 255, 255, 0.92)',
+    shadowColor: '#0069D666',
     elevation: 5,
   },
 });

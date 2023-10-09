@@ -8,7 +8,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="SpeakingGame1Result">
+      <Stack.Navigator initialRouteName="TutorialScreen">
         {stackScreen.map(stackItem => (
           <Stack.Screen
             key={stackItem.name}
