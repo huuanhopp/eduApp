@@ -13,7 +13,7 @@ import SpeakingTwoButton from '../../core/Button/SpeakingTwoButton';
 import Video from 'react-native-video';
 import {ratioH} from '../../utils/utils';
 
-const Game1Result = ({navigation}) => {
+const Game1Result = ({navigation, handleRePlayAudioRecord}) => {
   const [isPauseAudio, setPauseAudio] = useState(true);
 
   return (
@@ -25,23 +25,23 @@ const Game1Result = ({navigation}) => {
       <View style={styles.contentView}>
         <View style={styles.waveView}>
           <TouchableOpacity
-            style={styles.wave1}
             onPress={async () => {
               setPauseAudio(false);
             }}>
             <Image
               resizeMode="contain"
               source={require('../../../assets/images/SpeakingGame/Game1/wave.png')}
+              style={styles.wave1}
             />
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.wave2}
-            onPress={async () => {
-              setPauseAudio(false);
+            onPress={() => {
+              handleRePlayAudioRecord && handleRePlayAudioRecord();
             }}>
             <Image
               resizeMode="contain"
               source={require('../../../assets/images/SpeakingGame/Game1/wave.png')}
+              style={styles.wave2}
             />
           </TouchableOpacity>
         </View>
@@ -67,11 +67,11 @@ const styles = StyleSheet.create({
   },
   contentView: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
   },
   waveView: {
     flexDirection: 'row',
+    alignSelf: 'center',
   },
 });
 

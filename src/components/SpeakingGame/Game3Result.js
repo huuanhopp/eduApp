@@ -17,7 +17,7 @@ import WrongSpeakingModalDialog from '../../core/Modal/WrongSpeakingModalDialog'
 import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
 import {CommonSize, ratioH} from '../../utils/utils';
 
-const Game4Result = () => {
+const Game4Result = ({audioUrl}) => {
   const [isPauseAudio, setPauseAudio] = useState(true);
   const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
   const navigation = useNavigation();
@@ -26,6 +26,8 @@ const Game4Result = () => {
   const [correctModalShown, setCorrectModalShown] = useState(false);
   const [wrongModalShown, setWrongModalShown] = useState(false);
 
+
+  console.log({gggg: audioUrl})
   const onNext = () => {
     setWrongModalShown(false);
     navigation.dispatch(StackActions.push('SpeakingGame4'));
@@ -75,7 +77,7 @@ const Game4Result = () => {
           />
         </TouchableOpacity>
         <Video
-          source={require('../../../assets/audio/notCorrect1.m4a')}
+          source={{uri: audioUrl}}
           paused={isPauseAudio}
           audioOnly={true}
           repeat={Platform.OS === 'ios'}

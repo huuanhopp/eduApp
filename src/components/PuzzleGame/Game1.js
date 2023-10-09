@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import {StyleSheet, TouchableOpacity, Image, View} from 'react-native';
-import PuzzleBackground from './PuzzleBackground';
-import AnswerButton from '../../core/Button/AnswerButton';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import Card from '../../core/Card/Card';
+import PuzzleBackground from './PuzzleBackground';
 const Game1 = ({navigation}) => {
   const [flipCards, setFlipCards] = useState([]);
   const [cards, setCards] = useState([
     {
+      index: 0,
       hiddenImage: require('../../../assets/images/PuzzleGame/Game1/Peach.png'),
       top: 270,
       left: 370,
@@ -15,6 +15,7 @@ const Game1 = ({navigation}) => {
       removed: false,
     },
     {
+      index: 1,
       hiddenImage: require('../../../assets/images/PuzzleGame/Game1/Grape.png'),
       top: 270,
       left: 550,
@@ -23,6 +24,7 @@ const Game1 = ({navigation}) => {
       removed: false,
     },
     {
+      index: 2,
       hiddenImage: require('../../../assets/images/PuzzleGame/Game1/Popcorn.png'),
       top: 270,
       left: 730,
@@ -30,6 +32,7 @@ const Game1 = ({navigation}) => {
       selected: false,
     },
     {
+      index: 3,
       hiddenImage: require('../../../assets/images/PuzzleGame/Game1/Carrot.png'),
       top: 270,
       left: 910,
@@ -38,6 +41,7 @@ const Game1 = ({navigation}) => {
       removed: false,
     },
     {
+      index: 4,
       hiddenImage: require('../../../assets/images/PuzzleGame/Game1/Grape.png'),
       top: 485,
       left: 370,
@@ -46,6 +50,7 @@ const Game1 = ({navigation}) => {
       removed: false,
     },
     {
+      index: 5,
       hiddenImage: require('../../../assets/images/PuzzleGame/Game1/Popcorn.png'),
       top: 485,
       left: 550,
@@ -54,6 +59,7 @@ const Game1 = ({navigation}) => {
       removed: false,
     },
     {
+      index: 6,
       hiddenImage: require('../../../assets/images/PuzzleGame/Game1/Peach.png'),
       top: 485,
       left: 730,
@@ -62,6 +68,7 @@ const Game1 = ({navigation}) => {
       removed: false,
     },
     {
+      index: 7,
       hiddenImage: require('../../../assets/images/PuzzleGame/Game1/Carrot.png'),
       top: 485,
       left: 910,
@@ -95,14 +102,14 @@ const Game1 = ({navigation}) => {
           setCards(newCardsState);
         }
         setFlipCards([]);
-      }, 1000);
+      }, 600);
       return () => {
         clearTimeout(timer);
       };
     }
   }, [flipCards]);
 
-  const handleSelectedCard = index => {
+  const handleSelectedCard = (index) => {
     const newCards = cards.map((item, idx) => {
       if (item.removed) return item;
       if (idx === index) {
@@ -132,21 +139,25 @@ const Game1 = ({navigation}) => {
       <View style={styles.contentView}>
         <View style={{flexDirection: 'row'}}>
           <Card
+            index={cards[0].index}
             hiddenImage={cards[0].hiddenImage}
             selected={cards[0].selected}
             handSelectedCard={index => handleSelectedCard(index)}
           />
           <Card
+            index={cards[1].index}
             hiddenImage={cards[1].hiddenImage}
             selected={cards[1].selected}
             handSelectedCard={index => handleSelectedCard(index)}
           />
           <Card
+            index={cards[2].index}
             hiddenImage={cards[2].hiddenImage}
             selected={cards[2].selected}
             handSelectedCard={index => handleSelectedCard(index)}
           />
           <Card
+            index={cards[3].index}
             hiddenImage={cards[3].hiddenImage}
             selected={cards[3].selected}
             handSelectedCard={index => handleSelectedCard(index)}
@@ -154,21 +165,25 @@ const Game1 = ({navigation}) => {
         </View>
         <View style={{flexDirection: 'row'}}>
           <Card
+            index={cards[4].index}
             hiddenImage={cards[4].hiddenImage}
             selected={cards[4].selected}
             handSelectedCard={index => handleSelectedCard(index)}
           />
           <Card
+            index={cards[5].index}
             hiddenImage={cards[5].hiddenImage}
             selected={cards[5].selected}
             handSelectedCard={index => handleSelectedCard(index)}
           />
           <Card
+            index={cards[6].index}
             hiddenImage={cards[6].hiddenImage}
             selected={cards[6].selected}
             handSelectedCard={index => handleSelectedCard(index)}
           />
           <Card
+            index={cards[7].index}
             hiddenImage={cards[7].hiddenImage}
             selected={cards[7].selected}
             handSelectedCard={index => handleSelectedCard(index)}

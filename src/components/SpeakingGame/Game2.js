@@ -10,6 +10,12 @@ const Game2 = ({navigation}) => {
       title="문장 말하기"
       question="단어를 이용해 문장을 만든 후 직접 읽어보자!"
       destination="SpeakingGame3"
+      handleFinishRecording={audioUrl => {
+        navigation.navigate('SpeakingGame2Result', {
+          isCorrect: false,
+          audioUrl: audioUrl,
+        });
+      }}
       navigation={navigation}>
       <View
         style={{

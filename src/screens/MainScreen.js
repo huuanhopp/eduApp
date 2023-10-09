@@ -36,7 +36,7 @@ const MainScreen = ({navigation}) => {
       <TouchableOpacity
         style={styles.listeningGame}
         onPress={() => {
-          navigation.navigate('ListeningProgress');
+          navigation.navigate('ListeningGame1');
         }}>
         <Image
           resizeMode="cover"
@@ -46,7 +46,7 @@ const MainScreen = ({navigation}) => {
       <TouchableOpacity
         style={styles.speakingGame}
         onPress={() => {
-          navigation.navigate('SpeakingProgress');
+          navigation.navigate('SpeakingGame1');
         }}>
         <Image
           resizeMode="cover"
@@ -56,7 +56,7 @@ const MainScreen = ({navigation}) => {
       <TouchableOpacity
         style={styles.puzzleGame}
         onPress={() => {
-          navigation.navigate('PuzzleProgress');
+          navigation.navigate('PuzzleGame1');
         }}>
         <Image
           resizeMode="cover"
