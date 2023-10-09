@@ -43,7 +43,7 @@ const SpeakingBackground = ({
       onLayout={e => {
         setWidth((e.nativeEvent.layout.height * 1194) / 834);
       }}>
-      <View style={{flex: 1}}>
+      <View style={{height: '100%'}}>
         <View>
           <TouchableOpacity onPress={goBack}>
             <Image
@@ -54,11 +54,8 @@ const SpeakingBackground = ({
             />
           </TouchableOpacity>
           <View style={styles.topView}>
-            <Text
-              style={{fontSize: 50, fontWeight: 'bold', textAlign: 'center'}}>
-              {title}
-            </Text>
-            <Text style={{fontSize: 28, textAlign: 'center'}}>{question}</Text>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.subTitle}>{question}</Text>
           </View>
         </View>
         <View style={styles.contentView}>{children}</View>
@@ -80,6 +77,18 @@ const SpeakingBackground = ({
 };
 
 const styles = StyleSheet.create({
+  title: {
+    fontSize: ratioH(44),
+    color: '#002443',
+    fontWeight: 'bold',
+    alignSelf: 'center',
+  },
+  subTitle: {
+    fontSize: ratioH(28),
+    color: '#002443',
+    fontWeight: 'normal',
+    alignSelf: 'center',
+  },
   textTitle: {
     top: '18%',
     zIndex: 3,
@@ -93,11 +102,12 @@ const styles = StyleSheet.create({
   imgBG: {
     width: CommonSize.srcWidthDefault,
     flex: 1,
-    backgroundColor: 'red',
   },
   backButton: {
     marginTop: CommonSize.srcWidthDefault * 0.05,
     marginLeft: CommonSize.srcWidthDefault * 0.028,
+    height: ratioH(56),
+    aspectRatio: 1,
   },
   topView: {
     alignSelf: 'center',

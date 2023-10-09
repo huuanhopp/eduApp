@@ -60,9 +60,12 @@ const Game1Result = ({navigation, handleRePlayAudioRecord}) => {
 
 const styles = StyleSheet.create({
   wave1: {
+    height: ratioH(264),
     width: ratioH(424),
+    marginRight: ratioH(51),
   },
   wave2: {
+    height: ratioH(264),
     width: ratioH(424),
   },
   contentView: {
