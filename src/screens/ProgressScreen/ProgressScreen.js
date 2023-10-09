@@ -31,7 +31,7 @@ const ProgressScreen = ({navigation}) => {
         // onPress={toggleInstructions}
         onPress={() => {
           // navigation.navigate('Stage1');
-          navigation.navigate('SpeakingGame1');
+          navigation.navigate('GuideScreen');
         }}>
         <Image
           resizeMode="cover"
