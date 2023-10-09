@@ -125,7 +125,7 @@ const SpeechToTextMic = ({
       .post('https://api.openai.com/v1/audio/transcriptions', param, {
         headers: {
           Authorization:
-            'Bearer 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',
+            'Bearer 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',
         },
       })
       .then(res => {
@@ -257,6 +257,7 @@ const SpeechToTextMic = ({
         await handleRecord();
       }
     } else {
+      console.log("Hello")
       if (!isRecording) {
         //ko-KR
         await Voice.start('ko-KR', {

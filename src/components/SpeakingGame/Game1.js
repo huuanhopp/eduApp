@@ -72,13 +72,14 @@ const Game1 = ({navigation}) => {
         <SpeechToTextMic
           // isOnlyWhisper={isOnlyWhisper}
           // setOnlyWhisper={setOnlyWhisper}
-          onGetText={_text => {}}
-          isOnlyRecord={true}
+          onGetText={_text => {console.log("test is: ", _text)}}
+          isOnlyRecord={false}
           onFinalMessage={res => {
             // setAudioUrl(res?.audioUrl);
             navigation.replace('SpeakingGame1Result', {
               data: {
                 audioUrl: res?.audioUrl,
+                text: res?.text,
               },
             });
             // setPauseAudioUser(false);

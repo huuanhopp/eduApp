@@ -13,13 +13,42 @@ import SpeakingTwoButton from '../../core/Button/SpeakingTwoButton';
 import Video from 'react-native-video';
 import {ratioH} from '../../utils/utils';
 import {StackActions, useNavigation} from '@react-navigation/native';
+import { compareSentences } from '../../utils/utils';
+import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
+import WrongSpeakingModalDialog from '../../core/Modal/WrongSpeakingModalDialog';
 
-const Game1Result = ({handleRePlayAudioRecord}) => {
+const Game1Result = ({handleRePlayAudioRecord, route}) => {
   const navigation = useNavigation();
   const [isPauseAudio, setPauseAudio] = useState(true);
+  const [isCorrectPercent, setCorrectPercent] = useState(false);
+  const [correctModalShown, setCorrectModalShown] = useState(false);
+  const [wrongModalShown, setWrongModalShown] = useState(false);
+
+  const resultGame1 = '듣는습관'
+  const audioUrl = route?.params?.data?.audioUrl;
+  const text = route?.params?.data?.text;
 
   const onShowResult = () => {
-    navigation.dispatch(StackActions.push('SpeakingGame2'));
+    const percentage = compareSentences(text, resultGame1);
+    console.log('distance is', percentage);
+    if (percentage <=2) {
+      console.log('distance <= 2')
+      setCorrectPercent(true)
+      setCorrectModalShown(true);
+    }
+    else {
+      setWrongModalShown(true);
+    }
+  };
+
+  const onNext = () => {
+    setWrongModalShown(false);
+    navigation.dispatch(StackActions.push('SpeakingGame3'));
+  };
+
+  const onRetry = () => {
+    setWrongModalShown(false);
+    navigation.dispatch(StackActions.push('SpeakingGame1'));
   };
 
   return (
@@ -68,6 +97,17 @@ const Game1Result = ({handleRePlayAudioRecord}) => {
           onShowResult={onShowResult}
         />
       </View>
+      <SpeakingModalDialog
+        modalVisible={correctModalShown}
+        setModalVisible={setCorrectModalShown}
+        onNext={onNext}
+      />
+      <WrongSpeakingModalDialog
+        modalVisible={wrongModalShown}
+        setModalVisible={setWrongModalShown}
+        onNext={onNext}
+        onRetry={onRetry}
+      />
     </SpeakingBackground>
   );
 };

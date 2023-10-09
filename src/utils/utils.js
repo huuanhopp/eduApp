@@ -1,6 +1,6 @@
-import {Dimensions} from 'react-native';
+import { Dimensions } from 'react-native';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 export const Slides = [
   {
@@ -49,31 +49,83 @@ export const whisper_token =
   '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';
 
 
-export function compareSentences(sentence1, sentence2) {
-  // Remove special characters and convert to lowercase
-  const cleanSentence1 = sentence1.replace(/[^\w\s]/g, '').toLowerCase();
-  const cleanSentence2 = sentence2.replace(/[^\w\s]/g, '').toLowerCase();
+export function compareSentences(s1, s2) {
+  // // Remove special characters and convert to lowercase
+  // const cleanSentence1 = sentence1.replace(/[^\w\s]/g, '').toLowerCase();
+  // const cleanSentence2 = sentence2.replace(/[^\w\s]/g, '').toLowerCase();
+  // console.log("sentence1 sentence2", sentence1, sentence2)
+  // // Split the sentences into words
+  // const words1 = cleanSentence1.split(' ');
+  // const words2 = cleanSentence2.split(' ');
 
-  // Split the sentences into words
-  const words1 = cleanSentence1.split(' ');
-  const words2 = cleanSentence2.split(' ');
+  // // Find the minimum length of the two sentences
+  // const maxLength = Math.max(words1.length, words2.length);
 
-  // Find the minimum length of the two sentences
-  const maxLength = Math.max(words1.length, words2.length);
+  // // Count consecutive matching words
+  // let consecutiveMatches = 0;
+  // for (let i = 0; i < maxLength; i++) {
+  //   if (words1[i] === words2[i]) {
+  //     consecutiveMatches++;
+  //   } else {
+  //     // Break if consecutive words don't match
+  //     break;
+  //   }
+  // }
 
-  // Count consecutive matching words
-  let consecutiveMatches = 0;
-  for (let i = 0; i < maxLength; i++) {
-    if (words1[i] === words2[i]) {
-      consecutiveMatches++;
-    } else {
-      // Break if consecutive words don't match
-      break;
+  // // Calculate the percentage of consecutive matching words
+  // const percentage = (consecutiveMatches / maxLength) * 100;
+
+  // return percentage;
+  console.log("sentence1 sentence2", s1, s2)
+  const m = s1.length;
+  const n = s2.length;
+  const dp = Array.from(Array(m + 1), () => Array(n + 1).fill(0));
+
+  for (let i = 0; i <= m; i++) {
+    dp[i][0] = i;
+  }
+
+  for (let j = 0; j <= n; j++) {
+    dp[0][j] = j;
+  }
+
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      const cost = s1[i - 1] === s2[j - 1] ? 0 : 1;
+      dp[i][j] = Math.min(
+        dp[i - 1][j] + 1,
+        dp[i][j - 1] + 1,
+        dp[i - 1][j - 1] + cost
+      );
     }
   }
 
-  // Calculate the percentage of consecutive matching words
-  const percentage = (consecutiveMatches / maxLength) * 100;
+  return dp[m][n];
+}
 
-  return percentage;
+function levenshteinDistance(s1, s2) {
+  const m = s1.length;
+  const n = s2.length;
+  const dp = Array.from(Array(m + 1), () => Array(n + 1).fill(0));
+
+  for (let i = 0; i <= m; i++) {
+    dp[i][0] = i;
+  }
+
+  for (let j = 0; j <= n; j++) {
+    dp[0][j] = j;
+  }
+
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      const cost = s1[i - 1] === s2[j - 1] ? 0 : 1;
+      dp[i][j] = Math.min(
+        dp[i - 1][j] + 1,
+        dp[i][j - 1] + 1,
+        dp[i - 1][j - 1] + cost
+      );
+    }
+  }
+
+  return dp[m][n];
 }

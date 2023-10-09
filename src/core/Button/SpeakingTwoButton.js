@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {TouchableOpacity, Image, StyleSheet, View} from 'react-native';
+// import { useNavigation } from '@react-navigation/native';
 
 const SpeakingTwoButton = ({
   style = styles.absolute,
