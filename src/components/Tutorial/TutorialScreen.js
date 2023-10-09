@@ -8,15 +8,15 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
-import Carousel, {Pagination} from 'react-native-snap-carousel';
-import {screenSize} from '../../constants/constants';
+import React, { useState } from 'react';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
+import { screenSize } from '../../constants/constants';
 import TutorialItem from './TutorialItem';
-import {CommonSize} from '../../utils/utils';
+import { CommonSize } from '../../utils/utils';
 
 const widthScreen = Dimensions.get('screen').height * 1.431;
 
-const TutorialScreen = ({navigation}) => {
+const TutorialScreen = ({ navigation }) => {
   const tutorialImgs = [
     require('../../../assets/images/TutorialScreen/tutorial1Img.png'),
     require('../../../assets/images/TutorialScreen/tutorial2Img.png'),
@@ -29,7 +29,7 @@ const TutorialScreen = ({navigation}) => {
     <View style={styles.rootView}>
       <ImageBackground
         source={require('../../../assets/images/TutorialScreen/tutorialBGImg1.png')}
-        style={{...styles.bgImg, width: width, overflow: 'hidden'}}
+        style={{ ...styles.bgImg, width: width, overflow: 'hidden' }}
         resizeMode="contain"
         onLayout={e => {
           setWidth((e.nativeEvent.layout.height * 1194) / 834);
@@ -43,7 +43,7 @@ const TutorialScreen = ({navigation}) => {
         <View style={styles.contentView}>
           <Carousel
             data={tutorialImgs}
-            renderItem={({item}) => <TutorialItem item={item} />}
+            renderItem={({ item }) => <TutorialItem item={item} />}
             sliderWidth={widthScreen}
             itemWidth={widthScreen * 0.4}
             initialNumToRender={1}
@@ -61,7 +61,9 @@ const TutorialScreen = ({navigation}) => {
         <View style={styles.bottomView}>
           <TouchableOpacity
             style={styles.startButton}
-            onPress={() => Alert.alert('Show new screen')}>
+            onPress={() => { navigation.navigate('Main'); }}
+          >
+
             <Image
               source={require('../../../assets/images/TutorialScreen/startButton.png')}
               style={styles.startImgButton}

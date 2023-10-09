@@ -12,12 +12,12 @@ import RecordButton from '../../core/Button/RecordButton';
 import SpeakingTwoButton from '../../core/Button/SpeakingTwoButton';
 // import { Audio } from 'expo-av';
 import Video from 'react-native-video';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute, StackActions} from '@react-navigation/native';
 import WrongSpeakingModalDialog from '../../core/Modal/WrongSpeakingModalDialog';
 import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
 import {CommonSize, ratioH} from '../../utils/utils';
 
-const Game4Result = () => {
+const Game4Result = ({audioUrl}) => {
   const [isPauseAudio, setPauseAudio] = useState(true);
   const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
   const navigation = useNavigation();
@@ -27,7 +27,7 @@ const Game4Result = () => {
   const [wrongModalShown, setWrongModalShown] = useState(false);
 
   const onNext = () => {
-    // navigation.dispatch(StackActions.push('SpeakingGame5'));
+    navigation.dispatch(StackActions.push('ListeningGame1'));
   };
 
   const onRetry = () => {
@@ -73,8 +73,16 @@ const Game4Result = () => {
             style={styles.audioImg}
           />
         </TouchableOpacity>
-        <Video
+        {/* <Video
           source={require('../../../assets/audio/notCorrect1.m4a')}
+          paused={isPauseAudio}
+          audioOnly={true}
+          repeat={Platform.OS === 'ios'}
+          onEnd={() => setPauseAudio(true)}
+          style={{height: 0, width: 0}}
+        /> */}
+        <Video
+          source={{uri: audioUrl}}
           paused={isPauseAudio}
           audioOnly={true}
           repeat={Platform.OS === 'ios'}

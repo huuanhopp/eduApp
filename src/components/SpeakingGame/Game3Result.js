@@ -17,7 +17,7 @@ import WrongSpeakingModalDialog from '../../core/Modal/WrongSpeakingModalDialog'
 import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
 import {CommonSize, ratioH} from '../../utils/utils';
 
-const Game4Result = ({audioUrl}) => {
+const Game3Result = ({audioUrl}) => {
   const [isPauseAudio, setPauseAudio] = useState(true);
   const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
   const navigation = useNavigation();
@@ -130,4 +130,4 @@ const styles = StyleSheet.create({
   bottomView: {},
 });
 
-export default Game4Result;
+export default Game3Result;

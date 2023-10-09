@@ -66,7 +66,15 @@ const Game4 = () => {
       question="주어진 단어와 비슷한 발음을 가지고 있는 단어를 찾아 선택한 후 읽어보자!"
       destination="ListeningGame1"
       navigation={navigation}
-      onClickSpeakingButton={onSelectRecordButton}>
+      onClickSpeakingButton={onSelectRecordButton}
+      handleFinishRecording={audioUrl => {
+        navigation.navigate('SpeakingGame4Result', {
+          isCorrect: isCorrect,
+          audioUrl: audioUrl,
+        });
+      }}
+    >
+      
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Image
           resizeMode="cover"

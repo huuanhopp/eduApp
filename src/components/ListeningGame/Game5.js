@@ -92,7 +92,9 @@ const Game5 = ({navigation}) => {
         <TouchableOpacity
           style={styles.audio}
           onPress={async () => {
-            setPauseAudio(false);
+            setPauseAudio(( prevState) => 
+               !prevState
+            );
           }}>
           <Image
             style={{width: ratioH(96), height: ratioH(96)}}

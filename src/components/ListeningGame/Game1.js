@@ -102,7 +102,9 @@ const Game1 = ({navigation}) => {
         <TouchableOpacity
           style={styles.audio}
           onPress={async () => {
-            setPauseAudio(false);
+            setPauseAudio(( prevState) => 
+               !prevState
+            );
             try {
             } catch (error) {
               console.log('Error playing sound:', error);

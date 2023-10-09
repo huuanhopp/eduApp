@@ -77,7 +77,9 @@ const Game4 = ({navigation}) => {
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <TouchableOpacity
           onPress={() => {
-            setPauseAudio(false);
+            setPauseAudio(( prevState) => 
+               !prevState
+            );
           }}>
           <Image
             style={styles.car}
@@ -112,7 +114,7 @@ const Game4 = ({navigation}) => {
           />
         </View>
         <Video
-          source={require('../../../assets/audio/SentenceTraining.mp3')}
+          source={require('../../../assets/audio/CarO.mp3')}
           paused={isPauseAudio}
           audioOnly={true}
           repeat={Platform.OS === 'ios'}

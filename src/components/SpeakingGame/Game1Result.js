@@ -53,7 +53,7 @@ const Game1Result = ({handleRePlayAudioRecord}) => {
           </TouchableOpacity>
         </View>
         <Video
-          source={require('../../../assets/audio/SpeakingKid.mp3')}
+          source={require('../../../assets/audio/SpeakingWoman.mp3')}
           paused={isPauseAudio}
           audioOnly={true}
           repeat={Platform.OS === 'ios'}

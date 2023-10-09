@@ -7,8 +7,10 @@ import {
   StyleSheet,
   Image,
   Dimensions,
+  ImageBackground,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import Gif from 'react-native-gif';
 
 const widthScreen = Dimensions.get('screen').height * 1.431;
 
@@ -18,38 +20,37 @@ const SpeakingModalDialog = ({
   navigation,
   destination,
   onNext,
+  onRetry,
 }) => {
   return (
-    <View style={{height: modalVisible ? 'auto' : 0}}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <TouchableOpacity
-              style={{...styles.openButton, backgroundColor: '#2196F3'}}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-                onNext();
-              }}>
-              <Image
-                resizeMode="cover"
-                source={require('../../../assets/images/core/ListeningModalDialog.png')}
-              />
-            </TouchableOpacity>
-            <FastImage
-              style={styles.gifImage}
-              resizeMode="cover"
-              source={require('../../../assets/images/gif/correct.gif')}
-            />
+    <Modal
+      animationType="slide"
+      transparent={true}
+      visible={modalVisible}
+      onRequestClose={() => {
+        setModalVisible(!modalVisible);
+      }}
+      style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+      <View style={styles.container}>
+        <ImageBackground
+          resizeMode="cover"
+          source={require('../../../assets/images/core/ListeningModalDialog.png')}
+          style={styles.bgImg}>
+          <FastImage
+            style={styles.gifImage}
+            resizeMode="cover"
+            source={require('../../../assets/images/gif/correct.gif')}
+          />
+          <View style={styles.bottomView}>
+            {/* <TouchableOpacity style={styles.retryButton} onPress={onRetry} /> */}
+            <TouchableOpacity style={styles.nextButton} onPress={onNext} />
           </View>
-        </View>
-      </Modal>
-    </View>
+        </ImageBackground>
+      </View>
+    </Modal>
   );
 };
 
@@ -58,17 +59,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'rgba(52, 52, 52, 0.3)',
   },
   centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-    position: 'relative',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    height: (widthScreen * 574) / 1194,
+    width: (widthScreen * 894) / 1194,
+    backgroundColor: 'red',
   },
   modalView: {
     position: 'relative',
-    margin: 20,
     backgroundColor: 'white',
     borderRadius: 20,
     padding: 35,
@@ -98,10 +99,26 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   gifImage: {
-    position: 'absolute',
-    top: 120,
+    alignSelf: 'center',
     height: ((widthScreen * 574) / 1194) * 0.7,
     aspectRatio: 1,
+  },
+  bgImg: {
+    height: (widthScreen * 574) / 1194,
+    width: (widthScreen * 894) / 1194,
+    justifyContent: 'center',
+  },
+  retryButton: {
+    width: (widthScreen * 331) / 1194,
+    height: 70,
+  },
+  nextButton: {
+    width: (widthScreen * 331) / 1194,
+    height: 70,
+  },
+  bottomView: {
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 });
 

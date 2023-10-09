@@ -29,7 +29,7 @@ const ListeningModalDialog = ({
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <TouchableOpacity
-              style={{ ...styles.openButton, backgroundColor: '#2196F3' }}
+              style={{ ...styles.openButton }}
               onPress={() => {
                 setModalVisible(!modalVisible);
                 if (destination) navigation.navigate(destination);
@@ -72,17 +72,17 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 35,
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
+    // shadowColor: '#000',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 4,
     elevation: 5,
   },
   openButton: {
-    backgroundColor: '#F194FF',
+    backgroundColor: 'none',
     borderRadius: 20,
     padding: 10,
     elevation: 2,

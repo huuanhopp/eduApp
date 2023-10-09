@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
-import {StyleSheet, TouchableOpacity, Image, View} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, TouchableOpacity, Image, View } from 'react-native';
 import ListeningBackground from './ListeningBackground';
 import AnswerButton from '../../core/Button/AnswerButton';
-import {ratioH} from '../../utils/utils';
+import { ratioH } from '../../utils/utils';
 import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
 import WrongSpeakingModalDialog from '../../core/Modal/WrongSpeakingModalDialog';
-import {StackActions} from '@react-navigation/native';
+import { StackActions } from '@react-navigation/native';
 import Video from 'react-native-video';
 
-const Game3 = ({navigation}) => {
+const Game3 = ({ navigation }) => {
   const [isPauseAudio, setPauseAudio] = useState(true);
   const [anwsOptions, setAnwsOptions] = useState([
     {
@@ -74,15 +74,19 @@ const Game3 = ({navigation}) => {
       leftPosContent="35%"
       destination="ListeningGame4"
       onCheckResult={onCheckResult}>
-      <View style={{flex: 1, justifyContent: 'center'}}>
-        <TouchableOpacity style={styles.audio} onPress={async () => {  setPauseAudio(false);}}>
+      <View style={{ flex: 1, justifyContent: 'center' }}>
+        <TouchableOpacity style={styles.audio} onPress={async () => {
+          setPauseAudio((prevState) =>
+            !prevState
+          );
+        }}>
           <Image
-            style={{width: ratioH(165), height: ratioH(165)}}
+            style={{ width: ratioH(165), height: ratioH(165) }}
             resizeMode="cover"
             source={require('../../../assets/images/core/Audio.png')}
           />
         </TouchableOpacity>
-        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
           <AnswerButton
             customWidth={300}
             content={anwsOptions[0].content}
@@ -98,7 +102,7 @@ const Game3 = ({navigation}) => {
             multipleChoice={false}
             handleOneChoice={index => handleOneChoice(1)}
             isUniqueSelected={anwsOptions[1].selected}
-            style={{...styles.answerButton, marginLeft: 16, marginRight: 12}}
+            style={{ ...styles.answerButton, marginLeft: 16, marginRight: 12 }}
             textStyle={styles.textStyle}
             buttonStyle={styles.buttonStyle}
           />
@@ -125,13 +129,13 @@ const Game3 = ({navigation}) => {
         onRetry={onRetry}
       />
       <Video
-          source={require('../../../assets/audio/ListenStory.mp3')}
-          paused={isPauseAudio}
-          audioOnly={true}
-          repeat={Platform.OS === 'ios'}
-          onEnd={() => setPauseAudio(true)}
-          style={{height: 0, width: 0}}
-        />
+        source={require('../../../assets/audio/ListenStory.mp3')}
+        paused={isPauseAudio}
+        audioOnly={true}
+        repeat={Platform.OS === 'ios'}
+        onEnd={() => setPauseAudio(true)}
+        style={{ height: 0, width: 0 }}
+      />
     </ListeningBackground>
   );
 };
