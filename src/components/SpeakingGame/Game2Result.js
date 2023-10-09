@@ -12,12 +12,17 @@ import SpeakingTwoButton from '../../core/Button/SpeakingTwoButton';
 // import { Audio } from 'expo-av';
 import Video from 'react-native-video';
 import {ratioH} from '../../utils/utils';
+import {StackActions, useNavigation} from '@react-navigation/native';
 
-const Game2Result = ({navigation, audioUrl, isCorrect}) => {
+const Game2Result = ({audioUrl, isCorrect}) => {
+  const navigation = useNavigation();
   const [isPauseAudio, setPauseAudio] = useState(true);
 
-  const onShowResult = () => {};
-  console.log({gdfgsdgd: audioUrl})
+  const onShowResult = () => {
+    navigation.dispatch(StackActions.push('SpeakingGame3'));
+  };
+
+  console.log({gdfgsdgd: audioUrl});
 
   return (
     <SpeakingBackground

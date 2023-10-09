@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from 'react';
 import {
   View,
   ImageBackground,
@@ -7,39 +7,44 @@ import {
   Text,
   Image,
   TouchableOpacity,
-} from "react-native";
-import GuideImage from "./components/GuideImage";
-import Carousel, { Pagination } from "react-native-snap-carousel";
+} from 'react-native';
+import GuideImage from './components/GuideImage';
+import Carousel, {Pagination} from 'react-native-snap-carousel';
+import {ratioH} from '../../utils/utils';
 
-const widthScreen = Dimensions.get("screen").height * 1.431;
+const widthScreen = Dimensions.get('screen').height * 1.431;
 
 const GuideScreen = ({navigation}) => {
   const guideImages = [
-    require("../../../assets/images/GuideScreen/guide1Img.png"),
-    require("../../../assets/images/GuideScreen/guide2Img.png"),
-    require("../../../assets/images/GuideScreen/guide3Img.png"),
-    require("../../../assets/images/GuideScreen/guide4Img.png"),
-    require("../../../assets/images/GuideScreen/guide5Img.png"),
-    require("../../../assets/images/GuideScreen/guide6Img.png"),
-    require("../../../assets/images/GuideScreen/guide7Img.png"),
-    require("../../../assets/images/GuideScreen/guide8Img.png"),
-    require("../../../assets/images/GuideScreen/guide9Img.png"),
-    require("../../../assets/images/GuideScreen/guide10Img.png"),
-    require("../../../assets/images/GuideScreen/guide11Img.png"),
-    require("../../../assets/images/GuideScreen/guide12Img.png"),
+    require('../../../assets/images/GuideScreen/guide1.png'),
+    require('../../../assets/images/GuideScreen/guide2.png'),
+    require('../../../assets/images/GuideScreen/guide3.png'),
+    require('../../../assets/images/GuideScreen/guide4.png'),
+    require('../../../assets/images/GuideScreen/guide5.png'),
+    require('../../../assets/images/GuideScreen/guide6.png'),
+    require('../../../assets/images/GuideScreen/guide7.png'),
+    require('../../../assets/images/GuideScreen/guide8.png'),
+    require('../../../assets/images/GuideScreen/guide9.png'),
+    require('../../../assets/images/GuideScreen/guide10.png'),
+    require('../../../assets/images/GuideScreen/guide11.png'),
+    require('../../../assets/images/GuideScreen/guide12.png'),
   ];
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const descriptions = [
+    '왼쪽 박스를 눌러 단어 발음을 들은 후, 마이크를 눌러 발음 연습을 하는 훈련이야. 녹음을 하고 나서 소리를 번갈아가며듣고 발음을 고치는 훈련을 도전해보자!',
+    '문제의 빈 칸을 주어진 다섯가지 단어를 이용해 채운 후 문장을 만들어보자! 다 만든 후 마이크를 눌러 문장을 또박또박 읽어보자!',
+    '주어진 단어 중 한 개를 골라 문장의 빈칸을 채워서 문장을 완성시키고 마이크를 눌러 또박또박 읽어보자!',
+    '주어진 단어와 비슷한 발음을 가지고 있는 단어를 찾아보자! 비슷한 자음, 또는 모음을 가지고 있는 정답을 골라서 마이크를 누른 후 또박또박 읽어보자!',
+    '스피커를 눌러 나오는 소리를 듣고, 들리는 순서에 맞춰 단어를 차례대로 선택해보자!',
+    '스피커를 눌러 나오는 소리를 듣고, 주어진 문장들 속에서 소리와 일치하는 문장을 찾아 선택해보자!',
+    '스피커를 눌렀을 때 나오는 소음 속에서 단어를 찾아보자! 찾은 단어를 보기에서 골라 선택하면 돼!',
+    '재생되는 영상을 보며 스피커를 눌러 소리를 동시에 들은 후, 영상의 상황과 소음의 상황이 일치하는지 아닌지 찾아보자! ',
+    '스피커를 눌러 주어지는 짧은 이야기를 집중해서 듣고 주어진 문제를 풀어보자!',
+    '주어진 시간 안에 카드를 뒤집어 같은 그림을 찾아보자! 제한 시간은 30초니까 서두르는게 좋을거야!',
+    '주어진 시간 안에 틀린 그림 5가지를 찾아보자! 제한 시간은 30초니까 서두르는게 좋을거야!',
+    '주어진 시간 안에 퍼즐을 맞춰보자! 제한 시간은 30초니까 서두르는게 좋을거야!',
+  ];
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      if (currentIndex >= guideImages.length - 1) {
-        setCurrentIndex(0);
-      } else {
-        setCurrentIndex((pre) => pre + 1);
-      }
-    }, 2000);
-    return () => clearInterval(intervalId);
-  }, [currentIndex]);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const onStartTraining = () => {
     navigation.navigate('SpeakingGame1');
@@ -50,21 +55,20 @@ const GuideScreen = ({navigation}) => {
   return (
     <View style={styles.rootView}>
       <ImageBackground
-        source={require("../../../assets/images/GuideScreen/guideBGImg.png")}
-        style={styles.bgImage}
-      >
+        source={require('../../../assets/images/GuideScreen/guideBGImg.png')}
+        style={styles.bgImage}>
         <View style={styles.topView}>
           <View style={styles.titleView}>
-            <View style={{ flex: 1 }} />
+            <View style={{flex: 1}} />
             <Image
-              source={require("../../../assets/images/GuideScreen/guideTitleImg.png")}
+              source={require('../../../assets/images/GuideScreen/guideTitleImg.png')}
               style={styles.titleImg}
               resizeMode="contain"
             />
             <View style={styles.closeButtonView}>
               <TouchableOpacity onPress={onClose}>
                 <Image
-                  source={require("../../../assets/images/GuideScreen/closeButton.png")}
+                  source={require('../../../assets/images/GuideScreen/closeButton.png')}
                   style={styles.closeImg}
                   resizeMode="contain"
                 />
@@ -73,22 +77,40 @@ const GuideScreen = ({navigation}) => {
           </View>
         </View>
         <View style={styles.contentView}>
-          <GuideImage source={guideImages[currentIndex]} />
-          <View style={styles.pagingView}>
-            <Pagination
-              dotsLength={guideImages.length}
-              activeDotIndex={currentIndex}
-              dotStyle={styles.dotView}
-              inactiveDotStyle={styles.inactiveDotView}
-              inactiveDotScale={1}
-              inactiveDotOpacity={1}
-            />
+          <View
+            style={{
+              flexDirection: 'row',
+              paddingHorizontal: ratioH(40),
+            }}>
+            <View style={{alignItems: 'center'}}>
+              <GuideImage onChangeIndex={index => setCurrentIndex(index)} />
+              <View style={styles.pagingView}>
+                <Pagination
+                  dotsLength={guideImages.length}
+                  activeDotIndex={currentIndex}
+                  dotStyle={styles.dotView}
+                  inactiveDotStyle={styles.inactiveDotView}
+                  inactiveDotScale={1}
+                  inactiveDotOpacity={1}
+                />
+              </View>
+            </View>
+            <View style={styles.guideInfoView}>
+              <Image
+                source={require('../../../assets/images/GuideScreen/guideInfoImg.png')}
+                resizeMode="contain"
+                style={styles.guideInfoImg}
+              />
+              <View style={styles.desView}>
+                <Text style={styles.desText}>{descriptions[currentIndex]}</Text>
+              </View>
+            </View>
           </View>
         </View>
         <View style={styles.bottomView}>
           <TouchableOpacity onPress={onStartTraining}>
             <Image
-              source={require("../../../assets/images/GuideScreen/startTrainingButton.png")}
+              source={require('../../../assets/images/GuideScreen/startTrainingButton.png')}
               style={styles.startTrainingImg}
               resizeMode="contain"
             />
@@ -105,66 +127,87 @@ const styles = StyleSheet.create({
   rootView: {
     flex: 1,
     width: widthScreen,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   bgImage: {
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
   },
   topView: {
-    flex: 1,
-    justifyContent: "flex-end",
-    paddingBottom: 40,
-    alignItems: "center",
+    alignItems: 'center',
     paddingHorizontal: 40,
+    height: ratioH(114),
   },
   bottomView: {
     flex: 0.8,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   contentView: {
-    height: Dimensions.get("screen").height * 0.62,
+    height: Dimensions.get('screen').height * 0.65,
+    justifyContent: 'center',
   },
   titleText: {
     fontSize: 36,
-    fontWeight: "bold",
-    color: "#002443",
+    fontWeight: 'bold',
+    color: '#002443',
   },
   titleImg: {
     width: widthScreen * 0.28,
   },
   titleView: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: '100%',
   },
   closeImg: {
     height: widthScreen * 0.0418,
     width: widthScreen * 0.0418,
   },
-  closeButtonView: { flex: 1, alignItems: "flex-end" },
+  closeButtonView: {flex: 1, alignItems: 'flex-end'},
   dotView: {
-    width: 32,
-    height: 10,
+    width: ratioH(32),
+    height: ratioH(10),
     borderRadius: 5,
-    backgroundColor: "rgba(255, 255, 255, 0.92)",
-    shadowColor: "#0069D666",
+    backgroundColor: 'rgba(255, 255, 255, 0.92)',
+    shadowColor: '#0069D666',
     elevation: 5,
   },
   inactiveDotView: {
-    width: 10,
-    height: 10,
+    width: ratioH(10),
+    height: ratioH(10),
     borderRadius: 5,
-    backgroundColor: "rgba(255, 255, 255, 0.92)",
-    shadowColor: "#0069D666",
+    backgroundColor: 'rgba(255, 255, 255, 0.92)',
+    shadowColor: '#0069D666',
     elevation: 5,
   },
   pagingView: {
-    alignItems: "flex-start",
-    paddingLeft: widthScreen * 0.13,
-    marginTop: -10,
+    width: ratioH(299),
+    marginTop: -ratioH(15),
   },
   startTrainingImg: {
     width: widthScreen * 0.293,
+  },
+  guideInfoImg: {
+    width: ratioH(395),
+    height: ratioH(200),
+  },
+  guideInfoView: {
+    flex: 1,
+    marginLeft: ratioH(60),
+    justifyContent: 'center',
+  },
+  desView: {
+    backgroundColor: 'white',
+    height: ratioH(68),
+    width: '100%',
+    borderRadius: ratioH(12),
+    marginTop: ratioH(24),
+    paddingHorizontal: ratioH(16),
+    justifyContent: 'center',
+  },
+  desText: {
+    color: '#3D5268',
+    fontSize: ratioH(16),
   },
 });
