@@ -5,10 +5,10 @@ import {useRoute} from '@react-navigation/native';
 const SpeakingGame4 = ({navigation}) => {
   const route = useRoute();
   const isCorrect = route.params?.isCorrect ?? false;
-
+  const audioUrl = route.params?.audioUrl ?? false;
   return (
     <View style={styles.container}>
-      <Game4Result navigation={navigation} isCorrect={isCorrect} />
+      <Game4Result navigation={navigation} isCorrect={isCorrect} audioUrl={audioUrl}/>
     </View>
   );
 };

@@ -11,7 +11,7 @@ import SpeakingBackground from './SpeakingBackground';
 import RecordButton from '../../core/Button/RecordButton';
 import {StackActions, useNavigation} from '@react-navigation/native';
 import AnswerButton from '../../core/Button/AnswerButton';
-import {ratioH} from '../../utils/utils';
+import {ratioH, compareSentences} from '../../utils/utils';
 
 const widthScreen = Dimensions.get('screen').height * 1.431;
 
@@ -56,6 +56,27 @@ const Game4 = () => {
     }
   };
 
+  const checkAnswerCondition = () => {
+    console.log('vao day');
+    let isCondition = false;
+    anwsOptions.forEach((answ)=>{
+      console.log('answ is', answ);
+      if ((answ?.selected === answ?.isCorrect) && answ?.isCorrect) {
+        console.log('correct selected ans');
+        isCondition =  true;
+        }
+    })
+    return isCondition;
+  };
+
+  const checkPercentageCondition = (textRecording) => {
+    const SENTENCE_RESULT =  '숙제'
+    // const SENTENCE_RESULT =  '안녕하세요';
+    console.log('percentage', compareSentences(textRecording, SENTENCE_RESULT))
+    return (compareSentences(textRecording, SENTENCE_RESULT) <= 0)
+  }
+
+
   const onSelectRecordButton = () => {
     navigation.dispatch(StackActions.push('SpeakingGame4Result', {isCorrect}));
   };
@@ -67,9 +88,13 @@ const Game4 = () => {
       destination="ListeningGame1"
       navigation={navigation}
       onClickSpeakingButton={onSelectRecordButton}
-      handleFinishRecording={audioUrl => {
+      handleFinishRecording={(audioUrl, textRecording) => {
+        const isCorrectCondition = checkAnswerCondition() ;
+        console.log('finish checkCorrcect', isCorrectCondition);
+        const isCorrectPercentage = checkPercentageCondition(textRecording);
+        console.log('finish checkCorrcectPercentage', isCorrectPercentage);
         navigation.navigate('SpeakingGame4Result', {
-          isCorrect: isCorrect,
+          isCorrect: isCorrectCondition && isCorrectPercentage,
           audioUrl: audioUrl,
         });
       }}

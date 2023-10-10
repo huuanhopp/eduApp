@@ -20,12 +20,12 @@ const SpeakingConfirmButton = ({
         // isOnlyWhisper={isOnlyWhisper}
         // setOnlyWhisper={setOnlyWhisper}
         onGetText={_text => {}}
-        isOnlyRecord={true}
+        isOnlyRecord={false}
         audioFileName={
           indexSelected ? `audio_${indexSelected?.toString()}.wav` : null
         }
         onFinalMessage={res => {
-          handleFinishRecording && handleFinishRecording(res?.audioUrl);
+          handleFinishRecording && handleFinishRecording(res?.audioUrl, res?.text);
           // setAudioUrl(res?.audioUrl);
           // navigation.replace('SpeakingGame1Result', {
           //   data: {

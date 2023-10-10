@@ -18,6 +18,7 @@ import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
 import {CommonSize, ratioH} from '../../utils/utils';
 
 const Game4Result = ({audioUrl}) => {
+  console.log('audioUrl',audioUrl);
   const [isPauseAudio, setPauseAudio] = useState(true);
   const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
   const navigation = useNavigation();

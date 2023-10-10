@@ -21,12 +21,13 @@ const Game3 = () => {
 
   // Example usage:
 
-  useEffect(() => {
-    const sentence1 = 'This is a sample sentence.';
-    const sentence2 = 'This is a sample';
-    const similarityPercentage = compareSentences(sentence1, sentence2);
-    console.log(`Similarity Percentage: ${similarityPercentage.toFixed(2)}%`);
-  }, []);
+  // useEffect(() => {
+  //   const sentence1 = '철수는 오늘도 숙제 를(을) 해야한다';
+  //   const sentence2 = '철수는 오늘도 숙제 를(을) 해야';
+  //   const similarityPercentage = compareSentences(sentence1, sentence2);
+  //   console.log(`Similarity Percentage: ${similarityPercentage}`);
+  // }, []);
+  /// cheolsuneun naleul silh-eohanda
 
   const [anwsOptions, setAnwsOptions] = useState([
     {
@@ -96,6 +97,26 @@ const Game3 = () => {
     navigation.dispatch(StackActions.push('SpeakingGame3Result', {isCorrect}));
   };
 
+  const checkAnswerCondition = () => {
+    console.log('vao day');
+    let isCondition = false;
+    anwsOptions.forEach((answ)=>{
+      console.log('answ is', answ);
+      if ((answ?.selected === answ?.isCorrect) && answ?.isCorrect) {
+        console.log('correct selected ans');
+        isCondition =  true;
+        }
+    })
+    return isCondition;
+  };
+
+  const checkPercentageCondition = (textRecording) => {
+    const SENTENCE_RESULT =  '철수는 오늘도 숙제 를을 해야'
+    // const SENTENCE_RESULT =  '안녕하세요';
+    console.log('percentage', compareSentences(textRecording, SENTENCE_RESULT))
+    return (compareSentences(textRecording, SENTENCE_RESULT) <= 3)
+  }
+
   return (
     <SpeakingBackground
       title="빈칸 채우기"
@@ -103,10 +124,16 @@ const Game3 = () => {
       destination="SpeakingGame4"
       navigation={navigation}
       indexSelected={indexSelected}
-      handleFinishRecording={audioUrl => {
+      handleFinishRecording={(audioUrl, textRecording) => {
+        console.log('textRecordiing is', textRecording);
+        const isCorrectCondition = checkAnswerCondition() 
+        console.log('finish checkCorrcect', isCorrectCondition);
+        const isCorrectPercentage = checkPercentageCondition(textRecording);
+        console.log('finish checkCorrcectPercentage', isCorrectPercentage);
         navigation.navigate('SpeakingGame3Result', {
-          isCorrect: isCorrect,
+          isCorrect: isCorrectCondition && isCorrectPercentage,
           audioUrl: audioUrl,
+
         });
       }}
       onClickSpeakingButton={onSelectRecordButton}>
