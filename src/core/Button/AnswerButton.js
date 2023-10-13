@@ -17,6 +17,7 @@ const AnswerButton = ({
   style,
   textStyle,
   buttonStyle,
+  isHideOrder = false,
 }) => {
   const [isSelected, setSelected] = useState(false);
 
@@ -72,7 +73,7 @@ const AnswerButton = ({
           ]}>
           {content}
         </Text>
-        {selectedOrder != 0 && (
+        {selectedOrder != 0 && !isHideOrder && (
           <Image
             style={{position: 'absolute', right: 13.5, top: 12}}
             resizeMode="cover"

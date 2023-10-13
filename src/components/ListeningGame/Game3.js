@@ -129,7 +129,7 @@ const Game3 = ({ navigation }) => {
         onRetry={onRetry}
       />
       <Video
-        source={require('../../../assets/audio/ListenStory.mp3')}
+        source={require('../../../assets/audio/soundTrainingBoil.mp3')}
         paused={isPauseAudio}
         audioOnly={true}
         repeat={Platform.OS === 'ios'}

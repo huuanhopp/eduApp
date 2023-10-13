@@ -43,7 +43,7 @@ const Game1Result = ({handleRePlayAudioRecord, route}) => {
 
   const onNext = () => {
     setWrongModalShown(false);
-    navigation.dispatch(StackActions.push('SpeakingGame3'));
+    navigation.dispatch(StackActions.push('SpeakingGame2'));
   };
 
   const onRetry = () => {
