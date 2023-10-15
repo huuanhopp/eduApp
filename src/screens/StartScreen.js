@@ -5,7 +5,7 @@ const StartScreen = ({ navigation }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       // navigation.navigate('AdvertisingScreen');
-      navigation.navigate('TutorialScreen');
+      navigation.navigate('Main');
     }, 3000);
 
     return () => {
@@ -18,7 +18,7 @@ const StartScreen = ({ navigation }) => {
       <TouchableOpacity
         onPress={() => {
           // navigation.navigate('AdvertisingScreen');
-          navigation.navigate('TutorialScreen');
+          navigation.navigate('Main');
         }}
       >
         <Image
@@ -34,7 +34,7 @@ const StartScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#6EB5FE',
     alignItems: 'center',
     justifyContent: 'center',
   },

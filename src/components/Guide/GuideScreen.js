@@ -11,10 +11,11 @@ import {
 import GuideImage from './components/GuideImage';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import {ratioH} from '../../utils/utils';
+import { CommonSize, Images,  ratioW } from '../../utils/utils';
 
 const widthScreen = Dimensions.get('screen').height * 1.431;
 
-const GuideScreen = ({navigation}) => {
+const GuideScreen = ({navigation, route}) => {
   const guideImages = [
     require('../../../assets/images/GuideScreen/guide1.png'),
     require('../../../assets/images/GuideScreen/guide2.png'),
@@ -45,9 +46,21 @@ const GuideScreen = ({navigation}) => {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  const { status } = route.params;
   const onStartTraining = () => {
-    navigation.navigate('SpeakingGame1');
+    switch (status) {
+      case 1:
+        navigation.navigate('SpeakingGame1');
+        break;
+      case 2:
+        navigation.navigate('ListeningGame1');
+        break;
+      case 3:
+        navigation.navigate('PuzzleProgress');
+        break;
+      default:
+        // Handle any other cases if needed
+    }
   };
 
   const onClose = () => {};
@@ -126,8 +139,10 @@ export default GuideScreen;
 const styles = StyleSheet.create({
   rootView: {
     flex: 1,
-    width: widthScreen,
+    // width: widthScreen,
+    width: CommonSize.srcWidth,
     alignSelf: 'center',
+    // backgroundColor: '#B0D4FF',
   },
   bgImage: {
     width: '100%',

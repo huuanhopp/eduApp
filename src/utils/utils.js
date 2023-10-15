@@ -28,6 +28,7 @@ export const Slides = [
 
 export const ratioW = _width => {
   return (_width * width) / 1194;
+  // return (_width * width) / 1;
 };
 
 export const ratioH = _height => {
@@ -38,6 +39,7 @@ export const CommonSize = {
   srcWidth: width,
   srcHeight: height,
   srcWidthDefault: (height * 1194) / 834,
+  // srcWidthDefault: width,
   srcHeightDefault: height,
 };
 
@@ -49,7 +51,7 @@ export const whisper_token =
   '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';
 
 
-export function compareSentences(s1, s2) {
+export function compareSentences(se1, se2) {
   // // Remove special characters and convert to lowercase
   // const cleanSentence1 = sentence1.replace(/[^\w\s]/g, '').toLowerCase();
   // const cleanSentence2 = sentence2.replace(/[^\w\s]/g, '').toLowerCase();
@@ -76,6 +78,8 @@ export function compareSentences(s1, s2) {
   // const percentage = (consecutiveMatches / maxLength) * 100;
 
   // return percentage;
+  const s1 = se1.replace(/\s+/g, '')
+  const s2 = se2.replace(/\s+/g, '')
   console.log("sentence1 sentence2", s1, s2)
   const m = s1.length;
   const n = s2.length;

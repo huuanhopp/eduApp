@@ -36,7 +36,7 @@ const MainScreen = ({navigation}) => {
       <TouchableOpacity
         style={styles.listeningGame}
         onPress={() => {
-          navigation.navigate('ListeningGame1');
+          navigation.navigate('ListeningProgress');
         }}>
         <Image
           resizeMode="cover"
@@ -46,7 +46,7 @@ const MainScreen = ({navigation}) => {
       <TouchableOpacity
         style={styles.speakingGame}
         onPress={() => {
-          navigation.navigate('SpeakingGame1');
+          navigation.navigate('SpeakingProgress');
         }}>
         <Image
           resizeMode="cover"
@@ -56,7 +56,7 @@ const MainScreen = ({navigation}) => {
       <TouchableOpacity
         style={styles.puzzleGame}
         onPress={() => {
-          navigation.navigate('PuzzleGame1');
+          navigation.navigate('PuzzleProgress');
         }}>
         <Image
           resizeMode="cover"
@@ -70,9 +70,10 @@ const MainScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ECF4FF',
     alignItems: 'center',
     justifyContent: 'center',
+    // backgroundColor: 'rgb(224,238,255)',
   },
   yellowBtn: {
     position: 'absolute',
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
   searchingBtn: {
     position: 'absolute',
     zIndex: 1,
-    left: '11.5%',
+    left: '15.5%',
     top: '9.1%',
     opacity: 0,
   },

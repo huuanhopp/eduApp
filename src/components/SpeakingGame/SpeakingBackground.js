@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Dimensions,
   Image,
@@ -11,8 +11,9 @@ import {
 import BackButton from '../../core/Button/BackButton';
 import SpeakingConfirmButton from '../../core/Button/SpeakingConfirmButton';
 import ListeningModalDialog from '../../core/Modal/ListeningModalDialog';
-import {CommonSize, Images, ratioH, ratioW} from '../../utils/utils';
-import {useNavigation} from '@react-navigation/native';
+import GoBackModalDialog from '../../core/Modal/GoBackModalDialog';
+import { CommonSize, Images, ratioH, ratioW } from '../../utils/utils';
+import { useNavigation } from '@react-navigation/native';
 const SpeakingBackground = ({
   title,
   question,
@@ -27,52 +28,63 @@ const SpeakingBackground = ({
 }) => {
   const navigation = useNavigation();
   const [width, setWidth] = useState(CommonSize.srcWidthDefault);
+  const [gobackModalShown, setgobackModalShown] = useState(false);
 
   const goBack = () => {
-    navigation.goBack();
+    // navigation.goBack();
+    // navigation.pop();
+    navigation.navigate('Main');;
   };
 
   return (
-    <ImageBackground
-      resizeMode="contain"
-      source={require('../../../assets/images/SpeakingGame/SpeakingBackground.png')}
+    <View
       style={{
-        ...styles.imgBG,
-        width: width,
-      }}
-      onLayout={e => {
-        setWidth((e.nativeEvent.layout.height * 1194) / 834);
+        backgroundColor: 'rgb(224,238,255)',
+        flex: 1,
+        width: CommonSize.srcWidth,
+        alignItems: 'center',
       }}>
-      <View style={{height: '100%'}}>
-        <View>
-          <TouchableOpacity onPress={goBack}>
-            <Image
-              source={Images.backButton}
-              style={{
-                ...styles.backButton,
-              }}
-            />
-          </TouchableOpacity>
-          <View style={styles.topView}>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.subTitle}>{question}</Text>
+      <ImageBackground
+        resizeMode="contain"
+        source={require('../../../assets/images/SpeakingGame/SpeakingBackground.png')}
+        style={{
+          ...styles.imgBG,
+          width: width,
+        }}
+        onLayout={e => {
+          setWidth((e.nativeEvent.layout.height * 1194) / 834);
+        }}>
+        <View style={{ height: '100%' }}>
+          <View>
+            <TouchableOpacity onPress={goBack}>
+              <Image
+                source={Images.backButton}
+                style={{
+                  ...styles.backButton,
+                }}
+              />
+            </TouchableOpacity>
+            <View style={styles.topView}>
+              <Text style={styles.title}>{title}</Text>
+              <Text style={styles.subTitle}>{question}</Text>
+            </View>
+          </View>
+          <View style={styles.contentView}>{children}</View>
+          <View style={styles.bottomView}>
+            {speakingButtonShown && (
+              <SpeakingConfirmButton
+                Modal={ListeningModalDialog}
+                destination={destination}
+                navigation={navigation}
+                onPress={onClickSpeakingButton}
+                indexSelected={indexSelected}
+                handleFinishRecording={handleFinishRecording}
+              />
+            )}
           </View>
         </View>
-        <View style={styles.contentView}>{children}</View>
-        <View style={styles.bottomView}>
-          {speakingButtonShown && (
-            <SpeakingConfirmButton
-              Modal={ListeningModalDialog}
-              destination={destination}
-              navigation={navigation}
-              onPress={onClickSpeakingButton}
-              indexSelected={indexSelected}
-              handleFinishRecording={handleFinishRecording}
-            />
-          )}
-        </View>
-      </View>
-    </ImageBackground>
+      </ImageBackground>
+    </View>
   );
 };
 

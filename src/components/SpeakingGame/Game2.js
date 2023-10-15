@@ -168,14 +168,15 @@ const Game2 = () => {
         isCondition =  true;
         }
     })
-    return isCondition;
+    // return isCondition;
+    return isAllCorrect;
   };
 
   const checkPercentageCondition = (textRecording) => {
-    const SENTENCE_RESULT =  '철수는 오늘도 숙제 를을 해야'
-    // const SENTENCE_RESULT =  '안녕하세요';
-    console.log('percentage', compareSentences(textRecording, SENTENCE_RESULT))
-    return (compareSentences(textRecording, SENTENCE_RESULT) <= 3)
+    const SENTENCE_RESULT =  '나는 내일 점심에 친구와 토스트를 싼 후 피크닉에 간다'
+    console.log('percentage',  compareSentences(textRecording, SENTENCE_RESULT))
+    // return ((compareSentences(test, SENTENCE_RESULT) <= 3))
+    return ((compareSentences(textRecording, SENTENCE_RESULT) <= 3))
   }
   let removedOrderArr = useRef([]);
 
