@@ -84,7 +84,7 @@ const Game4 = ({navigation}) => {
           <Image
             style={styles.car}
             resizeMode="contain"
-            source={require('../../../assets/images/ListeningGame/Game4/Car.png')}
+            source={require('../../../assets/images/ListeningGame/Game4/Car1.png')}
           />
         </TouchableOpacity>
         <View
@@ -108,7 +108,7 @@ const Game4 = ({navigation}) => {
             multipleChoice={false}
             handleOneChoice={index => handleOneChoice(1)}
             isUniqueSelected={anwsOptions[1].selected}
-            style={{...styles.answerButton, marginLeft: 30}}
+            style={{...styles.answerButton, marginLeft: 80}}
             textStyle={styles.textStyle}
             buttonStyle={styles.buttonStyle}
           />
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   },
   answerButton: {
     position: 'relative',
-    width: 258,
+    width: '258.5px',
     height: ratioH(56),
     justifyContent: 'center',
     alignItems: 'center',

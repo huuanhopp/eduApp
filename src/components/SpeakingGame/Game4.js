@@ -20,19 +20,19 @@ const Game4 = () => {
   const [isCorrect, setIsCorrect] = useState(false);
   const [anwsOptions, setAnwsOptions] = useState([
     {
-      content: '숙제',
+      content: '뭐하니',
       left: widthScreen * 0.19,
       selected: false,
       isCorrect: true,
     },
     {
-      content: '색깔',
+      content: '배고파',
       left: widthScreen * 0.405,
       selected: false,
       isCorrect: false,
     },
     {
-      content: '친구',
+      content: '도우미',
       left: widthScreen * 0.62,
       selected: false,
       isCorrect: false,

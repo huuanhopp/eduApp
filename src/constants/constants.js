@@ -12,6 +12,7 @@ import ListeningGame3 from '../screens/ListeningScreen/ListeningGame3';
 import ListeningGame4 from '../screens/ListeningScreen/ListeningGame4';
 import ListeningGame5 from '../screens/ListeningScreen/ListeningGame5';
 import PuzzleGame1 from '../screens/PuzzleScreen/PuzzleGame1';
+import PuzzleGame2 from '../screens/PuzzleScreen/PuzzleGame2';
 import SpeakingGame1 from '../screens/SpeakingScreen/SpeakingGame1';
 import SpeakingGame1Result from '../screens/SpeakingScreen/SpeakingGame1Result';
 import SpeakingGame2 from '../screens/SpeakingScreen/SpeakingGame2';
@@ -82,6 +83,10 @@ export const stackScreen = [
   {
     name: 'PuzzleGame1',
     component: PuzzleGame1,
+  },
+  {
+    name: 'PuzzleGame2',
+    component: PuzzleGame2,
   },
   {
     name: 'Stage1',

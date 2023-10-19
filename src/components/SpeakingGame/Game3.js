@@ -111,10 +111,11 @@ const Game3 = () => {
   };
 
   const checkPercentageCondition = (textRecording) => {
-    const SENTENCE_RESULT =  '철수는 오늘도 숙제 를을 해야'
+    const SENTENCE_RESULT =  '철수는 오늘도 숙제를 해야한다'
+    const SENTENCE_RESULT1 =  '철수는 오늘도 숙제을 해야한다'
     // const SENTENCE_RESULT =  '안녕하세요';
     console.log('percentage', compareSentences(textRecording, SENTENCE_RESULT))
-    return (compareSentences(textRecording, SENTENCE_RESULT) <= 3)
+    return (compareSentences(textRecording, SENTENCE_RESULT) <= 0 || compareSentences(textRecording, SENTENCE_RESULT1) <= 0)
   }
 
   return (
