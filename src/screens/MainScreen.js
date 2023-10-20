@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 const MainScreen = ({navigation}) => {
-  // useEffect(() => {
-  //   navigation.navigate('SpeakingGame1');
-  // }, []);
+  useEffect(() => {
+    navigation.navigate('PuzzleGame3');
+  }, []);
 
   return (
     <View style={styles.container}>
