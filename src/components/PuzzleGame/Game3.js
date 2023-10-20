@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useMemo, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -10,17 +10,129 @@ import {
 import PuzzleBackground from './PuzzleBackground';
 import Card2 from '../../core/Card/Card2';
 
-const FragImage = ({ urlImage }) => {
+const FragImage = ({urlImage, onClick, ok}) => {
   return (
-    <TouchableOpacity>
-      <Image source={urlImage} />
+    <TouchableOpacity onPress={onClick}>
+      <Image
+        source={urlImage}
+        style={{
+          opacity: ok ? 1 : 0,
+        }}
+      />
     </TouchableOpacity>
   );
 };
 
-const Game3 = ({ navigation }) => {
-  const onCheckResult = () => {
-    // Implement your check result logic here
+const FragImage2 = ({urlImage, onClick, ok, select}) => {
+  let opacity = 0;
+  if (ok) {
+    opacity = 0;
+  } else if (select) {
+    opacity = 0;
+  } else {
+    opacity = 1;
+  }
+
+  return (
+    <TouchableOpacity onPress={onClick}>
+      <Image
+        source={urlImage}
+        // eslint-disable-next-line react-native/no-inline-styles
+        style={{
+          opacity, // ok ? 0 : select ? 0.5 : 1,
+        }}
+      />
+    </TouchableOpacity>
+  );
+};
+
+const Game3 = ({navigation}) => {
+  const [selectLeft, setSelectLeft] = useState();
+  const [selectRight, setSelectRight] = useState();
+
+  // const [p1, setP1] = useState(false);
+  // const [p2, setP2] = useState(false);
+  // const [p3, setP3] = useState(false);
+  // const [p4, setP4] = useState(false);
+  // const [p5, setP5] = useState(false);
+  // const [p6, setP6] = useState(false);
+  // const [p7, setP7] = useState(false);
+  // const [p8, setP8] = useState(false);
+  // const [p9, setP9] = useState(false);
+
+  const onCheckResult = () => {};
+
+  // const onCheckResult = () => {
+  //   // Implement your check result logic here
+  //   console.log('checking', selectLeft, selectRight);
+  //   if (selectLeft && selectRight) {
+  //     if (selectLeft === 'p9' && selectRight === 'p9') {
+  //       setP9(true);
+  //     }
+
+  //     if (selectLeft === 'p8' && selectRight === 'p8') {
+  //       setP8(true);
+  //     }
+
+  //     if (selectLeft === 'p7' && selectRight === 'p7') {
+  //       setP7(true);
+  //     }
+
+  //     if (selectLeft === 'p6' && selectRight === 'p6') {
+  //       setP6(true);
+  //     }
+
+  //     if (selectLeft === 'p5' && selectRight === 'p5') {
+  //       setP5(true);
+  //     }
+
+  //     if (selectLeft === 'p4' && selectRight === 'p4') {
+  //       setP4(true);
+  //     }
+
+  //     if (selectLeft === 'p3' && selectRight === 'p3') {
+  //       setP3(true);
+  //     }
+
+  //     if (selectLeft === 'p2' && selectRight === 'p2') {
+  //       setP2(true);
+  //     }
+
+  //     if (selectLeft === 'p1' && selectRight === 'p1') {
+  //       setP1(true);
+  //     }
+  //   }
+  // };
+
+  const p1 = selectLeft === 'p1' && selectRight === 'p1';
+  const p2 = selectLeft === 'p2' && selectRight === 'p2';
+  const p3 = selectLeft === 'p3' && selectRight === 'p3';
+  const p4 = selectLeft === 'p4' && selectRight === 'p4';
+  const p5 = selectLeft === 'p5' && selectRight === 'p5';
+  const p6 = selectLeft === 'p6' && selectRight === 'p6';
+  const p7 = selectLeft === 'p7' && selectRight === 'p7';
+  const p8 = selectLeft === 'p8' && selectRight === 'p8';
+  const p9 = selectLeft === 'p9' && selectRight === 'p9';
+
+  const setSelect = ([d, p]) => {
+    if (d === 'left') {
+      if (p === selectLeft) {
+        setSelectLeft(null);
+      } else {
+        setSelectLeft(p);
+      }
+    }
+
+    if (d === 'right') {
+      if (p === selectRight) {
+        setSelectRight(null);
+      } else {
+        setSelectRight(p);
+      }
+    }
+
+    // check
+    // onCheckResult();
   };
 
   return (
@@ -31,7 +143,7 @@ const Game3 = ({ navigation }) => {
       destination="PuzzleGame1"
       onCheckResult={onCheckResult}>
       <View style={styles.contentView}>
-        <View style={{ flexDirection: 'row' }}>
+        <View style={{flexDirection: 'row'}}>
           <View style={styles.cardContainer}>
             <Card2
               urlImage={require('../../../assets/images/PuzzleGame/Game3/bg1.png')}
@@ -39,36 +151,70 @@ const Game3 = ({ navigation }) => {
             <View style={styles.cardHolder}>
               <FragImage
                 urlImage={require('../../../assets/images/PuzzleGame/Game3/p9.png')}
+                onClick={() => {
+                  setSelect(['left', 'p9']);
+                }}
+                ok={p9}
               />
               <FragImage
                 urlImage={require('../../../assets/images/PuzzleGame/Game3/p7.png')}
+                onClick={() => {
+                  setSelect(['left', 'p7']);
+                }}
+                ok={p7}
               />
               <FragImage
                 urlImage={require('../../../assets/images/PuzzleGame/Game3/p2.png')}
+                onClick={() => {
+                  setSelect(['left', 'p2']);
+                }}
+                ok={p2}
               />
 
-              <Image
-                source={require('../../../assets/images/PuzzleGame/Game3/p8.png')}
+              <FragImage
+                urlImage={require('../../../assets/images/PuzzleGame/Game3/p8.png')}
+                onClick={() => {
+                  setSelect(['left', 'p8']);
+                }}
+                ok={p8}
+              />
+              <FragImage
+                urlImage={require('../../../assets/images/PuzzleGame/Game3/p1.png')}
+                onClick={() => {
+                  setSelect(['left', 'p1']);
+                }}
+                ok={p1}
+              />
+              <FragImage
+                urlImage={require('../../../assets/images/PuzzleGame/Game3/p3.png')}
+                onClick={() => {
+                  setSelect(['left', 'p3']);
+                }}
+                ok={p3}
               />
 
-              <Image
-                source={require('../../../assets/images/PuzzleGame/Game3/p1.png')}
+              <FragImage
+                urlImage={require('../../../assets/images/PuzzleGame/Game3/p6.png')}
+                onClick={() => {
+                  setSelect(['left', 'p6']);
+                }}
+                ok={p6}
               />
 
-              <Image
-                source={require('../../../assets/images/PuzzleGame/Game3/p3.png')}
+              <FragImage
+                urlImage={require('../../../assets/images/PuzzleGame/Game3/p5.png')}
+                onClick={() => {
+                  setSelect(['left', 'p5']);
+                }}
+                ok={p5}
               />
 
-              <Image
-                source={require('../../../assets/images/PuzzleGame/Game3/p6.png')}
-              />
-
-              <Image
-                source={require('../../../assets/images/PuzzleGame/Game3/p5.png')}
-              />
-
-              <Image
-                source={require('../../../assets/images/PuzzleGame/Game3/p4.png')}
+              <FragImage
+                urlImage={require('../../../assets/images/PuzzleGame/Game3/p4.png')}
+                onClick={() => {
+                  setSelect(['left', 'p4']);
+                }}
+                ok={p4}
               />
             </View>
           </View>
@@ -78,34 +224,70 @@ const Game3 = ({ navigation }) => {
               urlImage={require('../../../assets/images/PuzzleGame/Game3/bg2.png')}
             />
             <View style={styles.cardHolder}>
-              <Image
-                source={require('../../../assets/images/PuzzleGame/Game3/p1.png')}
+              <FragImage2
+                urlImage={require('../../../assets/images/PuzzleGame/Game3/p1.png')}
+                onClick={() => {
+                  setSelect(['right', 'p1']);
+                }}
+                select={selectRight === 'p1'}
               />
-              <Image
-                source={require('../../../assets/images/PuzzleGame/Game3/p2.png')}
+              <FragImage2
+                urlImage={require('../../../assets/images/PuzzleGame/Game3/p2.png')}
+                onClick={() => {
+                  setSelect(['right', 'p2']);
+                }}
+                select={selectRight === 'p2'}
               />
-              <Image
-                source={require('../../../assets/images/PuzzleGame/Game3/p3.png')}
+              <FragImage2
+                urlImage={require('../../../assets/images/PuzzleGame/Game3/p3.png')}
+                onClick={() => {
+                  setSelect(['right', 'p3']);
+                }}
+                select={selectRight === 'p3'}
               />
 
-              <Image
-                source={require('../../../assets/images/PuzzleGame/Game3/p4.png')}
+              <FragImage2
+                urlImage={require('../../../assets/images/PuzzleGame/Game3/p4.png')}
+                onClick={() => {
+                  setSelect(['right', 'p4']);
+                }}
+                select={selectRight === 'p4'}
               />
-              <Image
-                source={require('../../../assets/images/PuzzleGame/Game3/p5.png')}
+              <FragImage2
+                urlImage={require('../../../assets/images/PuzzleGame/Game3/p5.png')}
+                onClick={() => {
+                  setSelect(['right', 'p5']);
+                }}
+                select={selectRight === 'p5'}
               />
-              <Image
-                source={require('../../../assets/images/PuzzleGame/Game3/p6.png')}
+              <FragImage2
+                urlImage={require('../../../assets/images/PuzzleGame/Game3/p6.png')}
+                onClick={() => {
+                  setSelect(['right', 'p6']);
+                }}
+                select={selectRight === 'p6'}
               />
 
-              <Image
-                source={require('../../../assets/images/PuzzleGame/Game3/p7.png')}
+              <FragImage2
+                urlImage={require('../../../assets/images/PuzzleGame/Game3/p7.png')}
+                onClick={() => {
+                  setSelect(['right', 'p7']);
+                }}
+                select={selectRight === 'p7'}
               />
-              <Image
-                source={require('../../../assets/images/PuzzleGame/Game3/p8.png')}
+              <FragImage2
+                urlImage={require('../../../assets/images/PuzzleGame/Game3/p8.png')}
+                onClick={() => {
+                  setSelect(['right', 'p8']);
+                }}
+                select={selectRight === 'p8'}
               />
-              <Image
-                source={require('../../../assets/images/PuzzleGame/Game3/p9.png')}
+              <FragImage2
+                urlImage={require('../../../assets/images/PuzzleGame/Game3/p9.png')}
+                onClick={() => {
+                  setSelect(['right', 'p9']);
+                }}
+                select={selectRight === 'p9'}
               />
             </View>
           </View>
