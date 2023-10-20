@@ -4,24 +4,17 @@ import {
   Image,
   ImageBackground,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 import React, {useState} from 'react';
-import Carousel, {Pagination} from 'react-native-snap-carousel';
-import {screenSize} from '../../constants/constants';
-import TutorialItem from './TutorialItem';
-import {CommonSize} from '../../utils/utils';
+import {Pagination} from 'react-native-snap-carousel';
+import {CommonSize, ratioH} from '../../utils/utils';
+import CarouselView from './CarouselView';
 
 const widthScreen = Dimensions.get('screen').height * 1.431;
 
 const TutorialScreen = ({navigation}) => {
-  const tutorialImgs = [
-    require('../../../assets/images/TutorialScreen/tutorial1Img.png'),
-    require('../../../assets/images/TutorialScreen/tutorial2Img.png'),
-    require('../../../assets/images/TutorialScreen/tutorial3Img.png'),
-  ];
   const [currentIndex, setCurrentIndex] = useState(1);
   const [width, setWidth] = useState(CommonSize.srcWidthDefault);
 
@@ -41,12 +34,8 @@ const TutorialScreen = ({navigation}) => {
           <Text>매일 새로운 듣기, 말하기, 집중력 훈련 제공</Text> */}
         </View>
         <View style={styles.contentView}>
-          <Carousel
-            data={tutorialImgs}
-            renderItem={({item}) => <TutorialItem item={item} />}
-            sliderWidth={widthScreen}
-            itemWidth={widthScreen * 0.4}
-            initialNumToRender={1}
+          <CarouselView
+            width={width}
             onSnapToItem={index => setCurrentIndex(index)}
           />
           <Pagination
@@ -101,8 +90,10 @@ const styles = StyleSheet.create({
     flex: 0.8,
   },
   contentView: {
-    height: widthScreen * 0.4 * 0.72 + 70,
+    height: ratioH(420),
     marginTop: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   topText: {
     fontSize: 36,
