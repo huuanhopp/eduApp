@@ -10,15 +10,13 @@ import {
 import PuzzleBackground from './PuzzleBackground';
 import Card2 from '../../core/Card/Card2';
 
-const FragImage = ({ image }) => {
+const FragImage = ({ urlImage }) => {
   return (
     <TouchableOpacity>
-      <Image
-        source={require(image)}
-      />
+      <Image source={urlImage} />
     </TouchableOpacity>
   );
-}
+};
 
 const Game3 = ({ navigation }) => {
   const onCheckResult = () => {
@@ -39,16 +37,14 @@ const Game3 = ({ navigation }) => {
               urlImage={require('../../../assets/images/PuzzleGame/Game3/bg1.png')}
             />
             <View style={styles.cardHolder}>
-              <TouchableOpacity>
-                <Image
-                  source={require('../../../assets/images/PuzzleGame/Game3/p9.png')}
-                />
-              </TouchableOpacity>
-              <Image
-                source={require('../../../assets/images/PuzzleGame/Game3/p7.png')}
+              <FragImage
+                urlImage={require('../../../assets/images/PuzzleGame/Game3/p9.png')}
               />
-              <Image
-                source={require('../../../assets/images/PuzzleGame/Game3/p2.png')}
+              <FragImage
+                urlImage={require('../../../assets/images/PuzzleGame/Game3/p7.png')}
+              />
+              <FragImage
+                urlImage={require('../../../assets/images/PuzzleGame/Game3/p2.png')}
               />
 
               <Image
