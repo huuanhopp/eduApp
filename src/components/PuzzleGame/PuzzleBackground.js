@@ -10,8 +10,9 @@ import {
 import BackButton from '../../core/Button/BackButton';
 import ConfirmButton from '../../core/Button/ConfirmButton';
 import ListeningModalDialog from '../../core/Modal/ListeningModalDialog';
-import { CommonSize, Images, ratioH, ratioW } from '../../utils/utils';
-import { useNavigation } from '@react-navigation/native';
+import {CommonSize, Images, ratioH, ratioW} from '../../utils/utils';
+import {useNavigation} from '@react-navigation/native';
+import CountdownView from './components/CountdownView';
 const PuzzleBackground = ({
   title,
   question,
@@ -34,17 +35,23 @@ const PuzzleBackground = ({
       <ImageBackground
         source={require('../../../assets/images/PuzzleGame/PuzzleBackground.png')}
         style={styles.imgBG}>
-        <View style={{ flex: 1 }}>
+        <View style={{flex: 1}}>
           <View>
-            <TouchableOpacity onPress={goBack}>
-              <Image source={Images.backButton} style={styles.backButton} />
-            </TouchableOpacity>
+            <View style={{flexDirection: 'row'}}>
+              <TouchableOpacity onPress={goBack}>
+                <Image source={Images.backButton} style={styles.backButton} />
+              </TouchableOpacity>
+              <View style={{flex: 1}} />
+              <CountdownView />
+            </View>
             <View style={styles.topView}>
               <Text
-                style={{ fontSize: 50, fontWeight: 'bold', textAlign: 'center' }}>
+                style={{fontSize: 50, fontWeight: 'bold', textAlign: 'center'}}>
                 {title}
               </Text>
-              <Text style={{ fontSize: 28, textAlign: 'center' }}>{question}</Text>
+              <Text style={{fontSize: 28, textAlign: 'center'}}>
+                {question}
+              </Text>
             </View>
           </View>
           <View style={styles.contentView}>{children}</View>
@@ -73,7 +80,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#B0D4FF',
   },
   quesContent: {},
- 
+
   imgBG: {
     // width: CommonSize.srcWidthDefault,
     flex: 1,
