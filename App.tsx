@@ -1,14 +1,13 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {stackScreen} from './src/constants/constants';
-import SpeakingGame3 from './src/screens/SpeakingScreen/SpeakingGame3';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="PuzzleGame3">
+      <Stack.Navigator initialRouteName="PuzzleGame1">
         {stackScreen.map(stackItem => (
           <Stack.Screen
             key={stackItem.name}
