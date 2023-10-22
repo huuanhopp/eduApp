@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -60,6 +60,14 @@ const Game3 = ({ navigation }) => {
   const [p9, setP9] = useState(false);
 
   const onCheckResult = () => { };
+
+  useEffect(() => {
+    if (p1 && p2 && p3 && p4 && p5 && p6 && p7) {
+      alert("Done");
+    }
+  }, [
+    p1,p2,p3,p4,p5,p6,p7,p8
+  ]);
 
   const handleCheckResult = (selectLeft, selectRight) => {
     // Implement your check result logic here
@@ -164,7 +172,7 @@ const Game3 = ({ navigation }) => {
             <Card2
               urlImage={require('../../../assets/images/PuzzleGame/Game3/bg1.png')}
             />
-            <View style={styles.cardHolder}>
+            <View style={[styles.cardHolder]}>
               <FragImage
                 urlImage={require('../../../assets/images/PuzzleGame/Game3/p9.png')}
                 onClick={() => {
@@ -239,7 +247,7 @@ const Game3 = ({ navigation }) => {
             <Card2
               urlImage={require('../../../assets/images/PuzzleGame/Game3/bg2.png')}
             />
-            <View style={styles.cardHolder}>
+            <View style={[styles.cardHolder2, { rowGap: 7, columnGap: 7}]}>
               <FragImage2
                 urlImage={require('../../../assets/images/PuzzleGame/Game3/p1.png')}
                 onClick={() => {
@@ -340,6 +348,16 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     padding: 6,
+  },
+  cardHolder2: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
   },
 });
 
