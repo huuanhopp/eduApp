@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 const MainScreen = ({navigation}) => {
   // useEffect(() => {
-  //   navigation.navigate('SpeakingGame1');
+  //   navigation.navigate('PuzzleGame3');
   // }, []);
 
   return (
