@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Image,
   ImageBackground,
@@ -10,9 +10,12 @@ import {
 import BackButton from '../../core/Button/BackButton';
 import ConfirmButton from '../../core/Button/ConfirmButton';
 import ListeningModalDialog from '../../core/Modal/ListeningModalDialog';
-import {CommonSize, Images, ratioH, ratioW} from '../../utils/utils';
-import {useNavigation} from '@react-navigation/native';
+import { CommonSize, Images, ratioH, ratioW } from '../../utils/utils';
+import { useNavigation } from '@react-navigation/native';
 import CountdownView from './components/CountdownView';
+import TimeOutModalDialog from '../../core/Modal/TimeOutModalDialog';
+import StopModalDialog from '../../core/Modal/StopModalDialog';
+import { StackActions } from '@react-navigation/native';
 const PuzzleBackground = ({
   title,
   question,
@@ -21,8 +24,15 @@ const PuzzleBackground = ({
   leftPosTitle = '44.6%',
   children,
   onCheckResult,
+  isRunning,
+  setIsRunning
 }) => {
   const navigation = useNavigation();
+
+  const [timeOut, setTimeOut] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [reset, setReset] = useState(false);
+  // const [isRunning, setIsRunning] = useState(true);
 
   const goBack = () => {
     // navigation.goBack();
@@ -30,29 +40,52 @@ const PuzzleBackground = ({
     navigation.navigate('Main');
   };
 
+  // const setIsStop = () => {
+  //   setIsRunning(false);
+  // }
+
+  const handleTimeOutChange = (newTimeOut) => {
+    console.log(newTimeOut)
+    setModalVisible(true)
+    setTimeOut(newTimeOut);
+  };
+
+  const onRetry = () => {
+    setModalVisible(false);
+     setIsRunning(true);
+     setTimeOut(false);
+     setReset(true);
+  };
+
+  const onNext = () => {
+    setModalVisible(false);
+    navigation.dispatch(StackActions.push('Main'));
+  };
+
   return (
     <View style={styles.rootView}>
       <ImageBackground
         source={require('../../../assets/images/PuzzleGame/PuzzleBackground.png')}
         style={styles.imgBG}>
-        <View style={{flex: 1}}>
+        <View style={{ flex: 1 }}>
           <View>
-            <View style={{flexDirection: 'row'}}>
+            <View style={{ flexDirection: 'row' }}>
               <TouchableOpacity onPress={goBack}>
                 <Image source={Images.backButton} style={styles.backButton} />
               </TouchableOpacity>
-              <View style={{flex: 1}} />
-              <CountdownView />
+              <View style={{ flex: 1 }} />
+              <CountdownView reset={reset} setReset={setReset} timeOut={timeOut} setTimeOut={handleTimeOutChange} isRunning={isRunning} setIsRunning={setIsRunning} />
             </View>
             <View style={styles.topView}>
               <Text
-                style={{fontSize: 50, fontWeight: 'bold', textAlign: 'center'}}>
+                style={{ fontSize: 50, fontWeight: 'bold', textAlign: 'center' }}>
                 {title}
               </Text>
-              <Text style={{fontSize: 28, textAlign: 'center'}}>
+              <Text style={{ fontSize: 28, textAlign: 'center' }}>
                 {question}
               </Text>
             </View>
+
           </View>
           <View style={styles.contentView}>{children}</View>
           <View style={styles.bottomView}>
@@ -64,7 +97,24 @@ const PuzzleBackground = ({
               onPress={onCheckResult}
             />
           </View>
+          <TimeOutModalDialog
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+            onRetry={onRetry}
+            onNext={onNext}
+          // navigation={navigation} // You need to define navigation or pass it from somewhere
+          // destination={destination} // You need to define destination or pass it from somewhere
+          />
+
+          {/* <StopModalDialog
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+          // navigation={navigation} // You need to define navigation or pass it from somewhere
+          // destination={destination} // You need to define destination or pass it from somewhere
+          /> */}
+
         </View>
+
       </ImageBackground>
     </View>
   );

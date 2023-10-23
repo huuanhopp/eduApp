@@ -6,15 +6,39 @@ import {
   Text,
   View,
 } from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState, useCallback} from 'react';
 import {ratioH} from '../../../utils/utils';
+import { useFocusEffect } from '@react-navigation/native';
 
-const CountdownView = () => {
-  const time = 300;
-  const warningTime = 100;
+
+const CountdownView = ({ timeOut, setTimeOut, isRunning, setIsRunning, reset, setReset }) => {
+  const time = 310; //310
+  const warningTime = 110;
   const [count, setCount] = useState(time);
-  const [isRunning, setIsRunning] = useState(true);
+  // const [isRunning, setIsRunning] = useState(true);
   const interval = useRef(null);
+  // const [timeOut, setTimeOut] = useState(false)
+
+  useFocusEffect(
+    useCallback(() => {
+      // When the screen is focused
+      // If needed, start your timer or other logic here.
+
+      return () => {
+        // When the screen is unfocused (navigating away)
+        clearInterval(interval.current);
+        setCount(time-10); // Resetting the count to its initial value (e.g., 60 seconds)
+      };
+    }, [])
+  );
+
+  useEffect(()=> {
+    if (reset) {
+      clearInterval(interval.current);
+      setCount(time-10); // Resetting the count to its initial value (e.g., 60 seconds)
+      setReset(false);
+    }
+  },[reset])
 
   useEffect(() => {
     if (isRunning) {
@@ -24,12 +48,15 @@ const CountdownView = () => {
         } else {
           setIsRunning(false);
           clearInterval(interval.current); // Dừng đếm ngược khi hết thời gian
+          setTimeOut(true)
           Alert.alert('Time out');
         }
       }, 100); // Cập nhật mỗi 1 giây
     }
-    return () => {
+    return () => { 
+      // setCount(time);
       if (interval.current) {
+        // setCount(time);
         clearInterval(interval.current); // Đảm bảo dừng interval khi component bị unmount
       }
     };
@@ -44,6 +71,9 @@ const CountdownView = () => {
       return `남은 시간 00:01`;
     }
     if (count < warningTime) {
+      if(count >= 100){
+        return `남은 시간 00:${countText.substring(0, 2)}`;
+      }
       return `남은 시간 00:0${countText.substring(0, 1)}`;
     }
     return `남은 시간 00:${countText.substring(0, 2)}`;

@@ -2,8 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Card from '../../core/Card/Card';
 import PuzzleBackground from './PuzzleBackground';
+import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
+import { StackActions } from '@react-navigation/native';
 const Game1 = ({navigation}) => {
   const [flipCards, setFlipCards] = useState([]);
+  const [correctModalShown, setCorrectModalShown] = useState(false);
+  const [isRunning, setIsRunning] = useState(true);
+
   const [cards, setCards] = useState([
     {
       index: 0,
@@ -92,6 +97,12 @@ const Game1 = ({navigation}) => {
             return {...item};
           });
           setCards(newCardsState);
+          const isAllCardIsFlipped = newCardsState.every((card) => card.removed);
+          console.log('allcardflipped', isAllCardIsFlipped);
+          if (isAllCardIsFlipped) {
+            setCorrectModalShown(true);
+            setIsRunning(false);
+          }
         } else {
           const newCardsState = cards.map((item, idx) => {
             if (flipCards.findIndex(item => item === idx) > -1) {
@@ -102,7 +113,7 @@ const Game1 = ({navigation}) => {
           setCards(newCardsState);
         }
         setFlipCards([]);
-      }, 600);
+      }, 200);
       return () => {
         clearTimeout(timer);
       };
@@ -127,7 +138,15 @@ const Game1 = ({navigation}) => {
     setCards(newCards);
   };
 
-  const onCheckResult = () => {};
+  const onCheckResult = () => {
+    console.log("Timeout")
+  };
+
+  const onNext = () => {
+    setCorrectModalShown(false);
+    navigation.dispatch(StackActions.push('PuzzleGame2'));
+  };
+
 
   return (
     <PuzzleBackground
@@ -135,7 +154,9 @@ const Game1 = ({navigation}) => {
       question="주어진 시간 안에 카드를 뒤집어 같은 그림끼리 찾아보자!"
       navigation={navigation}
       destination="PuzzleGame1"
-      onCheckResult={onCheckResult}>
+      onCheckResult={onCheckResult}
+      isRunning={isRunning}
+      setIsRunning={setIsRunning}>  
       <View style={styles.contentView}>
         <View style={{flexDirection: 'row'}}>
           <Card
@@ -189,7 +210,13 @@ const Game1 = ({navigation}) => {
             handSelectedCard={index => handleSelectedCard(index)}
           />
         </View>
+        <SpeakingModalDialog
+          modalVisible={correctModalShown}
+          setModalVisible={setCorrectModalShown}
+          onNext={onNext}
+        />
       </View>
+      
     </PuzzleBackground>
   );
 };
