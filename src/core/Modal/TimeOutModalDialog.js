@@ -14,15 +14,13 @@ import Gif from 'react-native-gif';
 
 const widthScreen = Dimensions.get('screen').height * 1.431;
 
-const GoBackModalDialog = ({
+const TimeOutModalDialog = ({
   modalVisible,
   setModalVisible,
   navigation,
   destination,
-  onBackMain,
-  onBackNone,
+  onNext,
   onRetry,
-  onNext
 }) => {
   return (
     <Modal
@@ -39,16 +37,16 @@ const GoBackModalDialog = ({
       <View style={styles.container}>
         <ImageBackground
           resizeMode="cover"
-          source={require('../../../assets/images/SpeakingGame/wrongSpeakingBG.png')}
+          source={require('../../../assets/images/core/TimeOutModalDialog.png')}
           style={styles.bgImg}>
           <FastImage
             style={styles.gifImage}
             resizeMode="cover"
-            source={require('../../../assets/images/gif/AreYouStop.gif')}
+            source={require('../../../assets/images/gif/timeOut.gif')}
           />
           <View style={styles.bottomView}>
-             <TouchableOpacity style={styles.retryButton} onPress={onRetry} />
-             <TouchableOpacity style={styles.nextButton} onPress={onNext} />
+            <TouchableOpacity style={styles.retryButton} onPress={onRetry} />
+            <TouchableOpacity style={styles.nextButton} onPress={onNext} />
           </View>
         </ImageBackground>
       </View>
@@ -102,26 +100,34 @@ const styles = StyleSheet.create({
   },
   gifImage: {
     alignSelf: 'center',
-    height: ((widthScreen * 574) / 1194) * 0.7,
+    height: ((widthScreen * 500) / 1194) * 0.7,
     aspectRatio: 1,
+    position: 'absolute'
   },
   bgImg: {
     height: (widthScreen * 574) / 1194,
     width: (widthScreen * 894) / 1194,
     justifyContent: 'center',
+    position: 'relative',
   },
   retryButton: {
+    // backgroundColor: "red",
     width: (widthScreen * 331) / 1194,
-    height: 70,
+    height: 150,
   },
   nextButton: {
+    // backgroundColor:"green",
     width: (widthScreen * 331) / 1194,
-    height: 70,
+    height: 150,
   },
   bottomView: {
     flexDirection: 'row',
     justifyContent: 'center',
+    position: 'absolute',  // set this to absolute
+    bottom: 0.05 * (widthScreen * 574) / 1194,  // this positions it 15% away from the bottom
+    left: 0,
+    right: 0,
   },
 });
 
-export default GoBackModalDialog;
+export default TimeOutModalDialog;

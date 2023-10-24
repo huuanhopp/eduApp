@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Image,
   ImageBackground,
@@ -12,6 +12,10 @@ import ConfirmButton from '../../core/Button/ConfirmButton';
 import ListeningModalDialog from '../../core/Modal/ListeningModalDialog';
 import { CommonSize, Images, ratioH, ratioW } from '../../utils/utils';
 import { useNavigation } from '@react-navigation/native';
+import CountdownView from './components/CountdownView';
+import TimeOutModalDialog from '../../core/Modal/TimeOutModalDialog';
+import StopModalDialog from '../../core/Modal/StopModalDialog';
+import { StackActions } from '@react-navigation/native';
 const PuzzleBackground = ({
   title,
   question,
@@ -20,13 +24,53 @@ const PuzzleBackground = ({
   leftPosTitle = '44.6%',
   children,
   onCheckResult,
+  isRunning,
+  setIsRunning
 }) => {
   const navigation = useNavigation();
+
+  const [timeOut, setTimeOut] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [reset, setReset] = useState(false);
+  // const [isRunning, setIsRunning] = useState(true);
+
+  const [modalStopVisible, setModalStopVisible] = useState(false);
 
   const goBack = () => {
     // navigation.goBack();
     // navigation.pop();
-    navigation.navigate('Main');
+    setModalStopVisible(true)
+    // navigation.navigate('Main');
+  };
+
+  // const setIsStop = () => {
+  //   setIsRunning(false);
+  // }
+
+  const handleTimeOutChange = (newTimeOut) => {
+    console.log(newTimeOut)
+    setModalVisible(true)
+    setTimeOut(newTimeOut);
+  };
+
+  const onRetry = () => {
+    setModalVisible(false);
+    setModalStopVisible(false)
+    //  setIsRunning(true);
+     setTimeOut(false);
+    //  setReset(true);
+     navigation.dispatch(StackActions.push(destination));
+  };
+
+  const onNext = () => {
+    setModalVisible(false);
+    navigation.dispatch(StackActions.push('Main'));
+  };
+
+  const onBack = () => {
+    setModalVisible(false);
+    setModalStopVisible(false)
+    navigation.dispatch(StackActions.push('Main'));
   };
 
   return (
@@ -36,16 +80,23 @@ const PuzzleBackground = ({
         style={styles.imgBG}>
         <View style={{ flex: 1 }}>
           <View>
-            <TouchableOpacity onPress={goBack}>
-              <Image source={Images.backButton} style={styles.backButton} />
-            </TouchableOpacity>
+            <View style={{ flexDirection: 'row' }}>
+              <TouchableOpacity onPress={goBack}>
+                <Image source={Images.backButton} style={styles.backButton} />
+              </TouchableOpacity>
+              <View style={{ flex: 1 }} />
+              <CountdownView reset={reset} setReset={setReset} timeOut={timeOut} setTimeOut={handleTimeOutChange} isRunning={isRunning} setIsRunning={setIsRunning} />
+            </View>
             <View style={styles.topView}>
               <Text
                 style={{ fontSize: 50, fontWeight: 'bold', textAlign: 'center' }}>
                 {title}
               </Text>
-              <Text style={{ fontSize: 28, textAlign: 'center' }}>{question}</Text>
+              <Text style={{ fontSize: 28, textAlign: 'center' }}>
+                {question}
+              </Text>
             </View>
+
           </View>
           <View style={styles.contentView}>{children}</View>
           <View style={styles.bottomView}>
@@ -57,7 +108,23 @@ const PuzzleBackground = ({
               onPress={onCheckResult}
             />
           </View>
+          <TimeOutModalDialog
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+            onRetry={onRetry}
+            onNext={onNext}
+          />
+
+          <StopModalDialog
+            modalStopVisible={modalStopVisible}
+            setModalStopVisible={setModalStopVisible}
+            onRetry={onRetry}
+          // navigation={navigation} // You need to define navigation or pass it from somewhere
+          // destination={destination} // You need to define destination or pass it from somewhere
+          />
+
         </View>
+
       </ImageBackground>
     </View>
   );
@@ -73,7 +140,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#B0D4FF',
   },
   quesContent: {},
- 
+
   imgBG: {
     // width: CommonSize.srcWidthDefault,
     flex: 1,
