@@ -3,7 +3,7 @@ import { TouchableOpacity, Image, StyleSheet, PanResponder,View , Text} from 're
 import { ratioH } from '../../utils/utils';
 
 const Card2 = ({ urlImage}) => {
-    console.log(typeof urlImage)
+    // console.log(typeof urlImage)
     
     const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
     const [showCircle, setShowCircle] = useState(false);
@@ -23,7 +23,8 @@ const Card2 = ({ urlImage}) => {
 
                     setCoordinates({ x, y });
                 },
-                onPanResponderRelease: () => {
+                onPanResponderRelease: (e, gestureState) => {
+                    console.log("gestureState", gestureState.x0, gestureState.y0)
                     // Handle release if needed
                     setShowCircle(false);
                 },
