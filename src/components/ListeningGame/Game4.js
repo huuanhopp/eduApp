@@ -108,7 +108,7 @@ const Game4 = ({navigation}) => {
             multipleChoice={false}
             handleOneChoice={index => handleOneChoice(1)}
             isUniqueSelected={anwsOptions[1].selected}
-            style={{...styles.answerButton, marginLeft: 80}}
+            style={{...styles.answerButton, marginLeft: 8}}
             textStyle={styles.textStyle}
             buttonStyle={styles.buttonStyle}
           />
