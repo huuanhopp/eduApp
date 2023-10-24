@@ -11,6 +11,7 @@ import PuzzleBackground from './PuzzleBackground';
 import Card2 from '../../core/Card/Card2';
 import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
 import { StackActions } from '@react-navigation/native';
+import VictoryModalDialog from '../../core/Modal/VictoryModalDialog';
 
 const FragImage = ({ urlImage, onClick, ok }) => {
   return (
@@ -174,7 +175,8 @@ const Game3 = ({ navigation }) => {
       title="퍼즐 맞추기"
       question="주어진 시간 안에 퍼즐을 맞춰보자!"
       navigation={navigation}
-      destination="PuzzleGame3"
+      destination="Main"
+      retryTimeout="PuzzleGame3"
       onCheckResult={onCheckResult}
       isRunning={isRunning}
       setIsRunning={setIsRunning}
@@ -341,10 +343,9 @@ const Game3 = ({ navigation }) => {
             </View>
           </View>
         </View>
-        <SpeakingModalDialog
+        <VictoryModalDialog
           modalVisible={correctModalShown}
           setModalVisible={setCorrectModalShown}
-          onNext={onNext}
         />
       </View>
     </PuzzleBackground>

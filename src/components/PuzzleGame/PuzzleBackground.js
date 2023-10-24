@@ -25,7 +25,8 @@ const PuzzleBackground = ({
   children,
   onCheckResult,
   isRunning,
-  setIsRunning
+  setIsRunning,
+  retryTimeout
 }) => {
   const navigation = useNavigation();
 
@@ -59,12 +60,12 @@ const PuzzleBackground = ({
     //  setIsRunning(true);
      setTimeOut(false);
     //  setReset(true);
-     navigation.dispatch(StackActions.push(destination));
+     navigation.dispatch(StackActions.push(retryTimeout));
   };
 
   const onNext = () => {
     setModalVisible(false);
-    navigation.dispatch(StackActions.push('Main'));
+    navigation.dispatch(StackActions.push(destination));
   };
 
   const onBack = () => {
@@ -120,10 +121,10 @@ const PuzzleBackground = ({
           <StopModalDialog
             modalStopVisible={modalStopVisible}
             setModalStopVisible={setModalStopVisible}
-            onRetry={onRetry}
-          // navigation={navigation} // You need to define navigation or pass it from somewhere
-          // destination={destination} // You need to define destination or pass it from somewhere
+            isRunning={isRunning}
+            setIsRunning={setIsRunning}
           />
+
 
         </View>
 

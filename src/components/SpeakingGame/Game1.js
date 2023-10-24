@@ -45,10 +45,12 @@ const Game1 = ({navigation}) => {
             }}
           />
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            setPauseAudio(false);
-          }}>
+        <View
+          // onPress={() => {
+          //   console.log("pause")
+          //   // setPauseAudio(false);
+          // }}
+        >
           <Image
             resizeMode="cover"
             source={
@@ -61,7 +63,7 @@ const Game1 = ({navigation}) => {
               width: ratioH(424),
             }}
           />
-        </TouchableOpacity>
+        </View>
       </View>
       <View
         style={{
