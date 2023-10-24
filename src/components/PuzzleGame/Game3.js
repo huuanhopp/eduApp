@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import PuzzleBackground from './PuzzleBackground';
 import Card2 from '../../core/Card/Card2';
+import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
+import { StackActions } from '@react-navigation/native';
 
 const FragImage = ({ urlImage, onClick, ok }) => {
   return (
@@ -48,6 +50,8 @@ const FragImage2 = ({ urlImage, onClick, ok, select }) => {
 const Game3 = ({ navigation }) => {
   const [selectLeft, setSelectLeft] = useState();
   const [selectRight, setSelectRight] = useState();
+  const [correctModalShown, setCorrectModalShown] = useState(false);
+  const [isRunning, setIsRunning] = useState(true);
 
   const [p1, setP1] = useState(false);
   const [p2, setP2] = useState(false);
@@ -62,8 +66,9 @@ const Game3 = ({ navigation }) => {
   const onCheckResult = () => { };
 
   useEffect(() => {
-    if (p1 && p2 && p3 && p4 && p5 && p6 && p7) {
-      alert("Done");
+    if (p1 && p2 && p3 && p4 && p5 && p6 && p7 && p8 && p9) {
+      setCorrectModalShown(true);
+      setIsRunning(false);
     }
   }, [
     p1,p2,p3,p4,p5,p6,p7,p8
@@ -159,13 +164,23 @@ const Game3 = ({ navigation }) => {
     }
   };
 
+  const onNext = () => {
+    setCorrectModalShown(false);
+    navigation.dispatch(StackActions.push('Main'));
+  };
+
   return (
     <PuzzleBackground
       title="퍼즐 맞추기"
       question="주어진 시간 안에 퍼즐을 맞춰보자!"
       navigation={navigation}
-      destination="PuzzleGame1"
-      onCheckResult={onCheckResult}>
+      destination="PuzzleGame3"
+      onCheckResult={onCheckResult}
+      isRunning={isRunning}
+      setIsRunning={setIsRunning}
+    >  
+    
+    
       <View style={styles.contentView}>
         <View style={{ flexDirection: 'row' }}>
           <View style={styles.cardContainer}>
@@ -326,6 +341,11 @@ const Game3 = ({ navigation }) => {
             </View>
           </View>
         </View>
+        <SpeakingModalDialog
+          modalVisible={correctModalShown}
+          setModalVisible={setCorrectModalShown}
+          onNext={onNext}
+        />
       </View>
     </PuzzleBackground>
   );

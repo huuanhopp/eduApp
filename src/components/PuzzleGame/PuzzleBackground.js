@@ -34,10 +34,13 @@ const PuzzleBackground = ({
   const [reset, setReset] = useState(false);
   // const [isRunning, setIsRunning] = useState(true);
 
+  const [modalStopVisible, setModalStopVisible] = useState(false);
+
   const goBack = () => {
     // navigation.goBack();
     // navigation.pop();
-    navigation.navigate('Main');
+    setModalStopVisible(true)
+    // navigation.navigate('Main');
   };
 
   // const setIsStop = () => {
@@ -52,13 +55,21 @@ const PuzzleBackground = ({
 
   const onRetry = () => {
     setModalVisible(false);
-     setIsRunning(true);
+    setModalStopVisible(false)
+    //  setIsRunning(true);
      setTimeOut(false);
-     setReset(true);
+    //  setReset(true);
+     navigation.dispatch(StackActions.push(destination));
   };
 
   const onNext = () => {
     setModalVisible(false);
+    navigation.dispatch(StackActions.push('Main'));
+  };
+
+  const onBack = () => {
+    setModalVisible(false);
+    setModalStopVisible(false)
     navigation.dispatch(StackActions.push('Main'));
   };
 
@@ -102,16 +113,15 @@ const PuzzleBackground = ({
             setModalVisible={setModalVisible}
             onRetry={onRetry}
             onNext={onNext}
+          />
+
+          <StopModalDialog
+            modalStopVisible={modalStopVisible}
+            setModalStopVisible={setModalStopVisible}
+            onRetry={onRetry}
           // navigation={navigation} // You need to define navigation or pass it from somewhere
           // destination={destination} // You need to define destination or pass it from somewhere
           />
-
-          {/* <StopModalDialog
-            modalVisible={modalVisible}
-            setModalVisible={setModalVisible}
-          // navigation={navigation} // You need to define navigation or pass it from somewhere
-          // destination={destination} // You need to define destination or pass it from somewhere
-          /> */}
 
         </View>
 

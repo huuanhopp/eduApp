@@ -11,24 +11,29 @@ import {
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import Gif from 'react-native-gif';
+import { useNavigation } from '@react-navigation/native';
+import { StackActions } from '@react-navigation/native';
 
 const widthScreen = Dimensions.get('screen').height * 1.431;
 
 const StopModalDialog = ({
   modalVisible,
   setModalVisible,
-  navigation,
+  // navigation,
   destination,
   onNext,
   onRetry,
+  modalStopVisible,
+  setModalStopVisible
 }) => {
+  const navigation = useNavigation();
   return (
     <Modal
       animationType="slide"
       transparent={true}
-      visible={modalVisible}
+      visible={modalStopVisible}
       onRequestClose={() => {
-        setModalVisible(!modalVisible);
+        setModalStopVisible(!modalStopVisible);
       }}
       style={{
         justifyContent: 'center',
@@ -45,8 +50,19 @@ const StopModalDialog = ({
             source={require('../../../assets/images/gif/AreYouStop.gif')}
           />
           <View style={styles.bottomView}>
-            <TouchableOpacity style={styles.retryButton} onPress={onRetry} />
-            <TouchableOpacity style={styles.nextButton} onPress={onNext} />
+            <TouchableOpacity 
+              style={styles.retryButton} 
+              onPress={() => {
+              setModalStopVisible(false);
+              navigation.dispatch(StackActions.push('Main'));
+            }} 
+            />
+            <TouchableOpacity
+             style={styles.nextButton} 
+             onPress={() => {         
+              setModalStopVisible(false);
+            }} 
+            />
           </View>
         </ImageBackground>
       </View>
@@ -62,8 +78,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(52, 52, 52, 0.3)',
   },
   centeredView: {
-    // justifyContent: 'center',
-    // alignItems: 'center',
     height: (widthScreen * 574) / 1194,
     width: (widthScreen * 894) / 1194,
     backgroundColor: 'red',
@@ -100,25 +114,31 @@ const styles = StyleSheet.create({
   },
   gifImage: {
     alignSelf: 'center',
-    height: ((widthScreen * 400) / 1194) * 0.7,
+    height: ((widthScreen * 500) / 1194) * 0.7,
     aspectRatio: 1,
+    position: 'absolute'
   },
   bgImg: {
     height: (widthScreen * 574) / 1194,
     width: (widthScreen * 894) / 1194,
     justifyContent: 'center',
+    position: 'relative',
   },
   retryButton: {
     width: (widthScreen * 331) / 1194,
-    height: 70,
+    height: 150,
   },
   nextButton: {
     width: (widthScreen * 331) / 1194,
-    height: 70,
+    height: 150,
   },
   bottomView: {
     flexDirection: 'row',
     justifyContent: 'center',
+    position: 'absolute',  // set this to absolute
+    bottom: 0.05 * (widthScreen * 574) / 1194,  // this positions it 15% away from the bottom
+    left: 0,
+    right: 0,
   },
 });
 

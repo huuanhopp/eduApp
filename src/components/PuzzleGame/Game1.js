@@ -35,6 +35,7 @@ const Game1 = ({navigation}) => {
       left: 730,
       match: 3,
       selected: false,
+      removed: false,
     },
     {
       index: 3,
@@ -144,7 +145,7 @@ const Game1 = ({navigation}) => {
 
   const onNext = () => {
     setCorrectModalShown(false);
-    navigation.dispatch(StackActions.push('PuzzleGame2'));
+    navigation.dispatch(StackActions.push('PuzzleGame3'));
   };
 
 

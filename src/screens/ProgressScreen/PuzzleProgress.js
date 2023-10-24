@@ -3,8 +3,6 @@ import {Image, StyleSheet, View, TouchableOpacity} from 'react-native';
 const PuzzleScreen = ({navigation}) => {
   const [showInstructions, setShowInstructions] = useState(false);
 
-
-
   const toggleInstructions = () => {
     setShowInstructions(!showInstructions);
   };
@@ -28,9 +26,7 @@ const PuzzleScreen = ({navigation}) => {
 
       <TouchableOpacity
         style={styles.yellowNumber}
-        // onPress={toggleInstructions}
         onPress={() => {
-          // navigation.navigate('Stage1');
           navigation.navigate('PuzzleGame1', { status: 3 });
         }}>
         <Image
@@ -55,7 +51,7 @@ const PuzzleScreen = ({navigation}) => {
             style={styles.startBtn}
             onPress={() => {
               // navigation.navigate('Stage1');
-              navigation.navigate('PuzzleGame1');
+              navigation.navigate('PuzzleGame3');
             }}>
             <Image
               resizeMode="cover"

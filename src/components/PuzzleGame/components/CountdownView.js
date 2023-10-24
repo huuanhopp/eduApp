@@ -9,7 +9,7 @@ import {
 import React, {useEffect, useRef, useState, useCallback} from 'react';
 import {ratioH} from '../../../utils/utils';
 import { useFocusEffect } from '@react-navigation/native';
-
+import { useNavigation } from '@react-navigation/native';
 
 const CountdownView = ({ timeOut, setTimeOut, isRunning, setIsRunning, reset, setReset }) => {
   const time = 310; //310
@@ -18,7 +18,7 @@ const CountdownView = ({ timeOut, setTimeOut, isRunning, setIsRunning, reset, se
   // const [isRunning, setIsRunning] = useState(true);
   const interval = useRef(null);
   // const [timeOut, setTimeOut] = useState(false)
-
+  const navigation = useNavigation();
   useFocusEffect(
     useCallback(() => {
       // When the screen is focused
@@ -35,8 +35,9 @@ const CountdownView = ({ timeOut, setTimeOut, isRunning, setIsRunning, reset, se
   useEffect(()=> {
     if (reset) {
       clearInterval(interval.current);
-      setCount(time-10); // Resetting the count to its initial value (e.g., 60 seconds)
+      setCount(time); // Resetting the count to its initial value (e.g., 60 seconds)
       setReset(false);
+      console.log("Puzzle 3")
     }
   },[reset])
 
@@ -49,7 +50,6 @@ const CountdownView = ({ timeOut, setTimeOut, isRunning, setIsRunning, reset, se
           setIsRunning(false);
           clearInterval(interval.current); // Dừng đếm ngược khi hết thời gian
           setTimeOut(true)
-          Alert.alert('Time out');
         }
       }, 100); // Cập nhật mỗi 1 giây
     }

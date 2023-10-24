@@ -102,23 +102,31 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     height: ((widthScreen * 500) / 1194) * 0.7,
     aspectRatio: 1,
+    position: 'absolute'
   },
   bgImg: {
     height: (widthScreen * 574) / 1194,
     width: (widthScreen * 894) / 1194,
     justifyContent: 'center',
+    position: 'relative',
   },
   retryButton: {
+    // backgroundColor: "red",
     width: (widthScreen * 331) / 1194,
-    height: 70,
+    height: 150,
   },
   nextButton: {
+    // backgroundColor:"green",
     width: (widthScreen * 331) / 1194,
-    height: 70,
+    height: 150,
   },
   bottomView: {
     flexDirection: 'row',
     justifyContent: 'center',
+    position: 'absolute',  // set this to absolute
+    bottom: 0.05 * (widthScreen * 574) / 1194,  // this positions it 15% away from the bottom
+    left: 0,
+    right: 0,
   },
 });
 

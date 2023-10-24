@@ -44,7 +44,7 @@ const GoBackModalDialog = ({
           <FastImage
             style={styles.gifImage}
             resizeMode="cover"
-            source={require('../../../assets/images/gif/not-correct.gif')}
+            source={require('../../../assets/images/gif/AreYouStop.gif')}
           />
           <View style={styles.bottomView}>
              <TouchableOpacity style={styles.retryButton} onPress={onRetry} />
