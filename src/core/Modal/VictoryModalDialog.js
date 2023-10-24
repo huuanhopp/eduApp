@@ -16,7 +16,7 @@ import { StackActions } from '@react-navigation/native';
 
 const widthScreen = Dimensions.get('screen').height * 1.431;
 
-const StopModalDialog = ({
+const VictoryModalDialog = ({
   modalVisible,
   setModalVisible,
   // navigation,
@@ -33,9 +33,9 @@ const StopModalDialog = ({
     <Modal
       animationType="slide"
       transparent={true}
-      visible={modalStopVisible}
+      visible={modalVisible}
       onRequestClose={() => {
-        setModalStopVisible(!modalStopVisible);
+        setModalVisible(!modalVisible);
       }}
       style={{
         justifyContent: 'center',
@@ -49,21 +49,22 @@ const StopModalDialog = ({
           <FastImage
             style={styles.gifImage}
             resizeMode="cover"
-            source={require('../../../assets/images/gif/AreYouStop.gif')}
+            source={require('../../../assets/images/gif/victory.gif')}
           />
           <View style={styles.bottomView}>
             <TouchableOpacity 
               style={styles.retryButton} 
               onPress={() => {
-              setModalStopVisible(false);
-              setIsRunning(false)
-              navigation.dispatch(StackActions.push('Main'));
+              setModalVisible(false);
+            //   setIsRunning(false)
+              navigation.dispatch(StackActions.push('PuzzleProgress'));
             }} 
             />
             <TouchableOpacity
              style={styles.nextButton} 
              onPress={() => {         
-              setModalStopVisible(false);
+              setModalVisible(false);
+              navigation.dispatch(StackActions.push('Main'));
             }} 
             />
           </View>
@@ -145,4 +146,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StopModalDialog;
+export default VictoryModalDialog;

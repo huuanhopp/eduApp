@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {CommonSize, ratioH, ratioW} from '../../utils/utils';
 import {useNavigation} from '@react-navigation/native';
+import StopModalDialog from '../../core/Modal/StopModalDialog';
 
 const SpeakingBackgroundCustom = ({title, subTitle, ...props}) => {
   // nav
@@ -18,8 +19,14 @@ const SpeakingBackgroundCustom = ({title, subTitle, ...props}) => {
   // function
   // part Component
   // main container
-
+  const [modalStopVisible, setModalStopVisible] = useState(false);
   const navigation = useNavigation();
+  const goBack = () => {
+    // navigation.goBack();
+    // navigation.pop();
+    setModalStopVisible(true)
+    // navigation.navigate('Main');;
+  };
 
   return (
     <View
@@ -57,7 +64,7 @@ const SpeakingBackgroundCustom = ({title, subTitle, ...props}) => {
             top: ratioH(40),
             left: ratioH(40),
           }}
-          onPress={navigation.goBack}>
+          onPress={goBack}>
           <Image
             resizeMode="cover"
             source={require('../../../assets/images/core/BackButton.png')}
@@ -66,7 +73,14 @@ const SpeakingBackgroundCustom = ({title, subTitle, ...props}) => {
               width: ratioW(56),
             }}
           />
+           <StopModalDialog
+            modalStopVisible={modalStopVisible}
+            setModalStopVisible={setModalStopVisible}
+            isRunning={false}
+            setIsRunning={setModalStopVisible}
+          />
         </TouchableOpacity>
+        
       </View>
     </View>
     // <ImageBackground

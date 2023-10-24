@@ -14,6 +14,7 @@ import ListeningModalDialog from '../../core/Modal/ListeningModalDialog';
 import GoBackModalDialog from '../../core/Modal/GoBackModalDialog';
 import { CommonSize, Images, ratioH, ratioW } from '../../utils/utils';
 import { useNavigation } from '@react-navigation/native';
+import StopModalDialog from '../../core/Modal/StopModalDialog';
 const SpeakingBackground = ({
   title,
   question,
@@ -29,11 +30,13 @@ const SpeakingBackground = ({
   const navigation = useNavigation();
   const [width, setWidth] = useState(CommonSize.srcWidthDefault);
   const [gobackModalShown, setgobackModalShown] = useState(false);
+  const [modalStopVisible, setModalStopVisible] = useState(false);
 
   const goBack = () => {
     // navigation.goBack();
     // navigation.pop();
-    navigation.navigate('Main');;
+    setModalStopVisible(true)
+    // navigation.navigate('Main');;
   };
 
   return (
@@ -82,6 +85,12 @@ const SpeakingBackground = ({
               />
             )}
           </View>
+          <StopModalDialog
+            modalStopVisible={modalStopVisible}
+            setModalStopVisible={setModalStopVisible}
+            isRunning={false}
+            setIsRunning={setModalStopVisible}
+          />
         </View>
       </ImageBackground>
     </View>

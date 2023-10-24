@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Image,
   ImageBackground,
@@ -12,6 +12,7 @@ import ConfirmButton from '../../core/Button/ConfirmButton';
 import ListeningModalDialog from '../../core/Modal/ListeningModalDialog';
 import { CommonSize, Images, ratioH, ratioW } from '../../utils/utils';
 import { useNavigation } from '@react-navigation/native';
+import StopModalDialog from '../../core/Modal/StopModalDialog';
 const ListeningBackground = ({
   title,
   question,
@@ -23,10 +24,13 @@ const ListeningBackground = ({
 }) => {
   const navigation = useNavigation();
 
+  const [modalStopVisible, setModalStopVisible] = useState(false);
+
   const goBack = () => {
     // navigation.goBack();
     // navigation.pop();
-    navigation.navigate('Main');
+    setModalStopVisible(true)
+    // navigation.navigate('Main');
   };
 
   return (
@@ -57,6 +61,12 @@ const ListeningBackground = ({
               onPress={onCheckResult}
             />
           </View>
+          <StopModalDialog
+            modalStopVisible={modalStopVisible}
+            setModalStopVisible={setModalStopVisible}
+            isRunning={false}
+            setIsRunning={setModalStopVisible}
+          />
         </View>
       </ImageBackground>
     </View>

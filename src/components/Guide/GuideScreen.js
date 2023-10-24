@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   ImageBackground,
@@ -9,13 +9,13 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import GuideImage from './components/GuideImage';
-import Carousel, {Pagination} from 'react-native-snap-carousel';
-import {ratioH} from '../../utils/utils';
-import { CommonSize, Images,  ratioW } from '../../utils/utils';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
+import { ratioH } from '../../utils/utils';
+import { CommonSize, Images, ratioW } from '../../utils/utils';
 
 const widthScreen = Dimensions.get('screen').height * 1.431;
 
-const GuideScreen = ({navigation, route}) => {
+const GuideScreen = ({ navigation, route }) => {
   const guideImages = [
     require('../../../assets/images/GuideScreen/guide1.png'),
     require('../../../assets/images/GuideScreen/guide2.png'),
@@ -59,11 +59,11 @@ const GuideScreen = ({navigation, route}) => {
         navigation.navigate('PuzzleProgress');
         break;
       default:
-        // Handle any other cases if needed
+      // Handle any other cases if needed
     }
   };
 
-  const onClose = () => {};
+  const onClose = () => { };
 
   return (
     <View style={styles.rootView}>
@@ -72,14 +72,16 @@ const GuideScreen = ({navigation, route}) => {
         style={styles.bgImage}>
         <View style={styles.topView}>
           <View style={styles.titleView}>
-            <View style={{flex: 1}} />
+            <View style={{ flex: 1 }} />
             <Image
               source={require('../../../assets/images/GuideScreen/guideTitleImg.png')}
               style={styles.titleImg}
               resizeMode="contain"
             />
             <View style={styles.closeButtonView}>
-              <TouchableOpacity onPress={onClose}>
+              <TouchableOpacity onPress={() => {
+                navigation.pop();
+              }}>
                 <Image
                   source={require('../../../assets/images/GuideScreen/closeButton.png')}
                   style={styles.closeImg}
@@ -95,7 +97,7 @@ const GuideScreen = ({navigation, route}) => {
               flexDirection: 'row',
               paddingHorizontal: ratioH(40),
             }}>
-            <View style={{alignItems: 'center'}}>
+            <View style={{ alignItems: 'center' }}>
               <GuideImage onChangeIndex={index => setCurrentIndex(index)} />
               <View style={styles.pagingView}>
                 <Pagination
@@ -179,7 +181,7 @@ const styles = StyleSheet.create({
     height: widthScreen * 0.0418,
     width: widthScreen * 0.0418,
   },
-  closeButtonView: {flex: 1, alignItems: 'flex-end'},
+  closeButtonView: { flex: 1, alignItems: 'flex-end' },
   dotView: {
     width: ratioH(32),
     height: ratioH(10),

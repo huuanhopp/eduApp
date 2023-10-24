@@ -5,7 +5,7 @@ const StageScreen = ({ navigation }) => {
     <View style={styles.container}>
       <Image
         resizeMode="cover"
-        source={require('../../assets/images/StageScreen/StageScreen.png')}
+        source={require('../../assets/images/StageScreen/StageScreenNew.png')}
       />
       <TouchableOpacity
         style={styles.closeBtn}
@@ -30,12 +30,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   closeBtn: {
+    // backgroundColor: "red",
     position: 'absolute',
     zIndex: 1,
     top: '8.8%',
     right: '9.2%',
     borderRadius: 4,
-    opacity: 0,
+    opacity: 1,
     // pointerEvents: 'cursor',
   },
 });
