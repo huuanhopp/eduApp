@@ -173,7 +173,7 @@ const Game2 = () => {
   };
 
   const checkPercentageCondition = (textRecording) => {
-    const SENTENCE_RESULT =  '나는 내일 점심에 친구와 토스트를 싼 후 피크닉에 간다'
+    const SENTENCE_RESULT =  '나는 내일 점심에 친구와 토스르를 싼 후 피크닉을 간다'
     console.log('percentage',  compareSentences(textRecording, SENTENCE_RESULT))
     // return ((compareSentences(test, SENTENCE_RESULT) <= 3))
     return ((compareSentences(textRecording, SENTENCE_RESULT) <= 3))
