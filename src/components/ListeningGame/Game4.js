@@ -14,6 +14,7 @@ import {ratioH} from '../../utils/utils';
 import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
 import WrongSpeakingModalDialog from '../../core/Modal/WrongSpeakingModalDialog';
 import {StackActions} from '@react-navigation/native';
+import FastImage from 'react-native-fast-image';
 
 const Game4 = ({navigation}) => {
   const [isPauseAudio, setPauseAudio] = useState(true);
@@ -81,10 +82,10 @@ const Game4 = ({navigation}) => {
                !prevState
             );
           }}>
-          <Image
-            style={styles.car}
-            resizeMode="contain"
-            source={require('../../../assets/images/ListeningGame/Game4/Car1.png')}
+          <FastImage
+            style={styles.gifImage}
+            resizeMode="cover"
+            source={require('../../../assets/images/gif/car.gif')}
           />
         </TouchableOpacity>
         <View
@@ -138,7 +139,11 @@ const Game4 = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  car: {
+  // car: {
+  //   width: ratioH(545),
+  //   height: ratioH(253),
+  // },
+  gifImage: {
     width: ratioH(545),
     height: ratioH(253),
   },

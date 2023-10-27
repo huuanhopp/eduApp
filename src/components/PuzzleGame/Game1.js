@@ -145,7 +145,7 @@ const Game1 = ({navigation}) => {
 
   const onNext = () => {
     setCorrectModalShown(false);
-    navigation.dispatch(StackActions.push('PuzzleGame3'));
+    navigation.dispatch(StackActions.push('PuzzleGame2'));
   };
 
 
