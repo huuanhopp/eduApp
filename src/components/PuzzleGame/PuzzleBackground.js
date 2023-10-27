@@ -78,7 +78,9 @@ const PuzzleBackground = ({
     <View style={styles.rootView}>
       <ImageBackground
         source={require('../../../assets/images/PuzzleGame/PuzzleBackground.png')}
-        style={styles.imgBG}>
+        style={styles.imgBG}
+        resizeMode="cover"
+        >
         <View style={{ flex: 1 }}>
           <View>
             <View style={{ flexDirection: 'row' }}>
@@ -138,15 +140,18 @@ const styles = StyleSheet.create({
     // width: widthScreen,
     width: CommonSize.srcWidth,
     alignSelf: 'center',
-    backgroundColor: '#B0D4FF',
+    // backgroundColor: '#B0D4FF',
   },
   quesContent: {},
 
   imgBG: {
     // width: CommonSize.srcWidthDefault,
     flex: 1,
-    width: '100%',
-    height: '100%',
+    // width: "100%",
+    // height: "100%",
+    width: CommonSize.srcWidth,
+    height: CommonSize.srcHeight,
+    
   },
   backButton: {
     marginTop: ratioH(40),

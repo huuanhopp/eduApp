@@ -1,6 +1,8 @@
 import { Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
+console.log("width", width)
+console.log("height", height)
 
 export const Slides = [
   {
