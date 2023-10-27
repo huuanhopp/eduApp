@@ -3,19 +3,21 @@ import { StyleSheet, View, Image, Text, PanResponder, Alert } from 'react-native
 import PuzzleBackground from './PuzzleBackground';
 import Card2 from '../../core/Card/Card2';
 import Card2v2 from '../../core/Card/Card2v2';
+import { Dimensions } from 'react-native';
+const windowWidth = Dimensions.get('window').width;
 const listPoint = [
-  { x: 1346, y: 365, active: true, id: 0 },
-  { x: 1454, y: 523, active: true, id: 1 },
-  { x: 1193, y: 637, active: true, id: 2 },
-  { x: 1025, y: 563, active: true, id: 3 },
-  { x: 1065, y: 415, active: true, id: 4 },
+  { x: 958, y: 276, active: false, id: 0 },
+  { x: 1032, y: 387, active: false, id: 1 },
+  { x: 838, y: 470, active: false, id: 2 },
+  { x: 727, y: 416, active: false, id: 3 },
+  { x: 760, y: 310, active: false, id: 4 },
 ]
 const listPointBg1 = [
-  { x: 672, y: 365, active: false, id: 0 },
-  { x: 780, y: 523, active: false, id: 1 },
-  { x: 521, y: 632, active: false, id: 2 },
-  { x: 354, y: 559, active: false, id: 3 },
-  { x: 377, y: 408, active: false, id: 4 } ,
+  { x: 464, y: 276, active: false, id: 0 },
+  { x: 542, y: 387, active: false, id: 1 },
+  { x: 356, y: 470, active: false, id: 2 },
+  { x: 242, y: 418, active: false, id: 3 },
+  { x: 257, y: 310, active: false, id: 4 },
 ]
 const Game2 = ({ navigation }) => {
 
@@ -30,7 +32,7 @@ const Game2 = ({ navigation }) => {
 
   const onPressChangeGesture = (gesture, bg) => {
     console.log("gesture", gesture, bg)
-    setTimesPress(preTimes=> preTimes +1)
+    setTimesPress(preTimes => preTimes + 1)
     setGestureState({ ...gesture, bg })
     setListPointDebug(preList => [...preList, gesture])
   }
@@ -38,10 +40,10 @@ const Game2 = ({ navigation }) => {
     // khi click bg2 
     if (gestureState.bg == 2) {
       const newList = listPointState.map(item => {
-        if ((item.x + 20) > gestureState.x
-          && (item.x - 20) < gestureState.x
-          && (item.y + 20) > gestureState.y
-          && (item.y - 20) < gestureState.y) {
+        if ((item.x + 30) > gestureState.x
+          && (item.x - 30) < gestureState.x
+          && (item.y + 30) > gestureState.y
+          && (item.y - 30) < gestureState.y) {
           return {
             ...item,
             active: true
@@ -56,10 +58,10 @@ const Game2 = ({ navigation }) => {
     // khi click bg1
     if (gestureState.bg == 1) {
       const newList = listPointState.map((item, index) => {
-        if ((listPointBg1[index].x + 20) > gestureState.x
-          && (listPointBg1[index].x - 20) < gestureState.x
-          && (listPointBg1[index].y + 20) > gestureState.y
-          && (listPointBg1[index].y - 20) < gestureState.y) {
+        if ((listPointBg1[index].x + 30) > gestureState.x
+          && (listPointBg1[index].x - 30) < gestureState.x
+          && (listPointBg1[index].y + 30) > gestureState.y
+          && (listPointBg1[index].y - 30) < gestureState.y) {
           return {
             ...item,
             active: true
@@ -112,16 +114,18 @@ const Game2 = ({ navigation }) => {
             onPressChangeGesture={onPressChangeGesture}
           />
         </View>
-        <View>
+        <View style={{ position: "absolute", top: 0, left: 500 }}>
           <Text>You press {timesPress} times</Text>
+          <View><Text>windowWidth: {windowWidth}</Text></View>
         </View>
-        <View style={{position: "absolute", top: 0, left: 50}}>
-          {listPointDebug.length > 0 && listPointDebug.map((item, index)=>{
+        <View style={{ position: "absolute", top: 0, left: 50 }}>
+          {listPointDebug.length > 0 && listPointDebug.map((item, index) => {
             return (
               <Text key={index}>{item.x}:{item.y}</Text>
             )
           })}
         </View>
+
       </View>
     </PuzzleBackground>
   );

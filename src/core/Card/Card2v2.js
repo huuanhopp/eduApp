@@ -10,7 +10,7 @@ const imageHeight = windowWidth > 1700 ? 314*1.4 : 314
 
 const Card2v2 = ({ urlImage, bg, listPoint, onPressChangeGesture = () => { } }) => {
 
-    const defaultPoint = bg == 2 ? { x: 878, y: 308 } : { x: 200, y: 305 }
+    const defaultPoint = bg == 2 ? { x: 632, y: 248 } : { x: 146, y: 248 }
     const panResponder = React.useRef(
         PanResponder.create({
             onStartShouldSetPanResponder: (evt, gestureState) => true,
@@ -35,7 +35,7 @@ const Card2v2 = ({ urlImage, bg, listPoint, onPressChangeGesture = () => { } }) 
                     opacity: 0.5,
                     position: "absolute",
                 }}>
-                {/* {bg == 2
+                {bg == 2
                     && listPoint
                     && listPoint?.length > 0
                     && listPoint.map((item, index) => {
@@ -44,18 +44,18 @@ const Card2v2 = ({ urlImage, bg, listPoint, onPressChangeGesture = () => { } }) 
                                 key={index}
                                 source={require('../../../assets/images/PuzzleGame/Game2/red_circle.png')}
                                 style={{
-                                    width: 80,
-                                    height: 80,
+                                    width: 54,
+                                    height: 54,
                                     position: "absolute",
-                                    top: item.y - defaultPoint.y - 40 + 5,
-                                    left: item.x - defaultPoint.x - 40 + 5
+                                    top: item.y - defaultPoint.y - 27 + 10,
+                                    left: item.x - defaultPoint.x - 27 + 10
                                     // top: gesture2.y - defaultPoint.y - 40 + 5, // 40 là bán kính hình tròn, 5 là độ lệch sang phải
                                     // left: gesture2.x - defaultPoint.x - 40 + 5
                                 }}
 
                             />
                         ) : (<View key={index}></View>)
-                    })} */}
+                    })}
 
 
             </View>
