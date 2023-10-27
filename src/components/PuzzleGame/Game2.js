@@ -114,7 +114,7 @@ const Game2 = ({ navigation }) => {
             onPressChangeGesture={onPressChangeGesture}
           />
         </View>
-        <View style={{ position: "absolute", top: 0, left: 500 }}>
+        {/* <View style={{ position: "absolute", top: 0, left: 500 }}>
           <Text>You press {timesPress} times</Text>
           <View><Text>windowWidth: {windowWidth}</Text></View>
         </View>
@@ -124,7 +124,7 @@ const Game2 = ({ navigation }) => {
               <Text key={index}>{item.x}:{item.y}</Text>
             )
           })}
-        </View>
+        </View> */}
 
       </View>
     </PuzzleBackground>

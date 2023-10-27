@@ -12,20 +12,14 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Start">
-        {/* {stackScreen.map(stackItem => (
+        {stackScreen.map(stackItem => (
           <Stack.Screen
             key={stackItem.name}
             name={stackItem.name}
             component={stackItem.component}
             options={{headerShown: false}}
           />
-        ))} */}
-        <Stack.Screen
-            key={"PuzzleGame2"}
-            name={"PuzzleGame2"}
-            component={PuzzleGame2}
-            options={{headerShown: false}}
-          />
+        ))}
       </Stack.Navigator>
     </NavigationContainer>
   );
