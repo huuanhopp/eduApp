@@ -8,17 +8,17 @@ import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
 import { StackActions } from '@react-navigation/native';
 const windowWidth = Dimensions.get('window').width;
 const listPoint = [
-  { x: 958, y: 276, active: true, id: 0 },
-  { x: 1032, y: 387, active: true, id: 1 },
-  { x: 838, y: 470, active: true, id: 2 },
-  { x: 727, y: 416, active: true, id: 3 },
+  { x: 958, y: 276, active: false, id: 0 },
+  { x: 1032, y: 387, active: false, id: 1 },
+  { x: 838, y: 470, active: false, id: 2 },
+  { x: 727, y: 416, active: false, id: 3 },
   { x: 760, y: 310, active: false, id: 4 },
 ]
 const listPointBg1 = [
-  { x: 464, y: 276, active: true, id: 0 },
-  { x: 542, y: 387, active: true, id: 1 },
-  { x: 356, y: 470, active: true, id: 2 },
-  { x: 242, y: 418, active: true, id: 3 },
+  { x: 464, y: 276, active: false, id: 0 },
+  { x: 542, y: 387, active: false, id: 1 },
+  { x: 356, y: 470, active: false, id: 2 },
+  { x: 242, y: 418, active: false, id: 3 },
   { x: 257, y: 310, active: false, id: 4 },
 ]
 const Game2 = ({ navigation }) => {
