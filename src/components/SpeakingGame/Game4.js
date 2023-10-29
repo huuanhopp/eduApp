@@ -71,9 +71,9 @@ const Game4 = () => {
 
   const checkPercentageCondition = (textRecording) => {
     const SENTENCE_RESULT =  '뭐하니'
-    // const SENTENCE_RESULT =  '안녕하세요';
+    const SENTENCE_RESULT2 = '무하니'
     console.log('percentage', compareSentences(textRecording, SENTENCE_RESULT))
-    return (compareSentences(textRecording, SENTENCE_RESULT) <= 0)
+    return (compareSentences(textRecording, SENTENCE_RESULT) <= 0 || compareSentences(textRecording, SENTENCE_RESULT2) <= 0)
   }
 
 
