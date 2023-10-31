@@ -1,5 +1,11 @@
 import React, {useState, useRef} from 'react';
-import { StyleSheet, View, TouchableOpacity, Image, Platform } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Image,
+  Platform,
+} from 'react-native';
 import AnswerButton from '../../core/Button/AnswerButton';
 import ListeningBackground from './ListeningBackground';
 import {ratioH} from '../../utils/utils';
@@ -102,9 +108,7 @@ const Game1 = ({navigation}) => {
         <TouchableOpacity
           style={styles.audio}
           onPress={async () => {
-            setPauseAudio(( prevState) => 
-               !prevState
-            );
+            setPauseAudio(prevState => !prevState);
             try {
             } catch (error) {
               console.log('Error playing sound:', error);
@@ -123,7 +127,7 @@ const Game1 = ({navigation}) => {
               callbackFunc={(isSelected, index) =>
                 updateStackChoice(isSelected, 0)
               }
-              style={{...styles.answerButton, marginRight: 12}}
+              style={{...styles.answerButton, marginRight: ratioH(12)}}
               buttonStyle={styles.buttonStyle}
               textStyle={styles.textStyle}
             />
@@ -138,14 +142,18 @@ const Game1 = ({navigation}) => {
               textStyle={styles.textStyle}
             />
           </View>
-          <View style={{flexDirection: 'row', marginTop: 12}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              marginTop: ratioH(12),
+            }}>
             <AnswerButton
               content={anwsOptions[2].content}
               selectedOrder={anwsOptions[2].order}
               callbackFunc={(isSelected, index) =>
                 updateStackChoice(isSelected, 2)
               }
-              style={{...styles.answerButton, marginRight: 12}}
+              style={{...styles.answerButton, marginRight: ratioH(12)}}
               buttonStyle={styles.buttonStyle}
               textStyle={styles.textStyle}
             />
@@ -196,12 +204,12 @@ const styles = StyleSheet.create({
     height: ratioH(88),
   },
   buttonStyle: {
-    height: 88,
+    height: ratioH(88),
     justifyContent: 'center',
     alignItems: 'center',
   },
   textStyle: {
-    fontSize: 36,
+    fontSize: ratioH(36),
     lineHeight: null,
     includeFontPadding: false,
   },

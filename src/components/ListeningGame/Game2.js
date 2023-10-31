@@ -94,9 +94,7 @@ const Game2 = ({navigation}) => {
         <TouchableOpacity
           style={styles.audio}
           onPress={async () => {
-            setPauseAudio(( prevState) => 
-               !prevState
-            );
+            setPauseAudio(prevState => !prevState);
           }}>
           <Image
             resizeMode="contain"
@@ -172,7 +170,7 @@ const Game2 = ({navigation}) => {
 const styles = StyleSheet.create({
   audio: {
     alignSelf: 'center',
-    marginBottom: 30,
+    marginBottom: ratioH(30),
     height: ratioH(85),
     aspectRatio: 1,
   },

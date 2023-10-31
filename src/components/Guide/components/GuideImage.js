@@ -19,7 +19,7 @@ const GuideImage = ({onChangeIndex}) => {
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [fadeAnim] = useState(new Animated.Value(0));
+  const [fadeAnim] = useState(new Animated.Value(1));
 
   useEffect(() => {
     // Lên lịch thay đổi ảnh mỗi 2 giây
