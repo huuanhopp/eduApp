@@ -31,7 +31,7 @@ const Game1Result = ({handleRePlayAudioRecord, route}) => {
   const onShowResult = () => {
     const percentage = compareSentences(text, resultGame1);
     console.log('distance is', percentage);
-    if (percentage <=2) {
+    if (percentage <= 0) {
       console.log('distance <= 2')
       setCorrectPercent(true)
       setCorrectModalShown(true);
