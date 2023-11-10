@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, View} from 'react-native';
 import Card from '../../core/Card/Card';
 import PuzzleBackground from './PuzzleBackground';
 import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
-import { StackActions } from '@react-navigation/native';
+import {StackActions} from '@react-navigation/native';
+import {ratioH} from '../../utils/utils';
 const Game1 = ({navigation}) => {
   const [flipCards, setFlipCards] = useState([]);
   const [correctModalShown, setCorrectModalShown] = useState(false);
@@ -98,7 +99,7 @@ const Game1 = ({navigation}) => {
             return {...item};
           });
           setCards(newCardsState);
-          const isAllCardIsFlipped = newCardsState.every((card) => card.removed);
+          const isAllCardIsFlipped = newCardsState.every(card => card.removed);
           console.log('allcardflipped', isAllCardIsFlipped);
           if (isAllCardIsFlipped) {
             setCorrectModalShown(true);
@@ -121,7 +122,7 @@ const Game1 = ({navigation}) => {
     }
   }, [flipCards]);
 
-  const handleSelectedCard = (index) => {
+  const handleSelectedCard = index => {
     const newCards = cards.map((item, idx) => {
       if (item.removed) return item;
       if (idx === index) {
@@ -140,14 +141,13 @@ const Game1 = ({navigation}) => {
   };
 
   const onCheckResult = () => {
-    console.log("Timeout")
+    console.log('Timeout');
   };
 
   const onNext = () => {
     setCorrectModalShown(false);
     navigation.dispatch(StackActions.push('PuzzleGame2'));
   };
-
 
   return (
     <PuzzleBackground
@@ -158,7 +158,7 @@ const Game1 = ({navigation}) => {
       retryTimeout="PuzzleGame1"
       onCheckResult={onCheckResult}
       isRunning={isRunning}
-      setIsRunning={setIsRunning}>  
+      setIsRunning={setIsRunning}>
       <View style={styles.contentView}>
         <View style={{flexDirection: 'row'}}>
           <Card
@@ -218,7 +218,6 @@ const Game1 = ({navigation}) => {
           onNext={onNext}
         />
       </View>
-      
     </PuzzleBackground>
   );
 };

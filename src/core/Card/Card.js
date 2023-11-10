@@ -33,7 +33,8 @@ const Card = ({
 const styles = StyleSheet.create({
   absolute: {},
   cardImg: {
-    height: ratioH(196),
+    height: ratioH(216),
+    width: ratioH(182),
   },
 });
 
