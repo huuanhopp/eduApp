@@ -15,6 +15,7 @@ import SpeechToTextMic from '../SpeechToTextMic/SpeechToTextMic';
 import Video from 'react-native-video';
 import SpeakingBackgroundCustom from './SpeakingBackgroundCustom';
 import {ratioH} from '../../utils/utils';
+import {StackActions} from '@react-navigation/native';
 
 const Game1 = ({navigation}) => {
   const [isPauseAudio, setPauseAudio] = useState(true);
@@ -87,12 +88,20 @@ const Game1 = ({navigation}) => {
           isOnlyRecord={false}
           onFinalMessage={res => {
             // setAudioUrl(res?.audioUrl);
-            navigation.replace('SpeakingGame1Result', {
-              data: {
-                audioUrl: res?.audioUrl,
-                text: res?.text,
-              },
-            });
+            navigation.dispatch(
+              StackActions.push('SpeakingGame1Result', {
+                data: {
+                  audioUrl: res?.audioUrl,
+                  text: res?.text,
+                },
+              }),
+            );
+            // navigation.replace('SpeakingGame1Result', {
+            //   data: {
+            //     audioUrl: res?.audioUrl,
+            //     text: res?.text,
+            //   },
+            // });
             // setPauseAudioUser(false);
             // console.log({res})
             // {
