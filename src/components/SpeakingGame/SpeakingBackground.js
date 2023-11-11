@@ -15,6 +15,7 @@ import GoBackModalDialog from '../../core/Modal/GoBackModalDialog';
 import {CommonSize, Images, ratioH, ratioW} from '../../utils/utils';
 import {useNavigation} from '@react-navigation/native';
 import StopModalDialog from '../../core/Modal/StopModalDialog';
+import {screenSize, widthScreen} from '../../constants/constants';
 const SpeakingBackground = ({
   title,
   question,
@@ -42,20 +43,23 @@ const SpeakingBackground = ({
   return (
     <View
       style={{
-        backgroundColor: 'rgb(224,238,255)',
+        // backgroundColor: 'rgb(224,238,255)',
+        backgroundColor: 'red',
         flex: 1,
-        width: CommonSize.srcWidth,
-        alignItems: 'center',
+        // width: CommonSize.srcWidth,
+        // alignItems: 'center',
       }}>
       <ImageBackground
-        resizeMode="contain"
-        source={require('../../../assets/images/SpeakingGame/SpeakingBackground1.png')}
+        resizeMode="stretch"
+        source={require('../../../assets/images/common/speakingBG.png')}
         style={{
-          ...styles.imgBG,
-          width: width,
+          backgroundColor: 'green',
+          width: screenSize.width,
+          // ...styles.imgBG,
+          // width: width,
         }}
         onLayout={e => {
-          setWidth((e.nativeEvent.layout.height * 1194) / 834);
+          // setWidth((e.nativeEvent.layout.height * 1194) / 834);
         }}>
         <View style={{height: '100%'}}>
           <View>
@@ -63,7 +67,7 @@ const SpeakingBackground = ({
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                marginTop: CommonSize.srcWidthDefault * 0.05,
+                marginTop: CommonSize.srcWidthDefault * 0.028,
               }}>
               <TouchableOpacity onPress={goBack}>
                 <Image
@@ -79,7 +83,7 @@ const SpeakingBackground = ({
                 style={{
                   width: ratioH(125),
                   height: ratioH(49),
-                  marginRight: CommonSize.srcWidthDefault * 0.02,
+                  marginRight: CommonSize.srcWidthDefault * 0.04,
                 }}
                 resizeMode="cover"
               />
@@ -148,7 +152,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   backButton: {
-    marginLeft: CommonSize.srcWidthDefault * 0.028,
+    marginLeft: CommonSize.srcWidthDefault * 0.038,
     height: ratioH(56),
     aspectRatio: 1,
   },

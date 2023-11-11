@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {
+  Dimensions,
   Image,
   ImageBackground,
   StyleSheet,
@@ -13,6 +14,7 @@ import ListeningModalDialog from '../../core/Modal/ListeningModalDialog';
 import {CommonSize, Images, ratioH, ratioW} from '../../utils/utils';
 import {useNavigation} from '@react-navigation/native';
 import StopModalDialog from '../../core/Modal/StopModalDialog';
+import {screenSize} from '../../constants/constants';
 const ListeningBackground = ({
   title,
   question,
@@ -36,7 +38,9 @@ const ListeningBackground = ({
   return (
     <View style={styles.rootView}>
       <ImageBackground
-        source={require('../../../assets/images/ListeningGame/ListeningBackground1.png')}
+        source={require('../../../assets/images/common/listeningBG.png')}
+        resizeMode="stretch"
+        // source={require('../../../assets/images/ListeningGame/ListeningBackground1.png')}
         style={styles.imgBG}>
         <View style={{flex: 1}}>
           <View>
@@ -111,18 +115,18 @@ const ListeningBackground = ({
 const styles = StyleSheet.create({
   textTitle: {},
   rootView: {
-    flex: 2,
+    flex: 1,
     // width: widthScreen,
-    width: CommonSize.srcWidth,
-    alignSelf: 'center',
-    backgroundColor: '#B0D4FF',
+    // width: CommonSize.srcWidth,
+    // alignSelf: 'center',
+    // backgroundColor: '#B0D4FF',
   },
   quesContent: {},
-
   imgBG: {
     // width: CommonSize.srcWidthDefault,
-    flex: 1,
-    width: '100%',
+    // flex: 1,
+    // width: '100%',
+    width: Dimensions.get('screen').width,
     height: '100%',
   },
   backButton: {
