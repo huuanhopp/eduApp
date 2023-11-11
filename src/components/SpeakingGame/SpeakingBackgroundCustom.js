@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -24,7 +24,7 @@ const SpeakingBackgroundCustom = ({title, subTitle, ...props}) => {
   const goBack = () => {
     // navigation.goBack();
     // navigation.pop();
-    setModalStopVisible(true)
+    setModalStopVisible(true);
     // navigation.navigate('Main');;
   };
 
@@ -73,14 +73,13 @@ const SpeakingBackgroundCustom = ({title, subTitle, ...props}) => {
               width: ratioW(56),
             }}
           />
-           <StopModalDialog
+          <StopModalDialog
             modalStopVisible={modalStopVisible}
             setModalStopVisible={setModalStopVisible}
             isRunning={false}
             setIsRunning={setModalStopVisible}
           />
         </TouchableOpacity>
-        
       </View>
     </View>
     // <ImageBackground
@@ -118,5 +117,6 @@ const styles = StyleSheet.create({
     color: '#002443',
     fontWeight: 'normal',
     marginTop: ratioH(8),
+    fontFamily: 'SUIT-Regular',
   },
 });

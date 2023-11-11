@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   Dimensions,
   Image,
@@ -12,8 +12,8 @@ import BackButton from '../../core/Button/BackButton';
 import SpeakingConfirmButton from '../../core/Button/SpeakingConfirmButton';
 import ListeningModalDialog from '../../core/Modal/ListeningModalDialog';
 import GoBackModalDialog from '../../core/Modal/GoBackModalDialog';
-import { CommonSize, Images, ratioH, ratioW } from '../../utils/utils';
-import { useNavigation } from '@react-navigation/native';
+import {CommonSize, Images, ratioH, ratioW} from '../../utils/utils';
+import {useNavigation} from '@react-navigation/native';
 import StopModalDialog from '../../core/Modal/StopModalDialog';
 const SpeakingBackground = ({
   title,
@@ -35,7 +35,7 @@ const SpeakingBackground = ({
   const goBack = () => {
     // navigation.goBack();
     // navigation.pop();
-    setModalStopVisible(true)
+    setModalStopVisible(true);
     // navigation.navigate('Main');;
   };
 
@@ -49,7 +49,7 @@ const SpeakingBackground = ({
       }}>
       <ImageBackground
         resizeMode="contain"
-        source={require('../../../assets/images/SpeakingGame/SpeakingBackground.png')}
+        source={require('../../../assets/images/SpeakingGame/SpeakingBackground1.png')}
         style={{
           ...styles.imgBG,
           width: width,
@@ -57,16 +57,33 @@ const SpeakingBackground = ({
         onLayout={e => {
           setWidth((e.nativeEvent.layout.height * 1194) / 834);
         }}>
-        <View style={{ height: '100%' }}>
+        <View style={{height: '100%'}}>
           <View>
-            <TouchableOpacity onPress={goBack}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginTop: CommonSize.srcWidthDefault * 0.05,
+              }}>
+              <TouchableOpacity onPress={goBack}>
+                <Image
+                  source={Images.backButton}
+                  style={{
+                    ...styles.backButton,
+                  }}
+                />
+              </TouchableOpacity>
+              <View style={{flex: 1}} />
               <Image
-                source={Images.backButton}
+                source={require('../../../assets/images/common/topImage.png')}
                 style={{
-                  ...styles.backButton,
+                  width: ratioH(125),
+                  height: ratioH(49),
+                  marginRight: CommonSize.srcWidthDefault * 0.02,
                 }}
+                resizeMode="cover"
               />
-            </TouchableOpacity>
+            </View>
             <View style={styles.topView}>
               <Text style={styles.title}>{title}</Text>
               <Text style={styles.subTitle}>{question}</Text>
@@ -85,6 +102,11 @@ const SpeakingBackground = ({
               />
             )}
           </View>
+          <Image
+            source={require('../../../assets/images/common/beeBottomImage.png')}
+            style={styles.beeImage}
+            resizeMode="cover"
+          />
           <StopModalDialog
             modalStopVisible={modalStopVisible}
             setModalStopVisible={setModalStopVisible}
@@ -101,14 +123,15 @@ const styles = StyleSheet.create({
   title: {
     fontSize: ratioH(44),
     color: '#002443',
-    fontWeight: 'bold',
     alignSelf: 'center',
+    fontFamily: '1HoonGothicgulim Regular',
   },
   subTitle: {
     fontSize: ratioH(28),
     color: '#002443',
     fontWeight: 'normal',
     alignSelf: 'center',
+    fontFamily: 'SUIT-Regular',
   },
   textTitle: {
     top: '18%',
@@ -125,7 +148,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   backButton: {
-    marginTop: CommonSize.srcWidthDefault * 0.05,
     marginLeft: CommonSize.srcWidthDefault * 0.028,
     height: ratioH(56),
     aspectRatio: 1,
@@ -143,6 +165,13 @@ const styles = StyleSheet.create({
   bottomView: {
     alignItems: 'center',
     marginBottom: ratioH(65),
+  },
+  beeImage: {
+    width: ratioH(191),
+    height: ratioH(111),
+    bottom: ratioH(40),
+    marginLeft: ratioH(45),
+    position: 'absolute',
   },
 });
 

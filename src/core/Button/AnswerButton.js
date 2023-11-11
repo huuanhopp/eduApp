@@ -3,8 +3,8 @@ import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
 const AnswerButton = ({
   content = 'Default text',
-  top = '50%',
-  left = '50%',
+  // top = '50%',
+  // left = '50%',
   selectedOrder,
   callbackFunc,
   type = 'small',
@@ -86,7 +86,7 @@ const AnswerButton = ({
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
+    // position: 'absolute',
   },
   button: {
     borderWidth: 2,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   Image,
   ImageBackground,
@@ -10,12 +10,12 @@ import {
 import BackButton from '../../core/Button/BackButton';
 import ConfirmButton from '../../core/Button/ConfirmButton';
 import ListeningModalDialog from '../../core/Modal/ListeningModalDialog';
-import { CommonSize, Images, ratioH, ratioW } from '../../utils/utils';
-import { useNavigation } from '@react-navigation/native';
+import {CommonSize, Images, ratioH, ratioW} from '../../utils/utils';
+import {useNavigation} from '@react-navigation/native';
 import CountdownView from './components/CountdownView';
 import TimeOutModalDialog from '../../core/Modal/TimeOutModalDialog';
 import StopModalDialog from '../../core/Modal/StopModalDialog';
-import { StackActions } from '@react-navigation/native';
+import {StackActions} from '@react-navigation/native';
 const PuzzleBackground = ({
   title,
   question,
@@ -26,7 +26,7 @@ const PuzzleBackground = ({
   onCheckResult,
   isRunning,
   setIsRunning,
-  retryTimeout
+  retryTimeout,
 }) => {
   const navigation = useNavigation();
 
@@ -40,7 +40,7 @@ const PuzzleBackground = ({
   const goBack = () => {
     // navigation.goBack();
     // navigation.pop();
-    setModalStopVisible(true)
+    setModalStopVisible(true);
     // navigation.navigate('Main');
   };
 
@@ -48,19 +48,19 @@ const PuzzleBackground = ({
   //   setIsRunning(false);
   // }
 
-  const handleTimeOutChange = (newTimeOut) => {
-    console.log(newTimeOut)
-    setModalVisible(true)
+  const handleTimeOutChange = newTimeOut => {
+    console.log(newTimeOut);
+    setModalVisible(true);
     setTimeOut(newTimeOut);
   };
 
   const onRetry = () => {
     setModalVisible(false);
-    setModalStopVisible(false)
+    setModalStopVisible(false);
     //  setIsRunning(true);
-     setTimeOut(false);
+    setTimeOut(false);
     //  setReset(true);
-     navigation.dispatch(StackActions.push(retryTimeout));
+    navigation.dispatch(StackActions.push(retryTimeout));
   };
 
   const onNext = () => {
@@ -70,36 +70,68 @@ const PuzzleBackground = ({
 
   const onBack = () => {
     setModalVisible(false);
-    setModalStopVisible(false)
+    setModalStopVisible(false);
     navigation.dispatch(StackActions.push('Main'));
   };
 
   return (
     <View style={styles.rootView}>
       <ImageBackground
-        source={require('../../../assets/images/PuzzleGame/PuzzleBackground.png')}
+        source={require('../../../assets/images/PuzzleGame/PuzzleBackground1.png')}
         style={styles.imgBG}
-        resizeMode="cover"
-        >
-        <View style={{ flex: 1 }}>
+        resizeMode="cover">
+        <View style={{flex: 1}}>
           <View>
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{flexDirection: 'row'}}>
               <TouchableOpacity onPress={goBack}>
                 <Image source={Images.backButton} style={styles.backButton} />
               </TouchableOpacity>
-              <View style={{ flex: 1 }} />
-              <CountdownView reset={reset} setReset={setReset} timeOut={timeOut} setTimeOut={handleTimeOutChange} isRunning={isRunning} setIsRunning={setIsRunning} />
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: 'flex-end',
+                  paddingRight: ratioH(24),
+                }}>
+                <CountdownView
+                  reset={reset}
+                  setReset={setReset}
+                  timeOut={timeOut}
+                  setTimeOut={handleTimeOutChange}
+                  isRunning={isRunning}
+                  setIsRunning={setIsRunning}
+                />
+              </View>
+              <Image
+                source={require('../../../assets/images/common/topImage.png')}
+                style={{
+                  width: ratioH(125),
+                  height: ratioH(49),
+                  marginTop: ratioH(45),
+                  marginRight: ratioH(45),
+                }}
+                resizeMode="cover"
+              />
             </View>
             <View style={styles.topView}>
               <Text
-                style={{ fontSize: 50, fontWeight: 'bold', textAlign: 'center' }}>
+                style={{
+                  fontSize: 50,
+                  textAlign: 'center',
+                  color: '#002443',
+                  fontFamily: '1HoonGothicgulim Regular',
+                }}>
                 {title}
               </Text>
-              <Text style={{ fontSize: 28, textAlign: 'center' }}>
+              <Text
+                style={{
+                  fontSize: 28,
+                  textAlign: 'center',
+                  fontFamily: 'SUIT-Regular',
+                  color: '#002443',
+                }}>
                 {question}
               </Text>
             </View>
-
           </View>
           <View style={styles.contentView}>{children}</View>
           <View style={styles.bottomView}>
@@ -117,17 +149,18 @@ const PuzzleBackground = ({
             onRetry={onRetry}
             onNext={onNext}
           />
-
           <StopModalDialog
             modalStopVisible={modalStopVisible}
             setModalStopVisible={setModalStopVisible}
             isRunning={isRunning}
             setIsRunning={setIsRunning}
           />
-
-
         </View>
-
+        <Image
+          source={require('../../../assets/images/common/beeBottomImage.png')}
+          style={styles.beeImage}
+          resizeMode="cover"
+        />
       </ImageBackground>
     </View>
   );
@@ -151,7 +184,6 @@ const styles = StyleSheet.create({
     // height: "100%",
     width: CommonSize.srcWidth,
     height: CommonSize.srcHeight,
-    
   },
   backButton: {
     marginTop: ratioH(40),
@@ -169,6 +201,13 @@ const styles = StyleSheet.create({
   bottomView: {
     height: ratioH(130),
     alignItems: 'center',
+  },
+  beeImage: {
+    width: ratioH(191),
+    height: ratioH(111),
+    bottom: ratioH(40),
+    marginLeft: ratioH(45),
+    position: 'absolute',
   },
 });
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   Image,
   ImageBackground,
@@ -10,8 +10,8 @@ import {
 import BackButton from '../../core/Button/BackButton';
 import ConfirmButton from '../../core/Button/ConfirmButton';
 import ListeningModalDialog from '../../core/Modal/ListeningModalDialog';
-import { CommonSize, Images, ratioH, ratioW } from '../../utils/utils';
-import { useNavigation } from '@react-navigation/native';
+import {CommonSize, Images, ratioH, ratioW} from '../../utils/utils';
+import {useNavigation} from '@react-navigation/native';
 import StopModalDialog from '../../core/Modal/StopModalDialog';
 const ListeningBackground = ({
   title,
@@ -29,26 +29,56 @@ const ListeningBackground = ({
   const goBack = () => {
     // navigation.goBack();
     // navigation.pop();
-    setModalStopVisible(true)
+    setModalStopVisible(true);
     // navigation.navigate('Main');
   };
 
   return (
     <View style={styles.rootView}>
       <ImageBackground
-        source={require('../../../assets/images/ListeningGame/ListeningBackground.png')}
+        source={require('../../../assets/images/ListeningGame/ListeningBackground1.png')}
         style={styles.imgBG}>
-        <View style={{ flex: 1 }}>
+        <View style={{flex: 1}}>
           <View>
-            <TouchableOpacity onPress={goBack}>
-              <Image source={Images.backButton} style={styles.backButton} />
-            </TouchableOpacity>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginTop: ratioH(40),
+              }}>
+              <TouchableOpacity onPress={goBack}>
+                <Image source={Images.backButton} style={styles.backButton} />
+              </TouchableOpacity>
+              <View style={{flex: 1}} />
+              <Image
+                source={require('../../../assets/images/common/topImage.png')}
+                style={{
+                  width: ratioH(125),
+                  height: ratioH(49),
+                  marginRight: ratioW(40),
+                }}
+                resizeMode="cover"
+              />
+            </View>
             <View style={styles.topView}>
               <Text
-                style={{ fontSize: 50, fontWeight: 'bold', textAlign: 'center' }}>
+                style={{
+                  fontSize: 50,
+                  textAlign: 'center',
+                  color: '#002443',
+                  fontFamily: '1HoonGothicgulim Regular',
+                }}>
                 {title}
               </Text>
-              <Text style={{ fontSize: 28, textAlign: 'center' }}>{question}</Text>
+              <Text
+                style={{
+                  fontSize: 28,
+                  textAlign: 'center',
+                  fontFamily: 'SUIT-Regular',
+                  color: '#002443',
+                }}>
+                {question}
+              </Text>
             </View>
           </View>
           <View style={styles.contentView}>{children}</View>
@@ -67,6 +97,11 @@ const ListeningBackground = ({
             isRunning={false}
             setIsRunning={setModalStopVisible}
           />
+          <Image
+            source={require('../../../assets/images/common/beeBottomImage.png')}
+            style={styles.beeImage}
+            resizeMode="cover"
+          />
         </View>
       </ImageBackground>
     </View>
@@ -83,7 +118,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#B0D4FF',
   },
   quesContent: {},
- 
+
   imgBG: {
     // width: CommonSize.srcWidthDefault,
     flex: 1,
@@ -91,8 +126,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   backButton: {
-    marginTop: ratioH(40),
-    marginLeft: ratioW(40) + 20,
+    marginLeft: ratioW(40),
   },
   topView: {
     alignSelf: 'center',
@@ -106,6 +140,13 @@ const styles = StyleSheet.create({
   bottomView: {
     height: ratioH(130),
     alignItems: 'center',
+  },
+  beeImage: {
+    width: ratioH(191),
+    height: ratioH(111),
+    bottom: ratioH(40),
+    marginLeft: ratioH(45),
+    position: 'absolute',
   },
 });
 
