@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -10,10 +10,10 @@ import {
 import PuzzleBackground from './PuzzleBackground';
 import Card2 from '../../core/Card/Card2';
 import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
-import { StackActions } from '@react-navigation/native';
+import {StackActions} from '@react-navigation/native';
 import VictoryModalDialog from '../../core/Modal/VictoryModalDialog';
 
-const FragImage = ({ urlImage, onClick, ok }) => {
+const FragImage = ({urlImage, onClick, ok}) => {
   return (
     <TouchableOpacity onPress={onClick}>
       <Image
@@ -26,7 +26,7 @@ const FragImage = ({ urlImage, onClick, ok }) => {
   );
 };
 
-const FragImage2 = ({ urlImage, onClick, ok, select }) => {
+const FragImage2 = ({urlImage, onClick, ok, select}) => {
   let opacity = 0;
   if (ok) {
     opacity = 0;
@@ -48,11 +48,12 @@ const FragImage2 = ({ urlImage, onClick, ok, select }) => {
   );
 };
 
-const Game3 = ({ navigation }) => {
+const Game3 = ({navigation}) => {
   const [selectLeft, setSelectLeft] = useState();
   const [selectRight, setSelectRight] = useState();
   const [correctModalShown, setCorrectModalShown] = useState(false);
-  const [isRunning, setIsRunning] = useState(true);
+  const [isRunning, setIsRunning] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
 
   const [p1, setP1] = useState(false);
   const [p2, setP2] = useState(false);
@@ -64,16 +65,18 @@ const Game3 = ({ navigation }) => {
   const [p8, setP8] = useState(false);
   const [p9, setP9] = useState(false);
 
-  const onCheckResult = () => { };
+  const onCheckResult = () => {
+    if (isCorrect) {
+      setIsRunning(false);
+      setCorrectModalShown(true);
+    }
+  };
 
   useEffect(() => {
     if (p1 && p2 && p3 && p4 && p5 && p6 && p7 && p8 && p9) {
-      setCorrectModalShown(true);
-      setIsRunning(false);
+      setIsCorrect(true);
     }
-  }, [
-    p1,p2,p3,p4,p5,p6,p7,p8
-  ]);
+  }, [p1, p2, p3, p4, p5, p6, p7, p8]);
 
   const handleCheckResult = (selectLeft, selectRight) => {
     // Implement your check result logic here
@@ -179,12 +182,9 @@ const Game3 = ({ navigation }) => {
       retryTimeout="PuzzleGame3"
       onCheckResult={onCheckResult}
       isRunning={isRunning}
-      setIsRunning={setIsRunning}
-    >  
-    
-    
+      setIsRunning={setIsRunning}>
       <View style={styles.contentView}>
-        <View style={{ flexDirection: 'row' }}>
+        <View style={{flexDirection: 'row'}}>
           <View style={styles.cardContainer}>
             <Card2
               urlImage={require('../../../assets/images/PuzzleGame/Game3/bg1.png')}
@@ -264,7 +264,7 @@ const Game3 = ({ navigation }) => {
             <Card2
               urlImage={require('../../../assets/images/PuzzleGame/Game3/bg2.png')}
             />
-            <View style={[styles.cardHolder2, { rowGap: 7, columnGap: 7}]}>
+            <View style={[styles.cardHolder2, {rowGap: 7, columnGap: 7}]}>
               <FragImage2
                 urlImage={require('../../../assets/images/PuzzleGame/Game3/p1.png')}
                 onClick={() => {
@@ -293,7 +293,7 @@ const Game3 = ({ navigation }) => {
               <FragImage2
                 urlImage={require('../../../assets/images/PuzzleGame/Game3/p4.png')}
                 onClick={() => {
-                  ``
+                  ``;
                   setSelect(['right', 'p4']);
                 }}
                 ok={p4}

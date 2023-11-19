@@ -1,5 +1,14 @@
 import React, {useEffect} from 'react';
-import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ImageBackground,
+} from 'react-native';
+import {screenSize} from '../constants/constants';
+import {ratioH} from '../utils/utils';
 const MainScreen = ({navigation}) => {
   // useEffect(() => {
   //   navigation.navigate('PuzzleGame3');
@@ -7,62 +16,79 @@ const MainScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Image
-        resizeMode="cover"
+      {/* <Image
+        resizeMode="stretch"
         source={require('../../assets/images/MainScreen/Main.png')}
-      />
-
-      <TouchableOpacity
-        style={styles.searchingBtn}
-        onPress={() => {
-          navigation.navigate('Progress');
+        style={{
+          height: '100%',
+          aspectRatio: 1194 / 834,
+        }}
+      /> */}
+      <ImageBackground
+        resizeMode="contain"
+        source={require('../../assets/images/MainScreen/Searching.png')}
+        style={{
+          opacity: 1,
+          width: '100%',
         }}>
-        <Image
-          resizeMode="cover"
-          source={require('../../assets/images/MainScreen/Searching.png')}
-        />
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.yellowBtn}
-        onPress={() => {
-          navigation.navigate('Stage');
+        <TouchableOpacity
+          style={styles.yellowBtn}
+          onPress={() => {
+            navigation.navigate('Stage');
+          }}>
+          <Image
+            resizeMode="cover"
+            source={require('../../assets/images/MainScreen/YellowButton.png')}
+            style={{
+              opacity: 1,
+            }}
+          />
+        </TouchableOpacity>
+      </ImageBackground>
+      <View
+        style={{
+          flexDirection: 'row',
         }}>
-        <Image
-          resizeMode="cover"
-          source={require('../../assets/images/MainScreen/YellowButton.png')}
-        />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.listeningGame}
-        onPress={() => {
-          navigation.navigate('ListeningProgress');
-        }}>
-        <Image
-          resizeMode="cover"
-          source={require('../../assets/images/MainScreen/ListeningGame.png')}
-        />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.speakingGame}
-        onPress={() => {
-          navigation.navigate('SpeakingProgress');
-        }}>
-        <Image
-          resizeMode="cover"
-          source={require('../../assets/images/MainScreen/SpeakingGame.png')}
-        />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.puzzleGame}
-        onPress={() => {
-          navigation.navigate('PuzzleProgress');
-        }}>
-        <Image
-          resizeMode="cover"
-          source={require('../../assets/images/MainScreen/PuzzleGame.png')}
-        />
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.listeningGame}
+          onPress={() => {
+            navigation.navigate('ListeningProgress');
+          }}>
+          <Image
+            resizeMode="cover"
+            source={require('../../assets/images/MainScreen/ListeningGame.png')}
+            style={{
+              opacity: 1,
+            }}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.speakingGame}
+          onPress={() => {
+            navigation.navigate('SpeakingProgress');
+          }}>
+          <Image
+            resizeMode="cover"
+            source={require('../../assets/images/MainScreen/SpeakingGame.png')}
+            style={{
+              opacity: 1,
+            }}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.puzzleGame}
+          onPress={() => {
+            navigation.navigate('PuzzleProgress');
+          }}>
+          <Image
+            resizeMode="cover"
+            source={require('../../assets/images/MainScreen/PuzzleGame.png')}
+            style={{
+              opacity: 1,
+            }}
+          />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -73,43 +99,44 @@ const styles = StyleSheet.create({
     backgroundColor: '#ECF4FF',
     alignItems: 'center',
     justifyContent: 'center',
-    // backgroundColor: 'rgb(224,238,255)',
   },
   yellowBtn: {
-    position: 'absolute',
-    zIndex: 1,
-    top: '50%',
-    left: '14.3%',
+    // position: 'absolute',
+    // zIndex: 1,
+    // top: '50%',
+    // left: '14.3%',
     borderRadius: 4,
-    opacity: 0,
+    opacity: 1,
     // pointerEvents: 'none',
   },
   listeningGame: {
-    position: 'absolute',
-    zIndex: 1,
-    bottom: '6%',
-    opacity: 0,
+    // position: 'absolute',
+    // zIndex: 1,
+    // bottom: '6%',
+    // opacity: 1,
   },
   speakingGame: {
-    position: 'absolute',
-    zIndex: 1,
-    bottom: '6%',
-    left: '11.3%',
-    opacity: 0,
+    // position: 'absolute',
+    // zIndex: 1,
+    // bottom: '6%',
+    // left: '11.3%',
+    // opacity: 1,
   },
   puzzleGame: {
-    position: 'absolute',
-    zIndex: 1,
-    bottom: '6%',
-    right: '11.3%',
-    opacity: 0,
+    // position: 'absolute',
+    // zIndex: 1,
+    // bottom: '6%',
+    // right: '11.3%',
+    // opacity: 1,
   },
   searchingBtn: {
-    position: 'absolute',
-    zIndex: 1,
-    left: '15.5%',
-    top: '9.1%',
-    opacity: 0,
+    // position: 'absolute',
+    // zIndex: 1,
+    // right: '15.5%',
+    // top: '15%',
+    // opacity: 1,
+    // width: ratioH(380),
+    // height: ratioH(380),
   },
 });
 

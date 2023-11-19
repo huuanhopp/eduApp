@@ -70,7 +70,8 @@ const ListeningBackground = ({
                   fontSize: 50,
                   textAlign: 'center',
                   color: '#002443',
-                  fontFamily: '1HoonGothicgulim Regular',
+                  fontFamily: 'aaaaa',
+                  // fontFamily: '1HoonGothicgulim Regular',
                 }}>
                 {title}
               </Text>

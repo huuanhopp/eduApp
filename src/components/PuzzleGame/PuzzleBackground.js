@@ -16,6 +16,7 @@ import CountdownView from './components/CountdownView';
 import TimeOutModalDialog from '../../core/Modal/TimeOutModalDialog';
 import StopModalDialog from '../../core/Modal/StopModalDialog';
 import {StackActions} from '@react-navigation/native';
+import {screenSize} from '../../constants/constants';
 const PuzzleBackground = ({
   title,
   question,
@@ -79,7 +80,7 @@ const PuzzleBackground = ({
       <ImageBackground
         source={require('../../../assets/images/PuzzleGame/PuzzleBackground1.png')}
         style={styles.imgBG}
-        resizeMode="cover">
+        resizeMode="stretch">
         <View style={{flex: 1}}>
           <View>
             <View style={{flexDirection: 'row'}}>
@@ -118,7 +119,8 @@ const PuzzleBackground = ({
                   fontSize: 50,
                   textAlign: 'center',
                   color: '#002443',
-                  fontFamily: '1HoonGothicgulim Regular',
+                  fontFamily: 'aaaaa',
+                  // fontFamily: '1HoonGothicgulim Regular',
                 }}>
                 {title}
               </Text>
@@ -180,14 +182,12 @@ const styles = StyleSheet.create({
   imgBG: {
     // width: CommonSize.srcWidthDefault,
     flex: 1,
-    // width: "100%",
-    // height: "100%",
-    width: CommonSize.srcWidth,
-    height: CommonSize.srcHeight,
+    width: '100%',
+    height: '100%',
   },
   backButton: {
     marginTop: ratioH(40),
-    marginLeft: ratioW(40) + 20,
+    marginLeft: ratioW(40),
   },
   topView: {
     alignSelf: 'center',

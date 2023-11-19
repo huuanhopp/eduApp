@@ -90,7 +90,12 @@ const Game2 = ({navigation}) => {
       navigation={navigation}
       destination="ListeningGame3"
       onCheckResult={onCheckResult}>
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
         <TouchableOpacity
           style={styles.audio}
           onPress={async () => {
@@ -170,7 +175,7 @@ const Game2 = ({navigation}) => {
 const styles = StyleSheet.create({
   audio: {
     alignSelf: 'center',
-    marginBottom: ratioH(30),
+    marginBottom: 30,
     height: ratioH(85),
     aspectRatio: 1,
   },

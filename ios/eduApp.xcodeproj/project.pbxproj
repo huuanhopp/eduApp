@@ -31,6 +31,7 @@
 		93151F96094342FA9EF71AF4 /* UnDinaruBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16E7B15867FD4D51A8179001 /* UnDinaruBold.ttf */; };
 		BB991DBA5B9D4894ABB55500 /* UnDinaruLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0198F4EE83E74B618ACDAC18 /* UnDinaruLight.ttf */; };
 		439A4C2AB4A842A68466F83A /* 1HoonGothicgulim Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F8F9B52E8A634DC8896539AD /* 1HoonGothicgulim Regular.ttf */; };
+		97DEF2E42A3A49C98355AD10 /* aaaaa.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0A018CBA54D4FA7977EBFBB /* aaaaa.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		16E7B15867FD4D51A8179001 /* UnDinaruBold.ttf */ = {isa = PBXFileReference; name = "UnDinaruBold.ttf"; path = "../assets/fonts/static/ttf/UnDinaruBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		0198F4EE83E74B618ACDAC18 /* UnDinaruLight.ttf */ = {isa = PBXFileReference; name = "UnDinaruLight.ttf"; path = "../assets/fonts/static/ttf/UnDinaruLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		F8F9B52E8A634DC8896539AD /* 1HoonGothicgulim Regular.ttf */ = {isa = PBXFileReference; name = "1HoonGothicgulim Regular.ttf"; path = "../assets/fonts/static/ttf/1HoonGothicgulim Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C0A018CBA54D4FA7977EBFBB /* aaaaa.ttf */ = {isa = PBXFileReference; name = "aaaaa.ttf"; path = "../assets/fonts/static/ttf/aaaaa.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +205,7 @@
 				16E7B15867FD4D51A8179001 /* UnDinaruBold.ttf */,
 				0198F4EE83E74B618ACDAC18 /* UnDinaruLight.ttf */,
 				F8F9B52E8A634DC8896539AD /* 1HoonGothicgulim Regular.ttf */,
+				C0A018CBA54D4FA7977EBFBB /* aaaaa.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				93151F96094342FA9EF71AF4 /* UnDinaruBold.ttf in Resources */,
 				BB991DBA5B9D4894ABB55500 /* UnDinaruLight.ttf in Resources */,
 				439A4C2AB4A842A68466F83A /* 1HoonGothicgulim Regular.ttf in Resources */,
+				97DEF2E42A3A49C98355AD10 /* aaaaa.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,21 +2,35 @@ import React, {useState, useEffect} from 'react';
 import {View, Image, Animated, StyleSheet} from 'react-native';
 import {ratioH} from '../../../utils/utils';
 
-const GuideImage = ({onChangeIndex}) => {
-  const guideImages = [
-    require('../../../../assets/images/GuideScreen/guide1.png'),
-    require('../../../../assets/images/GuideScreen/guide2.png'),
-    require('../../../../assets/images/GuideScreen/guide3.png'),
-    require('../../../../assets/images/GuideScreen/guide4.png'),
-    require('../../../../assets/images/GuideScreen/guide5.png'),
-    require('../../../../assets/images/GuideScreen/guide6.png'),
-    require('../../../../assets/images/GuideScreen/guide7.png'),
-    require('../../../../assets/images/GuideScreen/guide8.png'),
-    require('../../../../assets/images/GuideScreen/guide9.png'),
-    require('../../../../assets/images/GuideScreen/guide10.png'),
-    require('../../../../assets/images/GuideScreen/guide11.png'),
-    require('../../../../assets/images/GuideScreen/guide12.png'),
-  ];
+const GuideImage = ({status, onChangeIndex}) => {
+  let guideImages = [];
+
+  if (status == 1) {
+    guideImages = [
+      require('../../../../assets/images/GuideScreen/guide1.png'),
+      require('../../../../assets/images/GuideScreen/guide2.png'),
+      require('../../../../assets/images/GuideScreen/guide3.png'),
+      require('../../../../assets/images/GuideScreen/guide4.png'),
+    ];
+  }
+
+  if (status == 2) {
+    guideImages = [
+      require('../../../../assets/images/GuideScreen/guide5.png'),
+      require('../../../../assets/images/GuideScreen/guide6.png'),
+      require('../../../../assets/images/GuideScreen/guide7.png'),
+      // require('../../../../assets/images/GuideScreen/guide8.png'),
+      require('../../../../assets/images/GuideScreen/guide9.png'),
+    ];
+  }
+
+  if (status == 3) {
+    guideImages = [
+      require('../../../../assets/images/GuideScreen/guide10.png'),
+      require('../../../../assets/images/GuideScreen/guide11.png'),
+      require('../../../../assets/images/GuideScreen/guide12.png'),
+    ];
+  }
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [fadeAnim] = useState(new Animated.Value(1));

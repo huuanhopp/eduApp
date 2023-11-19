@@ -128,7 +128,8 @@ const styles = StyleSheet.create({
     fontSize: ratioH(44),
     color: '#002443',
     alignSelf: 'center',
-    fontFamily: '1HoonGothicgulim Regular',
+    fontFamily: 'aaaaa',
+    // fontFamily: '1HoonGothicgulim Regular',
   },
   subTitle: {
     fontSize: ratioH(28),

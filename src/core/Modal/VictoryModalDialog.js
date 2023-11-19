@@ -11,8 +11,9 @@ import {
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import Gif from 'react-native-gif';
-import { useNavigation } from '@react-navigation/native';
-import { StackActions } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import {StackActions} from '@react-navigation/native';
+import {ratioH} from '../../utils/utils';
 
 const widthScreen = Dimensions.get('screen').height * 1.431;
 
@@ -26,7 +27,7 @@ const VictoryModalDialog = ({
   modalStopVisible,
   setModalStopVisible,
   isRunning,
-  setIsRunning
+  setIsRunning,
 }) => {
   const navigation = useNavigation();
   return (
@@ -52,20 +53,20 @@ const VictoryModalDialog = ({
             source={require('../../../assets/images/gif/victory.gif')}
           />
           <View style={styles.bottomView}>
-            <TouchableOpacity 
-              style={styles.retryButton} 
+            <TouchableOpacity
+              style={styles.retryButton}
               onPress={() => {
-              setModalVisible(false);
-            //   setIsRunning(false)
-              navigation.dispatch(StackActions.push('PuzzleProgress'));
-            }} 
+                setModalVisible(false);
+                //   setIsRunning(false)
+                navigation.dispatch(StackActions.push('PuzzleProgress'));
+              }}
             />
             <TouchableOpacity
-             style={styles.nextButton} 
-             onPress={() => {         
-              setModalVisible(false);
-              navigation.dispatch(StackActions.push('Main'));
-            }} 
+              style={styles.nextButton}
+              onPress={() => {
+                setModalVisible(false);
+                navigation.dispatch(StackActions.push('Main'));
+              }}
             />
           </View>
         </ImageBackground>
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     height: ((widthScreen * 500) / 1194) * 0.7,
     aspectRatio: 1,
-    position: 'absolute'
+    position: 'absolute',
   },
   bgImg: {
     height: (widthScreen * 574) / 1194,
@@ -129,20 +130,18 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   retryButton: {
-    width: (widthScreen * 331) / 1194,
-    height: 150,
+    flex: 1,
   },
   nextButton: {
-    width: (widthScreen * 331) / 1194,
-    height: 150,
+    flex: 1,
   },
   bottomView: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    position: 'absolute',  // set this to absolute
-    bottom: 0.05 * (widthScreen * 574) / 1194,  // this positions it 15% away from the bottom
-    left: 0,
-    right: 0,
+    height: ratioH(150),
+    width: '100%',
+    zIndex: 999,
+    position: 'absolute',
+    bottom: 0,
   },
 });
 

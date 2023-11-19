@@ -78,22 +78,21 @@ const Game4 = ({navigation}) => {
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <TouchableOpacity
           onPress={() => {
-            setPauseAudio(( prevState) => 
-               !prevState
-            );
+            setPauseAudio(prevState => !prevState);
           }}>
           <FastImage
             style={styles.gifImage}
-            resizeMode="cover"
+            resizeMode="stretch"
             source={require('../../../assets/images/gif/car.gif')}
           />
         </TouchableOpacity>
         <View
           style={{
             flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
+            // justifyContent: 'center',
+            // alignItems: 'center',
             marginTop: 30,
+            width: ratioH(545),
           }}>
           <AnswerButton
             content={anwsOptions[0].content}
@@ -109,9 +108,11 @@ const Game4 = ({navigation}) => {
             multipleChoice={false}
             handleOneChoice={index => handleOneChoice(1)}
             isUniqueSelected={anwsOptions[1].selected}
-            style={{...styles.answerButton, marginLeft: 8}}
+            style={{
+              ...styles.answerButton,
+            }}
             textStyle={styles.textStyle}
-            buttonStyle={styles.buttonStyle}
+            buttonStyle={{...styles.buttonStyle, alignSelf: 'flex-end'}}
           />
         </View>
         <Video
@@ -149,10 +150,9 @@ const styles = StyleSheet.create({
   },
   answerButton: {
     position: 'relative',
-    width: '258.5px',
+    width: ratioH(260),
     height: ratioH(56),
-    justifyContent: 'center',
-    alignItems: 'center',
+    flex: 1,
   },
   textStyle: {
     lineHeight: null,
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     height: ratioH(56),
-    width: 258,
+    width: ratioH(260),
   },
 });
 
