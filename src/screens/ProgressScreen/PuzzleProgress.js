@@ -10,24 +10,28 @@ const PuzzleScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image
+        resizeMode="cover"
         source={require('../../../assets/images/ProgressScreen/PuzzleProgress.png')}
-        resizeMode="stretch"
-        style={{
-          height: '100%',
-          aspectRatio: 1194 / 834,
-        }}
       />
 
       <TouchableOpacity
         style={styles.backBtn}
         onPress={() => {
           navigation.pop();
-        }}></TouchableOpacity>
+        }}>
+        <Image
+          resizeMode="cover"
+          source={require('../../../assets/images/ProgressScreen/BackButton.png')}
+          style={{
+            opacity: 0,
+          }}
+        />
+      </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.yellowNumber}
         onPress={() => {
-          navigation.navigate('GuideScreen', {status: 3});
+          navigation.navigate('PuzzleGame1', {status: 3});
         }}>
         <Image
           resizeMode="cover"

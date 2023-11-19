@@ -119,8 +119,7 @@ const PuzzleBackground = ({
                   fontSize: 50,
                   textAlign: 'center',
                   color: '#002443',
-                  fontFamily: 'aaaaa',
-                  // fontFamily: '1HoonGothicgulim Regular',
+                  fontFamily: 'korean-final',
                 }}>
                 {title}
               </Text>

@@ -10,12 +10,8 @@ const SpeakingProgress = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image
-        resizeMode="stretch"
+        resizeMode="cover"
         source={require('../../../assets/images/ProgressScreen/SpeakingProgress.png')}
-        style={{
-          height: '100%',
-          aspectRatio: 1194 / 834,
-        }}
       />
 
       <TouchableOpacity

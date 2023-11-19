@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {Image, StyleSheet, View, TouchableOpacity} from 'react-native';
+import {ratioH} from '../../utils/utils';
 const ProgressScreen = ({navigation}) => {
   const [showInstructions, setShowInstructions] = useState(false);
-
-
 
   const toggleInstructions = () => {
     setShowInstructions(!showInstructions);
@@ -23,6 +22,9 @@ const ProgressScreen = ({navigation}) => {
         <Image
           resizeMode="cover"
           source={require('../../../assets/images/ProgressScreen/BackButton.png')}
+          style={{
+            opacity: 0,
+          }}
         />
       </TouchableOpacity>
 
@@ -31,7 +33,7 @@ const ProgressScreen = ({navigation}) => {
         // onPress={toggleInstructions}
         onPress={() => {
           // navigation.navigate('Stage1');
-          navigation.navigate('GuideScreen', { status: 1 });
+          navigation.navigate('GuideScreen', {status: 1});
         }}>
         <Image
           resizeMode="cover"
@@ -84,11 +86,12 @@ const styles = StyleSheet.create({
   backBtn: {
     position: 'absolute',
     zIndex: 1,
-    top: '6.9%',
+    top: ratioH(25),
     left: '11.3%',
     borderRadius: 4,
     opacity: 0,
-    // pointerEvents: 'cursor',
+    width: 100,
+    height: 100,
   },
   yellowNumber: {
     position: 'absolute',

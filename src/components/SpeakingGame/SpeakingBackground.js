@@ -128,8 +128,7 @@ const styles = StyleSheet.create({
     fontSize: ratioH(44),
     color: '#002443',
     alignSelf: 'center',
-    fontFamily: 'aaaaa',
-    // fontFamily: '1HoonGothicgulim Regular',
+    fontFamily: 'korean-final',
   },
   subTitle: {
     fontSize: ratioH(28),

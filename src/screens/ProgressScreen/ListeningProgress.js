@@ -10,12 +10,8 @@ const ListeningProgress = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image
+        resizeMode="cover"
         source={require('../../../assets/images/ProgressScreen/ListeningProgress.png')}
-        resizeMode="stretch"
-        style={{
-          height: '100%',
-          aspectRatio: 1194 / 834,
-        }}
       />
 
       <TouchableOpacity
@@ -23,10 +19,13 @@ const ListeningProgress = ({navigation}) => {
         onPress={() => {
           navigation.pop();
         }}>
-        {/* <Image
+        <Image
           resizeMode="cover"
           source={require('../../../assets/images/ProgressScreen/BackButton.png')}
-        /> */}
+          style={{
+            opacity: 0,
+          }}
+        />
       </TouchableOpacity>
 
       <TouchableOpacity
