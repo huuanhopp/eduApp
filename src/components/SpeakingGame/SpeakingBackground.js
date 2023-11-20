@@ -44,7 +44,6 @@ const SpeakingBackground = ({
     <View
       style={{
         // backgroundColor: 'rgb(224,238,255)',
-        backgroundColor: 'red',
         flex: 1,
         // width: CommonSize.srcWidth,
         // alignItems: 'center',
@@ -53,7 +52,6 @@ const SpeakingBackground = ({
         resizeMode="stretch"
         source={require('../../../assets/images/common/speakingBG.png')}
         style={{
-          backgroundColor: 'green',
           width: screenSize.width,
           // ...styles.imgBG,
           // width: width,
