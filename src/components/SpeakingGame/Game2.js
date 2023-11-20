@@ -367,7 +367,7 @@ const styles = StyleSheet.create({
     // line-height: 132.5%; /* 42.4px */
   },
   hintImg: {
-    width: ratioH(675),
+    width: ratioH(900),
     height: ratioH(75),
   },
   buttonStyle: {
