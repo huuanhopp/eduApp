@@ -31,7 +31,8 @@ const PuzzleScreen = ({navigation}) => {
       <TouchableOpacity
         style={styles.yellowNumber}
         onPress={() => {
-          navigation.navigate('PuzzleGame1', {status: 3});
+          // navigation.navigate('PuzzleGame1', {status: 3});
+          navigation.navigate('GuideScreen', {status: 3});
         }}>
         <Image
           resizeMode="cover"

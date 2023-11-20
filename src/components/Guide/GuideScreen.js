@@ -58,6 +58,18 @@ const GuideScreen = ({navigation, route}) => {
 
   const onClose = () => {};
 
+  const getTitle = () => {
+    switch (status) {
+      case 1:
+        return require('../../../assets/images/GuideScreen/speak-title.png');
+      case 2:
+        return require('../../../assets/images/GuideScreen/listen-title.png');
+      case 3:
+        return require('../../../assets/images/GuideScreen/puzzle-title.png');
+      default:
+    }
+  };
+
   useEffect(() => {
     switch (status) {
       case 1:
@@ -85,7 +97,7 @@ const GuideScreen = ({navigation, route}) => {
           <View style={styles.titleView}>
             <View style={{flex: 1}} />
             <Image
-              source={require('../../../assets/images/GuideScreen/guideTitleImg.png')}
+              source={getTitle()}
               style={styles.titleImg}
               resizeMode="contain"
             />
