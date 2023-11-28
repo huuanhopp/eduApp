@@ -59,23 +59,36 @@ const Game4 = () => {
   const checkAnswerCondition = () => {
     console.log('vao day');
     let isCondition = false;
-    anwsOptions.forEach((answ)=>{
+    anwsOptions.forEach(answ => {
       console.log('answ is', answ);
-      if ((answ?.selected === answ?.isCorrect) && answ?.isCorrect) {
+      if (answ?.selected === answ?.isCorrect && answ?.isCorrect) {
         console.log('correct selected ans');
-        isCondition =  true;
-        }
-    })
+        isCondition = true;
+      }
+    });
     return isCondition;
   };
 
-  const checkPercentageCondition = (textRecording) => {
-    const SENTENCE_RESULT =  '뭐하니'
-    const SENTENCE_RESULT2 = '무하니'
-    console.log('percentage', compareSentences(textRecording, SENTENCE_RESULT))
-    return (compareSentences(textRecording, SENTENCE_RESULT) <= 0 || compareSentences(textRecording, SENTENCE_RESULT2) <= 0)
-  }
+  const checkPercentageCondition = textRecording => {
+    const a = textRecording.replace(/\s/g, '');
 
+    const SENTENCE_RESULT = '뭐하니';
+    const SENTENCE_RESULT2 = '무하니';
+    const SENTENCE_RESULT3 = '모하니';
+
+    console.log('00000000000');
+    console.log(textRecording);
+    console.log('00000000000');
+
+    // return (
+    //   textRecording == SENTENCE_RESULT || textRecording == SENTENCE_RESULT2
+    // );
+    return (
+      compareSentences(a, SENTENCE_RESULT) <= 0 ||
+      compareSentences(a, SENTENCE_RESULT2) <= 0 ||
+      compareSentences(a, SENTENCE_RESULT3) <= 0
+    );
+  };
 
   const onSelectRecordButton = () => {
     navigation.dispatch(StackActions.push('SpeakingGame4Result', {isCorrect}));
@@ -89,7 +102,7 @@ const Game4 = () => {
       navigation={navigation}
       onClickSpeakingButton={onSelectRecordButton}
       handleFinishRecording={(audioUrl, textRecording) => {
-        const isCorrectCondition = checkAnswerCondition() ;
+        const isCorrectCondition = checkAnswerCondition();
         console.log('finish checkCorrcect', isCorrectCondition);
         const isCorrectPercentage = checkPercentageCondition(textRecording);
         console.log('finish checkCorrcectPercentage', isCorrectPercentage);
@@ -97,9 +110,7 @@ const Game4 = () => {
           isCorrect: isCorrectCondition && isCorrectPercentage,
           audioUrl: audioUrl,
         });
-      }}
-    >
-      
+      }}>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Image
           resizeMode="cover"

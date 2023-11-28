@@ -8,10 +8,17 @@ import {
 } from 'react-native';
 import React, {useEffect, useRef, useState, useCallback} from 'react';
 import {ratioH} from '../../../utils/utils';
-import { useFocusEffect } from '@react-navigation/native';
-import { useNavigation } from '@react-navigation/native';
+import {useFocusEffect} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
-const CountdownView = ({ timeOut, setTimeOut, isRunning, setIsRunning, reset, setReset }) => {
+const CountdownView = ({
+  timeOut,
+  setTimeOut,
+  isRunning,
+  setIsRunning,
+  reset,
+  setReset,
+}) => {
   const time = 310; //310
   const warningTime = 110;
   const [count, setCount] = useState(time);
@@ -27,19 +34,19 @@ const CountdownView = ({ timeOut, setTimeOut, isRunning, setIsRunning, reset, se
       return () => {
         // When the screen is unfocused (navigating away)
         clearInterval(interval.current);
-        setCount(time-10); // Resetting the count to its initial value (e.g., 60 seconds)
+        setCount(time - 10); // Resetting the count to its initial value (e.g., 60 seconds)
       };
-    }, [])
+    }, []),
   );
 
-  useEffect(()=> {
+  useEffect(() => {
     if (reset) {
       clearInterval(interval.current);
       setCount(time); // Resetting the count to its initial value (e.g., 60 seconds)
       setReset(false);
-      console.log("Puzzle 3")
+      console.log('Puzzle 3');
     }
-  },[reset])
+  }, [reset]);
 
   useEffect(() => {
     if (isRunning) {
@@ -49,11 +56,11 @@ const CountdownView = ({ timeOut, setTimeOut, isRunning, setIsRunning, reset, se
         } else {
           setIsRunning(false);
           clearInterval(interval.current); // Dừng đếm ngược khi hết thời gian
-          setTimeOut(true)
+          setTimeOut(true);
         }
       }, 100); // Cập nhật mỗi 1 giây
     }
-    return () => { 
+    return () => {
       // setCount(time);
       if (interval.current) {
         // setCount(time);
@@ -71,7 +78,7 @@ const CountdownView = ({ timeOut, setTimeOut, isRunning, setIsRunning, reset, se
       return `남은 시간 00:01`;
     }
     if (count < warningTime) {
-      if(count >= 100){
+      if (count >= 100) {
         return `남은 시간 00:${countText.substring(0, 2)}`;
       }
       return `남은 시간 00:0${countText.substring(0, 1)}`;
@@ -149,7 +156,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: ratioH(44),
-    marginRight: ratioH(189),
   },
   clockImg: {
     height: ratioH(56),

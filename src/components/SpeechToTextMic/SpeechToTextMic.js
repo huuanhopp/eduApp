@@ -8,7 +8,7 @@ import {
   Image,
 } from 'react-native';
 import Voice from '@react-native-voice/voice';
-import { Alert } from 'react-native';
+import {Alert} from 'react-native';
 import {ratioH, ratioW, whisper_token} from '../../utils/utils';
 import Permissions from 'react-native-permissions';
 import AudioRecord from 'react-native-audio-record';
@@ -126,7 +126,7 @@ const SpeechToTextMic = ({
       .post('https://api.openai.com/v1/audio/transcriptions', param, {
         headers: {
           Authorization:
-            'Bearer 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',
+            'Bearer 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',
         },
       })
       .then(res => {
@@ -141,10 +141,8 @@ const SpeechToTextMic = ({
         Alert.alert(
           '오류',
           '일부 오류가 있습니다. 다시 시도해 주세요',
-          [
-            { text: '좋아요', onPress: () => console.log('OK Pressed') }
-          ],
-          { cancelable: false }
+          [{text: '좋아요', onPress: () => console.log('OK Pressed')}],
+          {cancelable: false},
         );
         console.log({e});
       });
@@ -266,7 +264,7 @@ const SpeechToTextMic = ({
         await handleRecord();
       }
     } else {
-      console.log("Hello")
+      console.log('Hello');
       if (!isRecording) {
         //ko-KR
         await Voice.start('ko-KR', {

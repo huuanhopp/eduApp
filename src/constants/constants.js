@@ -27,6 +27,8 @@ import Stage1Screen from '../screens/Stage1Screen/Stage1Screen';
 import TutorialScreen from '../components/Tutorial/TutorialScreen';
 import {Dimensions} from 'react-native';
 import GuideScreen from '../components/Guide/GuideScreen';
+import SpeakingVictoryModal from '../core/Modal/VictoryPartModalDialog';
+import VictoryPartModalDialog from '../core/Modal/VictoryPartModalDialog';
 
 export const stackScreen = [
   {
@@ -136,6 +138,10 @@ export const stackScreen = [
   {
     name: 'GuideScreen',
     component: GuideScreen,
+  },
+  {
+    name: 'VictoryPartModalDialog',
+    component: VictoryPartModalDialog,
   },
 ];
 

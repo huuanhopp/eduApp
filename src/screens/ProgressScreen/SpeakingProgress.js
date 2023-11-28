@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {Image, StyleSheet, View, TouchableOpacity} from 'react-native';
+import {ratioH} from '../../utils/utils';
 const SpeakingProgress = ({navigation}) => {
   const [showInstructions, setShowInstructions] = useState(false);
-
-
 
   const toggleInstructions = () => {
     setShowInstructions(!showInstructions);
@@ -11,19 +10,23 @@ const SpeakingProgress = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image
-        resizeMode="cover"
+        resizeMode="stretch"
         source={require('../../../assets/images/ProgressScreen/SpeakingProgress.png')}
+        style={{
+          width: '100%',
+          height: '100%',
+        }}
       />
 
       <TouchableOpacity
         style={styles.backBtn}
         onPress={() => {
-          navigation.pop();
+          navigation.navigate('Main');
         }}>
-        <Image
+        {/* <Image
           resizeMode="cover"
           source={require('../../../assets/images/ProgressScreen/BackButton.png')}
-        />
+        /> */}
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -31,11 +34,12 @@ const SpeakingProgress = ({navigation}) => {
         // onPress={toggleInstructions}
         onPress={() => {
           // navigation.navigate('Stage1');
-          navigation.navigate('GuideScreen', { status: 1 });
+          navigation.navigate('GuideScreen', {status: 1});
         }}>
         <Image
-          resizeMode="cover"
+          resizeMode="stretch"
           source={require('../../../assets/images/ProgressScreen/YellowNumber.png')}
+          style={{opacity: 0, width: ratioH(200), height: ratioH(200)}}
         />
       </TouchableOpacity>
 
@@ -84,19 +88,20 @@ const styles = StyleSheet.create({
   backBtn: {
     position: 'absolute',
     zIndex: 1,
-    top: '6.9%',
-    left: '11.3%',
+    top: ratioH(25),
+    left: '2%',
     borderRadius: 4,
     opacity: 0,
-    // pointerEvents: 'cursor',
+    width: 100,
+    height: 100,
   },
   yellowNumber: {
     position: 'absolute',
     zIndex: 1,
-    top: '64%',
-    left: '24.5%',
+    top: '57%',
+    left: '17%',
     borderRadius: 4,
-    opacity: 0,
+    opacity: 1,
   },
   instructionContainer: {
     position: 'absolute',

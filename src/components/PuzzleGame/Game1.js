@@ -9,7 +9,7 @@ const Game1 = ({navigation}) => {
   const [flipCards, setFlipCards] = useState([]);
   const [correctModalShown, setCorrectModalShown] = useState(false);
   const [isRunning, setIsRunning] = useState(true);
-
+  const [isAllCardIsFlipped, setIsAllCardIsFlipped] = useState(false);
   const [cards, setCards] = useState([
     {
       index: 0,
@@ -102,8 +102,7 @@ const Game1 = ({navigation}) => {
           const isAllCardIsFlipped = newCardsState.every(card => card.removed);
           console.log('allcardflipped', isAllCardIsFlipped);
           if (isAllCardIsFlipped) {
-            setCorrectModalShown(true);
-            setIsRunning(false);
+            setIsAllCardIsFlipped(true);
           }
         } else {
           const newCardsState = cards.map((item, idx) => {
@@ -141,7 +140,10 @@ const Game1 = ({navigation}) => {
   };
 
   const onCheckResult = () => {
-    console.log('Timeout');
+    if (isAllCardIsFlipped) {
+      setIsRunning(false);
+      setCorrectModalShown(true);
+    }
   };
 
   const onNext = () => {

@@ -100,23 +100,30 @@ const Game3 = () => {
   const checkAnswerCondition = () => {
     console.log('vao day');
     let isCondition = false;
-    anwsOptions.forEach((answ)=>{
+    anwsOptions.forEach(answ => {
       console.log('answ is', answ);
-      if ((answ?.selected === answ?.isCorrect) && answ?.isCorrect) {
+      if (answ?.selected === answ?.isCorrect && answ?.isCorrect) {
         console.log('correct selected ans');
-        isCondition =  true;
-        }
-    })
+        isCondition = true;
+      }
+    });
     return isCondition;
   };
 
-  const checkPercentageCondition = (textRecording) => {
-    const SENTENCE_RESULT =  '철수는 오늘도 숙제를 해야한다'
-    const SENTENCE_RESULT1 =  '철수는 오늘도 숙제을 해야한다'
+  const checkPercentageCondition = textRecording => {
+    const SENTENCE_RESULT = '철수는 오늘도 숙제를 해야한다';
+    const SENTENCE_RESULT1 = '철수는 오늘도 숙제을 해야한다';
     // const SENTENCE_RESULT =  '안녕하세요';
-    console.log('percentage', compareSentences(textRecording, SENTENCE_RESULT))
-    return (compareSentences(textRecording, SENTENCE_RESULT) <= 0 || compareSentences(textRecording, SENTENCE_RESULT1) <= 0)
-  }
+    console.log('percentage', compareSentences(textRecording, SENTENCE_RESULT));
+    console.log(
+      'percentage',
+      compareSentences(textRecording, SENTENCE_RESULT1),
+    );
+    return (
+      compareSentences(textRecording, SENTENCE_RESULT) <= 0 ||
+      compareSentences(textRecording, SENTENCE_RESULT1) <= 0
+    );
+  };
 
   return (
     <SpeakingBackground
@@ -127,14 +134,13 @@ const Game3 = () => {
       indexSelected={indexSelected}
       handleFinishRecording={(audioUrl, textRecording) => {
         console.log('textRecordiing is', textRecording);
-        const isCorrectCondition = checkAnswerCondition() 
+        const isCorrectCondition = checkAnswerCondition();
         console.log('finish checkCorrcect', isCorrectCondition);
         const isCorrectPercentage = checkPercentageCondition(textRecording);
         console.log('finish checkCorrcectPercentage', isCorrectPercentage);
         navigation.navigate('SpeakingGame3Result', {
           isCorrect: isCorrectCondition && isCorrectPercentage,
           audioUrl: audioUrl,
-
         });
       }}
       onClickSpeakingButton={onSelectRecordButton}>

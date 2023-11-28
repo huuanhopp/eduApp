@@ -16,6 +16,7 @@ import CountdownView from './components/CountdownView';
 import TimeOutModalDialog from '../../core/Modal/TimeOutModalDialog';
 import StopModalDialog from '../../core/Modal/StopModalDialog';
 import {StackActions} from '@react-navigation/native';
+import {screenSize} from '../../constants/constants';
 const PuzzleBackground = ({
   title,
   question,
@@ -79,22 +80,28 @@ const PuzzleBackground = ({
       <ImageBackground
         source={require('../../../assets/images/PuzzleGame/PuzzleBackground1.png')}
         style={styles.imgBG}
-        resizeMode="cover">
+        resizeMode="stretch">
         <View style={{flex: 1}}>
           <View>
             <View style={{flexDirection: 'row'}}>
               <TouchableOpacity onPress={goBack}>
                 <Image source={Images.backButton} style={styles.backButton} />
               </TouchableOpacity>
-              <View style={{flex: 1}} />
-              <CountdownView
-                reset={reset}
-                setReset={setReset}
-                timeOut={timeOut}
-                setTimeOut={handleTimeOutChange}
-                isRunning={isRunning}
-                setIsRunning={setIsRunning}
-              />
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: 'flex-end',
+                  paddingRight: ratioH(24),
+                }}>
+                <CountdownView
+                  reset={reset}
+                  setReset={setReset}
+                  timeOut={timeOut}
+                  setTimeOut={handleTimeOutChange}
+                  isRunning={isRunning}
+                  setIsRunning={setIsRunning}
+                />
+              </View>
               <Image
                 source={require('../../../assets/images/common/topImage.png')}
                 style={{
@@ -110,9 +117,9 @@ const PuzzleBackground = ({
               <Text
                 style={{
                   fontSize: 50,
-                  fontWeight: 'bold',
                   textAlign: 'center',
                   color: '#002443',
+                  fontFamily: 'korean-final',
                 }}>
                 {title}
               </Text>
@@ -174,14 +181,12 @@ const styles = StyleSheet.create({
   imgBG: {
     // width: CommonSize.srcWidthDefault,
     flex: 1,
-    // width: "100%",
-    // height: "100%",
-    width: CommonSize.srcWidth,
-    height: CommonSize.srcHeight,
+    width: '100%',
+    height: '100%',
   },
   backButton: {
     marginTop: ratioH(40),
-    marginLeft: ratioW(40) + 20,
+    marginLeft: ratioW(40),
   },
   topView: {
     alignSelf: 'center',

@@ -11,8 +11,9 @@ import {
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import Gif from 'react-native-gif';
-import { useNavigation } from '@react-navigation/native';
-import { StackActions } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import {StackActions} from '@react-navigation/native';
+import {ratioH} from '../../utils/utils';
 
 const widthScreen = Dimensions.get('screen').height * 1.431;
 
@@ -26,7 +27,7 @@ const StopModalDialog = ({
   modalStopVisible,
   setModalStopVisible,
   isRunning,
-  setIsRunning
+  setIsRunning,
 }) => {
   const navigation = useNavigation();
   return (
@@ -52,19 +53,19 @@ const StopModalDialog = ({
             source={require('../../../assets/images/gif/AreYouStop.gif')}
           />
           <View style={styles.bottomView}>
-            <TouchableOpacity 
-              style={styles.retryButton} 
+            <TouchableOpacity
+              style={styles.retryButton}
               onPress={() => {
-              setModalStopVisible(false);
-              setIsRunning(false)
-              navigation.dispatch(StackActions.push('Main'));
-            }} 
+                setModalStopVisible(false);
+                setIsRunning(false);
+                navigation.dispatch(StackActions.push('Main'));
+              }}
             />
             <TouchableOpacity
-             style={styles.nextButton} 
-             onPress={() => {         
-              setModalStopVisible(false);
-            }} 
+              style={styles.nextButton}
+              onPress={() => {
+                setModalStopVisible(false);
+              }}
             />
           </View>
         </ImageBackground>
@@ -119,7 +120,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     height: ((widthScreen * 500) / 1194) * 0.7,
     aspectRatio: 1,
-    position: 'absolute'
+    position: 'absolute',
   },
   bgImg: {
     height: (widthScreen * 574) / 1194,
@@ -128,20 +129,24 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   retryButton: {
-    width: (widthScreen * 331) / 1194,
-    height: 150,
+    // width: (widthScreen * 331) / 1194,
+    flex: 1,
   },
   nextButton: {
-    width: (widthScreen * 331) / 1194,
-    height: 150,
+    // width: (widthScreen * 331) / 1194,
+    flex: 1,
   },
   bottomView: {
     flexDirection: 'row',
     justifyContent: 'center',
-    position: 'absolute',  // set this to absolute
-    bottom: 0.05 * (widthScreen * 574) / 1194,  // this positions it 15% away from the bottom
+    position: 'absolute', // set this to absolute
+    // bottom: (0.05 * (widthScreen * 574)) / 1194, // this positions it 15% away from the bottom
     left: 0,
     right: 0,
+    bottom: ratioH(20),
+    opacity: 0.5,
+    height: 150,
+    paddingHorizontal: ratioH(60),
   },
 });
 

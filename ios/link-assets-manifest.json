@@ -2,6 +2,14 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "assets/fonts/static/ttf/1HoonGothicgulim Regular.ttf",
+      "sha1": "dfecb9d10d405517c6c35443303f736702c83dfb"
+    },
+    {
+      "path": "assets/fonts/static/ttf/KoreanSWGIG2-R.ttf",
+      "sha1": "313986ac721202430a21db18d017d7da6e4f5315"
+    },
+    {
       "path": "assets/fonts/static/ttf/SUIT-Bold.ttf",
       "sha1": "4022d4d88d5e4c8d3f619663011cf677a3c32d5a"
     },
@@ -36,6 +44,38 @@
     {
       "path": "assets/fonts/static/ttf/SUIT-Thin.ttf",
       "sha1": "f78379d0eb2f134c037d2e89fd98a53e679fe429"
+    },
+    {
+      "path": "assets/fonts/static/ttf/UnDinaru.ttf",
+      "sha1": "56a670b603ea09b9825a8389976a981576482155"
+    },
+    {
+      "path": "assets/fonts/static/ttf/UnDinaruBold.ttf",
+      "sha1": "e4cd1aef22742b7f4b9e12f299f5922bcc0beafb"
+    },
+    {
+      "path": "assets/fonts/static/ttf/UnDinaruLight.ttf",
+      "sha1": "8332b01d086ee89c3a4e68846200da0419b18a00"
+    },
+    {
+      "path": "assets/fonts/static/ttf/aaaaa.ttf",
+      "sha1": "313986ac721202430a21db18d017d7da6e4f5315"
+    },
+    {
+      "path": "assets/fonts/static/ttf/korean-final.ttf",
+      "sha1": "2703692696adfe8543df4d8da09f9c7579b31102"
+    },
+    {
+      "path": "assets/fonts/static/ttf/korean1.ttf",
+      "sha1": "f129fc8d9ae8059d5ca49001475b3967a1a14ea3"
+    },
+    {
+      "path": "assets/fonts/static/ttf/korean3.ttf",
+      "sha1": "d0a5904948f6b296e61a5d966caafb3a8e2567af"
+    },
+    {
+      "path": "assets/fonts/static/ttf/korean4.ttf",
+      "sha1": "9315f7db168cc47e12f933c25e89d2dc012a107d"
     }
   ]
 }

@@ -1,8 +1,8 @@
-import { Dimensions } from 'react-native';
+import {Dimensions} from 'react-native';
 
-const { width, height } = Dimensions.get('window');
-console.log("width", width)
-console.log("height", height)
+const {width, height} = Dimensions.get('window');
+console.log('width', width);
+console.log('height', height);
 
 export const Slides = [
   {
@@ -52,8 +52,15 @@ export const Images = {
 export const whisper_token =
   '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';
 
-
 export function compareSentences(se1, se2) {
+  console.log(
+    '================================================================',
+  );
+  console.log(se1);
+  console.log(se2);
+  console.log(
+    '================================================================',
+  );
   // // Remove special characters and convert to lowercase
   // const cleanSentence1 = sentence1.replace(/[^\w\s]/g, '').toLowerCase();
   // const cleanSentence2 = sentence2.replace(/[^\w\s]/g, '').toLowerCase();
@@ -80,9 +87,14 @@ export function compareSentences(se1, se2) {
   // const percentage = (consecutiveMatches / maxLength) * 100;
 
   // return percentage;
-  const s1 = se1.replace(/\s+/g, '')
-  const s2 = se2.replace(/\s+/g, '')
-  console.log("sentence1 sentence2", s1, s2)
+  const s1 = se1
+    .replace(/\s/g, '')
+    .replace(
+      /[^\uAC00-\uD7AF\u1100-\u11FF\u3130-\u318F\uA960-\uA97F\uAC00-\uD7A3\uFFA1-\uFFDC]+/g,
+      '',
+    ); //.replace(/\s+/g, '');
+  const s2 = se2.replace(/\s/g, ''); //.replace(/\s+/g, '');
+  // console.log('sentence1 sentence2', s1, s2);
   const m = s1.length;
   const n = s2.length;
   const dp = Array.from(Array(m + 1), () => Array(n + 1).fill(0));
@@ -101,7 +113,7 @@ export function compareSentences(se1, se2) {
       dp[i][j] = Math.min(
         dp[i - 1][j] + 1,
         dp[i][j - 1] + 1,
-        dp[i - 1][j - 1] + cost
+        dp[i - 1][j - 1] + cost,
       );
     }
   }
@@ -128,7 +140,7 @@ function levenshteinDistance(s1, s2) {
       dp[i][j] = Math.min(
         dp[i - 1][j] + 1,
         dp[i][j - 1] + 1,
-        dp[i - 1][j - 1] + cost
+        dp[i - 1][j - 1] + cost,
       );
     }
   }
