@@ -8,10 +8,13 @@ const MainScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image
-        resizeMode="cover"
+        resizeMode="contain"
         source={require('../../assets/images/MainScreen/Main.png')}
+        style={{
+          width: '100%',
+          height: '100%',
+        }}
       />
-
       <TouchableOpacity
         style={styles.searchingBtn}
         onPress={() => {
@@ -20,6 +23,9 @@ const MainScreen = ({navigation}) => {
         <Image
           resizeMode="cover"
           source={require('../../assets/images/MainScreen/Searching.png')}
+          style={{
+            opacity: 0,
+          }}
         />
       </TouchableOpacity>
 
@@ -31,6 +37,9 @@ const MainScreen = ({navigation}) => {
         <Image
           resizeMode="cover"
           source={require('../../assets/images/MainScreen/YellowButton.png')}
+          style={{
+            opacity: 0,
+          }}
         />
       </TouchableOpacity>
       <TouchableOpacity
@@ -41,6 +50,9 @@ const MainScreen = ({navigation}) => {
         <Image
           resizeMode="cover"
           source={require('../../assets/images/MainScreen/ListeningGame.png')}
+          style={{
+            opacity: 0,
+          }}
         />
       </TouchableOpacity>
       <TouchableOpacity
@@ -51,6 +63,9 @@ const MainScreen = ({navigation}) => {
         <Image
           resizeMode="cover"
           source={require('../../assets/images/MainScreen/SpeakingGame.png')}
+          style={{
+            opacity: 0,
+          }}
         />
       </TouchableOpacity>
       <TouchableOpacity
@@ -61,6 +76,9 @@ const MainScreen = ({navigation}) => {
         <Image
           resizeMode="cover"
           source={require('../../assets/images/MainScreen/PuzzleGame.png')}
+          style={{
+            opacity: 0,
+          }}
         />
       </TouchableOpacity>
     </View>
@@ -94,14 +112,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 1,
     bottom: '6%',
-    left: '11.3%',
+    left: '7%',
     opacity: 0,
   },
   puzzleGame: {
     position: 'absolute',
     zIndex: 1,
     bottom: '6%',
-    right: '11.3%',
+    right: '7%',
     opacity: 0,
   },
   searchingBtn: {

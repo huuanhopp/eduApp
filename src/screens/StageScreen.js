@@ -1,23 +1,36 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-const StageScreen = ({ navigation }) => {
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ImageBackground,
+  Dimensions,
+} from 'react-native';
+import {screenSize} from '../constants/constants';
+import {ratioH} from '../utils/utils';
+const StageScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <Image
-        resizeMode="cover"
-        source={require('../../assets/images/StageScreen/StageScreenNew.png')}
-      />
-      <TouchableOpacity
-        style={styles.closeBtn}
-        onPress={() => {
-          navigation.pop();
+      <ImageBackground
+        style={{
+          height: '100%',
+          aspectRatio: 1194 / 834,
         }}
-      >
-        <Image
-          resizeMode="cover"
-          source={require('../../assets/images/StageScreen/CloseButton.png')}
-        />
-      </TouchableOpacity>
+        resizeMode="contain"
+        source={require('../../assets/images/StageScreen/StageScreenNew.png')}>
+        <TouchableOpacity
+          style={styles.closeBtn}
+          onPress={() => {
+            navigation.pop();
+          }}>
+          <Image
+            resizeMode="contain"
+            source={require('../../assets/images/StageScreen/CloseButton.png')}
+          />
+        </TouchableOpacity>
+      </ImageBackground>
     </View>
   );
 };
@@ -27,17 +40,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFEC99',
     alignItems: 'center',
-    justifyContent: 'center',
   },
   closeBtn: {
-    // backgroundColor: "red",
-    position: 'absolute',
-    zIndex: 1,
-    top: '8.8%',
-    right: '9.2%',
-    borderRadius: 4,
-    opacity: 1,
-    // pointerEvents: 'cursor',
+    alignSelf: 'flex-end',
+    marginRight: ratioH(40),
+    marginTop: ratioH(47),
   },
 });
 

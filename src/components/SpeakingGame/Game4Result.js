@@ -16,9 +16,12 @@ import {useNavigation, useRoute, StackActions} from '@react-navigation/native';
 import WrongSpeakingModalDialog from '../../core/Modal/WrongSpeakingModalDialog';
 import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
 import {CommonSize, ratioH} from '../../utils/utils';
+import VictoryModalDialog from '../../core/Modal/VictoryModalDialog';
+import AppManager from '../../utils/AppManager';
+import VictoryPartModalDialog from '../../core/Modal/VictoryPartModalDialog';
 
 const Game4Result = ({audioUrl}) => {
-  console.log('audioUrl',audioUrl);
+  console.log('audioUrl', audioUrl);
   const [isPauseAudio, setPauseAudio] = useState(true);
   const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
   const navigation = useNavigation();
@@ -26,9 +29,18 @@ const Game4Result = ({audioUrl}) => {
   const isCorrect = route.params?.isCorrect ?? false;
   const [correctModalShown, setCorrectModalShown] = useState(false);
   const [wrongModalShown, setWrongModalShown] = useState(false);
+  const [victoryModalShown, setVictoryModalShow] = useState(false);
 
   const onNext = () => {
-    navigation.dispatch(StackActions.push('ListeningGame1'));
+    // navigation.dispatch(StackActions.push('SpeakingVictoryModal'));
+    setCorrectModalShown(false);
+    setWrongModalShown(false);
+
+    if (AppManager.shared.isFullFlow) {
+      navigation.dispatch(StackActions.push('ListeningGame1'));
+    } else {
+      setVictoryModalShow(true);
+    }
   };
 
   const onRetry = () => {
@@ -108,6 +120,11 @@ const Game4Result = ({audioUrl}) => {
         setModalVisible={WrongSpeakingModalDialog}
         onNext={onNext}
         onRetry={onRetry}
+      />
+      <VictoryPartModalDialog
+        modalVisible={victoryModalShown}
+        setModalVisible={setVictoryModalShow}
+        gameType={1}
       />
     </SpeakingBackground>
   );

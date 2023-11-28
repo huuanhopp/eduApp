@@ -90,7 +90,12 @@ const Game2 = ({navigation}) => {
       navigation={navigation}
       destination="ListeningGame3"
       onCheckResult={onCheckResult}>
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
         <TouchableOpacity
           style={styles.audio}
           onPress={async () => {
@@ -99,6 +104,12 @@ const Game2 = ({navigation}) => {
           <Image
             resizeMode="contain"
             source={require('../../../assets/images/core/Audio.png')}
+            style={{
+              alignSelf: 'center',
+              height: ratioH(85),
+              aspectRatio: 1,
+              marginBottom: 15,
+            }}
           />
         </TouchableOpacity>
         <View>
@@ -168,12 +179,7 @@ const Game2 = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  audio: {
-    alignSelf: 'center',
-    marginBottom: ratioH(30),
-    height: ratioH(85),
-    aspectRatio: 1,
-  },
+  audio: {},
   answerButton: {
     position: 'relative',
     width: ratioH(560),

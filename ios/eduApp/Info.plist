@@ -62,6 +62,16 @@
 		<string>SUIT-Regular.ttf</string>
 		<string>SUIT-SemiBold.ttf</string>
 		<string>SUIT-Thin.ttf</string>
+		<string>korean1.ttf</string>
+		<string>korean3.ttf</string>
+		<string>korean4.ttf</string>
+		<string>KoreanSWGIG2-R.ttf</string>
+		<string>UnDinaru.ttf</string>
+		<string>UnDinaruBold.ttf</string>
+		<string>UnDinaruLight.ttf</string>
+		<string>1HoonGothicgulim Regular.ttf</string>
+		<string>aaaaa.ttf</string>
+		<string>korean-final.ttf</string>
 	</array>
 </dict>
 </plist>

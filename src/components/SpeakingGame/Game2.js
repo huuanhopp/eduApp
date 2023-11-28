@@ -29,39 +29,49 @@ const Game2 = () => {
   //   console.log(`Similarity Percentage: ${similarityPercentage}`);
   // }, []);
   /// cheolsuneun naleul silh-eohanda
-  const initialValues = ['__','__','__','__','__',]
-  const [orderAnsArr, setOrderAnsArr] = useState(initialValues)
+  const initialValues = ['__', '__', '__', '__', '__'];
+  const [orderAnsArr, setOrderAnsArr] = useState(initialValues);
   // 4-2-3-5-1
-  const RESULT = '나는 토스트 색깔에 친구 와 토스트 를 싼 후 내일 을 간다'
- 
+  const RESULT = '나는 토스트 색깔에 친구 와 토스트 를 싼 후 내일 을 간다';
+
   const TEXT_STRING = () => {
-   return (
-    <Text style={styles.textString}>
-      <Text>나는 </Text>
-      <Text style={{ color: '#C65300', fontWeight:'bold' }}>{orderAnsArr[0]}</Text>
-      <Text> </Text>
-      <Text style={{ color: '#C65300', fontWeight:'bold' }}>{orderAnsArr[1]}</Text>
-      <Text>에 </Text>
-      <Text style={{ color: '#C65300', fontWeight:'bold' }}>{orderAnsArr[2]}</Text>
-      <Text> 와 </Text>
-      <Text style={{ color: '#C65300', fontWeight:'bold' }}>{orderAnsArr[3]}</Text>
-      <Text> 를 싼 후 </Text>
-      <Text style={{ color: '#C65300', fontWeight:'bold'}}>{orderAnsArr[4]}</Text>
-      <Text> 을 간다</Text>
-    </Text>
-   ) 
-  }
+    return (
+      <Text style={styles.textString}>
+        <Text>나는 </Text>
+        <Text style={{color: '#C65300', fontWeight: 'bold'}}>
+          {orderAnsArr[0]}
+        </Text>
+        <Text> </Text>
+        <Text style={{color: '#C65300', fontWeight: 'bold'}}>
+          {orderAnsArr[1]}
+        </Text>
+        <Text>에 </Text>
+        <Text style={{color: '#C65300', fontWeight: 'bold'}}>
+          {orderAnsArr[2]}
+        </Text>
+        <Text> 와 </Text>
+        <Text style={{color: '#C65300', fontWeight: 'bold'}}>
+          {orderAnsArr[3]}
+        </Text>
+        <Text> 를 싼 후 </Text>
+        <Text style={{color: '#C65300', fontWeight: 'bold'}}>
+          {orderAnsArr[4]}
+        </Text>
+        <Text> 을 간다</Text>
+      </Text>
+    );
+  };
 
   const arraysAreEqual = (arr1, arr2) => {
-    console.log("arr1 arr2 ", arr1, arr2)
+    console.log('arr1 arr2 ', arr1, arr2);
     if (arr1.length !== arr2.length) return false;
-  
+
     for (let i = 0; i < arr1.length; i++) {
       if (arr1[i] !== arr2[i]) return false;
     }
-  
+
     return true;
-  }
+  };
 
   const [stackChoiceOrder, setStackChoiceOrder] = useState(0);
 
@@ -73,7 +83,7 @@ const Game2 = () => {
       top: 530,
       left: widthScreen * 0.26,
       isCorrect: true,
-      order: 0
+      order: 0,
     },
     {
       id: 2,
@@ -81,7 +91,7 @@ const Game2 = () => {
       top: 530,
       left: widthScreen * 0.48,
       isCorrect: false,
-      order: 0
+      order: 0,
     },
     {
       id: 3,
@@ -89,7 +99,7 @@ const Game2 = () => {
       top: 530,
       left: widthScreen * 0.7,
       isCorrect: false,
-      order: 0
+      order: 0,
     },
     {
       id: 4,
@@ -97,7 +107,7 @@ const Game2 = () => {
       top: 500,
       left: widthScreen * 0.37,
       isCorrect: false,
-      order: 0
+      order: 0,
     },
     {
       id: 5,
@@ -105,38 +115,38 @@ const Game2 = () => {
       top: 500,
       left: widthScreen * 0.59,
       isCorrect: false,
-      order: 0
+      order: 0,
     },
   ]);
-  const RESULT_ARR = ['내일', '점심', '친구', '토스트', '__']
-  
-  useEffect(()=> {
+  const RESULT_ARR = ['내일', '점심', '친구', '토스트', '__'];
+
+  useEffect(() => {
     console.log('ansOptions', anwsOptions);
     const orderArr = [];
     const newOrderAns = [...orderAnsArr];
-      anwsOptions.forEach(ans => {
-        console.log("ans: ", ans?.order )
-        if (ans?.order > 0) {
-          orderArr.push(ans?.order);
-          newOrderAns[ans?.order - 1] = ans?.content;
-        }
-      })
+    anwsOptions.forEach(ans => {
+      console.log('ans: ', ans?.order);
+      if (ans?.order > 0) {
+        orderArr.push(ans?.order);
+        newOrderAns[ans?.order - 1] = ans?.content;
+      }
+    });
 
-    const missingNumbers = Array.from({length: 5}, (_, i) => i + 1).filter(num =>!orderArr.includes(num));
+    const missingNumbers = Array.from({length: 5}, (_, i) => i + 1).filter(
+      num => !orderArr.includes(num),
+    );
     if (missingNumbers.length > 0) {
       console.log('missingNumbre is', missingNumbers);
-      missingNumbers.forEach((order) => {
+      missingNumbers.forEach(order => {
         newOrderAns[order - 1] = '__';
-      })
-    }
-    else {
-
+      });
+    } else {
       const ans = `나는 ${orderAnsArr[0]} ${orderAnsArr[1]}에 ${orderAnsArr[2]} 와 ${orderAnsArr[3]} 를 싼 후 ${orderAnsArr[4]} 을 간다`;
       console.log('NAS IS', ans);
       console.log('RESULT IS', RESULT);
-      console.log('IS EQUAL', ans===RESULT);
+      console.log('IS EQUAL', ans === RESULT);
       const areEqual = arraysAreEqual(RESULT_ARR, orderAnsArr);
-      console.log("areEqual ", areEqual);
+      console.log('areEqual ', areEqual);
       //4 2 3 5 1
       if (areEqual) {
         console.log('correct all');
@@ -145,8 +155,7 @@ const Game2 = () => {
     }
 
     setOrderAnsArr(newOrderAns);
-
-  },[anwsOptions])
+  }, [anwsOptions]);
 
   const indexSelected = useMemo(() => {
     return anwsOptions?.findIndex(e => e?.selected == true);
@@ -161,23 +170,24 @@ const Game2 = () => {
     console.log('vao day');
     let isCondition = false;
 
-    anwsOptions.forEach((answ)=>{
+    anwsOptions.forEach(answ => {
       console.log('answ is', answ);
-      if ((answ?.selected === answ?.isCorrect) && answ?.isCorrect) {
+      if (answ?.selected === answ?.isCorrect && answ?.isCorrect) {
         console.log('correct selected ans');
-        isCondition =  true;
-        }
-    })
+        isCondition = true;
+      }
+    });
     // return isCondition;
     return isAllCorrect;
   };
 
-  const checkPercentageCondition = (textRecording) => {
-    const SENTENCE_RESULT =  '나는 내일 점심에 친구와 토스르를 싼 후 피크닉을 간다'
-    console.log('percentage',  compareSentences(textRecording, SENTENCE_RESULT))
+  const checkPercentageCondition = textRecording => {
+    const SENTENCE_RESULT =
+      '나는 내일 점심에 친구와 토스르를 싼 후 피크닉을 간다';
+    console.log('percentage', compareSentences(textRecording, SENTENCE_RESULT));
     // return ((compareSentences(test, SENTENCE_RESULT) <= 3))
-    return ((compareSentences(textRecording, SENTENCE_RESULT) <= 3))
-  }
+    return compareSentences(textRecording, SENTENCE_RESULT) <= 3;
+  };
   let removedOrderArr = useRef([]);
 
   const handleOrderInButton = (isSelected, index) => {
@@ -208,7 +218,6 @@ const Game2 = () => {
       : setStackChoiceOrder(prevStack => prevStack - 1);
   };
 
-
   return (
     <SpeakingBackground
       title="빈칸 채우기"
@@ -218,30 +227,32 @@ const Game2 = () => {
       indexSelected={indexSelected}
       handleFinishRecording={(audioUrl, textRecording) => {
         console.log('textRecordiing is', textRecording);
-        const isCorrectCondition = checkAnswerCondition() 
+        const isCorrectCondition = checkAnswerCondition();
         console.log('finish checkCorrcect', isCorrectCondition);
         const isCorrectPercentage = checkPercentageCondition(textRecording);
         console.log('finish checkCorrcectPercentage', isCorrectPercentage);
         navigation.navigate('SpeakingGame2Result', {
           isCorrect: isCorrectCondition && isCorrectPercentage,
           audioUrl: audioUrl,
-
         });
       }}
       onClickSpeakingButton={onSelectRecordButton}>
       <View style={{flex: 1, justifyContent: 'center'}}>
-        <View style={{height: ratioH(93), justifyContent:'center', alignItems:'center', position:'relative',  marginBottom: ratioH(70), }}>
-           
+        <View
+          style={{
+            height: ratioH(93),
+            justifyContent: 'center',
+            alignItems: 'center',
+            position: 'relative',
+            marginBottom: ratioH(70),
+          }}>
           <Image
-            resizeMode="contain"
+            resizeMode="stretch"
             source={require('../../../assets/images/SpeakingGame/Game2/yellowFrame.png')}
-            style={styles.hintImg}
-          >
-         
-          </Image>
+            style={styles.hintImg}></Image>
           {/* <Text style={styles.textString}> */}
-              {TEXT_STRING()}
-            {/* </Text> */}
+          {TEXT_STRING()}
+          {/* </Text> */}
         </View>
         <View
           style={{
@@ -262,7 +273,7 @@ const Game2 = () => {
               buttonStyle={styles.buttonStyle}
               textStyle={styles.textStyle}
               style={styles.answerButton}
-               callbackFunc={(isSelected, index) =>
+              callbackFunc={(isSelected, index) =>
                 updateStackChoice(isSelected, 0)
               }
               isHideOrder={true}
@@ -286,7 +297,7 @@ const Game2 = () => {
               isHideOrder={true}
             />
             <AnswerButton
-            selectedOrder={anwsOptions[2].order}
+              selectedOrder={anwsOptions[2].order}
               customWidth={135}
               content={anwsOptions[2].content}
               // multipleChoice={false}
@@ -351,16 +362,13 @@ const styles = StyleSheet.create({
     color: '#E67700',
     // fontFamily: 'SUIT',
     fontSize: 28,
-      // font-style: normal;
-      // font-weight: 500;
-      // line-height: 132.5%; /* 42.4px */
+    // font-style: normal;
+    // font-weight: 500;
+    // line-height: 132.5%; /* 42.4px */
   },
   hintImg: {
-    alignSelf: 'center',
-    // height: ratioH(93),
-    resizeMode: 'contain',
-
-    display: 'relative'
+    width: ratioH(900),
+    height: ratioH(75),
   },
   buttonStyle: {
     height: 56,

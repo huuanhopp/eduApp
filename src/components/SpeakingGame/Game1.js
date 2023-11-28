@@ -15,6 +15,7 @@ import SpeechToTextMic from '../SpeechToTextMic/SpeechToTextMic';
 import Video from 'react-native-video';
 import SpeakingBackgroundCustom from './SpeakingBackgroundCustom';
 import {ratioH} from '../../utils/utils';
+import {StackActions} from '@react-navigation/native';
 
 const Game1 = ({navigation}) => {
   const [isPauseAudio, setPauseAudio] = useState(true);
@@ -25,10 +26,16 @@ const Game1 = ({navigation}) => {
 
   console.log({audioUrl});
   return (
-    <SpeakingBackgroundCustom
+    <SpeakingBackground
       title={'단어 말하기'}
-      subTitle={'소리를 듣고 따라말한 후 비교해보자!'}>
-      <View style={{flexDirection: 'row', marginTop: ratioH(41)}}>
+      question={'소리를 듣고 따라말한 후 비교해보자!'}
+      speakingButtonShown={false}>
+      <View
+        style={{
+          flexDirection: 'row',
+          marginTop: ratioH(41),
+          justifyContent: 'center',
+        }}>
         <TouchableOpacity
           style={{
             marginRight: ratioH(51),
@@ -46,10 +53,10 @@ const Game1 = ({navigation}) => {
           />
         </TouchableOpacity>
         <View
-          // onPress={() => {
-          //   console.log("pause")
-          //   // setPauseAudio(false);
-          // }}
+        // onPress={() => {
+        //   console.log("pause")
+        //   // setPauseAudio(false);
+        // }}
         >
           <Image
             resizeMode="cover"
@@ -69,21 +76,32 @@ const Game1 = ({navigation}) => {
         style={{
           position: 'absolute',
           zIndex: 1000,
-          bottom: ratioH(65),
+          bottom: ratioH(0),
+          alignSelf: 'center',
         }}>
         <SpeechToTextMic
           // isOnlyWhisper={isOnlyWhisper}
           // setOnlyWhisper={setOnlyWhisper}
-          onGetText={_text => {console.log("test is: ", _text)}}
+          onGetText={_text => {
+            console.log('test is: ', _text);
+          }}
           isOnlyRecord={false}
           onFinalMessage={res => {
             // setAudioUrl(res?.audioUrl);
-            navigation.replace('SpeakingGame1Result', {
-              data: {
-                audioUrl: res?.audioUrl,
-                text: res?.text,
-              },
-            });
+            navigation.dispatch(
+              StackActions.push('SpeakingGame1Result', {
+                data: {
+                  audioUrl: res?.audioUrl,
+                  text: res?.text,
+                },
+              }),
+            );
+            // navigation.replace('SpeakingGame1Result', {
+            //   data: {
+            //     audioUrl: res?.audioUrl,
+            //     text: res?.text,
+            //   },
+            // });
             // setPauseAudioUser(false);
             // console.log({res})
             // {
@@ -116,7 +134,7 @@ const Game1 = ({navigation}) => {
           style={{width: 0, height: 0}}
         />
       )}
-    </SpeakingBackgroundCustom>
+    </SpeakingBackground>
   );
 };
 

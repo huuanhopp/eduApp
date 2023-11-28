@@ -13,6 +13,9 @@ import {ratioH} from '../../utils/utils';
 import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
 import WrongSpeakingModalDialog from '../../core/Modal/WrongSpeakingModalDialog';
 import {StackActions} from '@react-navigation/native';
+import VictoryModalDialog from '../../core/Modal/VictoryModalDialog';
+import AppManager from '../../utils/AppManager';
+import VictoryPartModalDialog from '../../core/Modal/VictoryPartModalDialog';
 
 const Game5 = ({navigation}) => {
   const [isPauseAudio, setPauseAudio] = useState(true);
@@ -53,10 +56,17 @@ const Game5 = ({navigation}) => {
   const [correctModalShown, setCorrectModalShown] = useState(false);
   const [wrongModalShown, setWrongModalShown] = useState(false);
   const [answerSelected, setAnswerSlected] = useState(null);
+  const [victoryModalShown, setVictoryModalShow] = useState(false);
 
   const onNext = () => {
     setWrongModalShown(false);
-    navigation.dispatch(StackActions.push('PuzzleGame1'));
+    setCorrectModalShown(false);
+
+    if (AppManager.shared.isFullFlow) {
+      navigation.dispatch(StackActions.push('PuzzleGame1'));
+    } else {
+      setVictoryModalShow(true);
+    }
   };
 
   const onRetry = () => {
@@ -92,9 +102,7 @@ const Game5 = ({navigation}) => {
         <TouchableOpacity
           style={styles.audio}
           onPress={async () => {
-            setPauseAudio(( prevState) => 
-               !prevState
-            );
+            setPauseAudio(prevState => !prevState);
           }}>
           <Image
             style={{width: ratioH(96), height: ratioH(96)}}
@@ -150,6 +158,11 @@ const Game5 = ({navigation}) => {
           setModalVisible={setWrongModalShown}
           onNext={onNext}
           onRetry={onRetry}
+        />
+        <VictoryPartModalDialog
+          modalVisible={victoryModalShown}
+          setModalVisible={setVictoryModalShow}
+          gameType={2}
         />
       </View>
     </ListeningBackground>
