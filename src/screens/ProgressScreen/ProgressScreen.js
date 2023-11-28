@@ -10,14 +10,18 @@ const ProgressScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image
-        resizeMode="cover"
+        resizeMode="stretch"
         source={require('../../../assets/images/ProgressScreen/MainProgress.png')}
+        style={{
+          width: '100%',
+          height: '100%',
+        }}
       />
 
       <TouchableOpacity
         style={styles.backBtn}
         onPress={() => {
-          navigation.pop();
+          navigation.navigate('Main');
         }}>
         <Image
           resizeMode="cover"
@@ -33,11 +37,14 @@ const ProgressScreen = ({navigation}) => {
         // onPress={toggleInstructions}
         onPress={() => {
           // navigation.navigate('Stage1');
-          navigation.navigate('GuideScreen', {status: 1});
+          navigation.navigate('GuideScreen', {status: 4});
         }}>
         <Image
           resizeMode="cover"
           source={require('../../../assets/images/ProgressScreen/YellowNumber.png')}
+          style={{
+            opacity: 0,
+          }}
         />
       </TouchableOpacity>
 
@@ -87,7 +94,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 1,
     top: ratioH(25),
-    left: '11.3%',
+    left: '2%',
     borderRadius: 4,
     opacity: 0,
     width: 100,
@@ -96,10 +103,12 @@ const styles = StyleSheet.create({
   yellowNumber: {
     position: 'absolute',
     zIndex: 1,
-    top: '45%',
-    left: '45%',
+    top: '40%',
+    left: '39%',
     borderRadius: 4,
     opacity: 0,
+    width: ratioH(200),
+    height: ratioH(200),
   },
   instructionContainer: {
     position: 'absolute',

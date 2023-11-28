@@ -104,6 +104,12 @@ const Game2 = ({navigation}) => {
           <Image
             resizeMode="contain"
             source={require('../../../assets/images/core/Audio.png')}
+            style={{
+              alignSelf: 'center',
+              height: ratioH(85),
+              aspectRatio: 1,
+              marginBottom: 15,
+            }}
           />
         </TouchableOpacity>
         <View>
@@ -173,12 +179,7 @@ const Game2 = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  audio: {
-    alignSelf: 'center',
-    marginBottom: 30,
-    height: ratioH(85),
-    aspectRatio: 1,
-  },
+  audio: {},
   answerButton: {
     position: 'relative',
     width: ratioH(560),

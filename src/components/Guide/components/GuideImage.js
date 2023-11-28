@@ -19,13 +19,30 @@ const GuideImage = ({status, onChangeIndex}) => {
       require('../../../../assets/images/GuideScreen/guide5.png'),
       require('../../../../assets/images/GuideScreen/guide6.png'),
       require('../../../../assets/images/GuideScreen/guide7.png'),
-      // require('../../../../assets/images/GuideScreen/guide8.png'),
+      require('../../../../assets/images/GuideScreen/guide8.png'),
       require('../../../../assets/images/GuideScreen/guide9.png'),
     ];
   }
 
   if (status == 3) {
     guideImages = [
+      require('../../../../assets/images/GuideScreen/guide10.png'),
+      require('../../../../assets/images/GuideScreen/guide11.png'),
+      require('../../../../assets/images/GuideScreen/guide12.png'),
+    ];
+  }
+
+  if (status == 4) {
+    guideImages = [
+      require('../../../../assets/images/GuideScreen/guide1.png'),
+      require('../../../../assets/images/GuideScreen/guide2.png'),
+      require('../../../../assets/images/GuideScreen/guide3.png'),
+      require('../../../../assets/images/GuideScreen/guide4.png'),
+      require('../../../../assets/images/GuideScreen/guide5.png'),
+      require('../../../../assets/images/GuideScreen/guide6.png'),
+      require('../../../../assets/images/GuideScreen/guide7.png'),
+      require('../../../../assets/images/GuideScreen/guide8.png'),
+      require('../../../../assets/images/GuideScreen/guide9.png'),
       require('../../../../assets/images/GuideScreen/guide10.png'),
       require('../../../../assets/images/GuideScreen/guide11.png'),
       require('../../../../assets/images/GuideScreen/guide12.png'),

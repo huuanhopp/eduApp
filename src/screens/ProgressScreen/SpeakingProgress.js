@@ -10,14 +10,18 @@ const SpeakingProgress = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image
-        resizeMode="cover"
+        resizeMode="stretch"
         source={require('../../../assets/images/ProgressScreen/SpeakingProgress.png')}
+        style={{
+          width: '100%',
+          height: '100%',
+        }}
       />
 
       <TouchableOpacity
         style={styles.backBtn}
         onPress={() => {
-          navigation.pop();
+          navigation.navigate('Main');
         }}>
         {/* <Image
           resizeMode="cover"
@@ -33,8 +37,9 @@ const SpeakingProgress = ({navigation}) => {
           navigation.navigate('GuideScreen', {status: 1});
         }}>
         <Image
-          resizeMode="cover"
+          resizeMode="stretch"
           source={require('../../../assets/images/ProgressScreen/YellowNumber.png')}
+          style={{opacity: 0, width: ratioH(200), height: ratioH(200)}}
         />
       </TouchableOpacity>
 
@@ -84,7 +89,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 1,
     top: ratioH(25),
-    left: '11.3%',
+    left: '2%',
     borderRadius: 4,
     opacity: 0,
     width: 100,
@@ -93,10 +98,10 @@ const styles = StyleSheet.create({
   yellowNumber: {
     position: 'absolute',
     zIndex: 1,
-    top: '64%',
-    left: '24.5%',
+    top: '57%',
+    left: '17%',
     borderRadius: 4,
-    opacity: 0,
+    opacity: 1,
   },
   instructionContainer: {
     position: 'absolute',

@@ -1,14 +1,5 @@
 import React, {useEffect} from 'react';
-import {
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ImageBackground,
-} from 'react-native';
-import {screenSize} from '../constants/constants';
-import {ratioH} from '../utils/utils';
+import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 const MainScreen = ({navigation}) => {
   // useEffect(() => {
   //   navigation.navigate('PuzzleGame3');
@@ -17,10 +8,13 @@ const MainScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image
-        resizeMode="cover"
+        resizeMode="contain"
         source={require('../../assets/images/MainScreen/Main.png')}
+        style={{
+          width: '100%',
+          height: '100%',
+        }}
       />
-
       <TouchableOpacity
         style={styles.searchingBtn}
         onPress={() => {
@@ -97,6 +91,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ECF4FF',
     alignItems: 'center',
     justifyContent: 'center',
+    // backgroundColor: 'rgb(224,238,255)',
   },
   yellowBtn: {
     position: 'absolute',
@@ -104,36 +99,35 @@ const styles = StyleSheet.create({
     top: '50%',
     left: '14.3%',
     borderRadius: 4,
-    opacity: 1,
+    opacity: 0,
+    // pointerEvents: 'none',
   },
   listeningGame: {
     position: 'absolute',
     zIndex: 1,
     bottom: '6%',
-    opacity: 1,
+    opacity: 0,
   },
   speakingGame: {
     position: 'absolute',
     zIndex: 1,
     bottom: '6%',
-    left: '11.3%',
-    opacity: 1,
+    left: '7%',
+    opacity: 0,
   },
   puzzleGame: {
     position: 'absolute',
     zIndex: 1,
     bottom: '6%',
-    right: '11.3%',
-    opacity: 1,
+    right: '7%',
+    opacity: 0,
   },
   searchingBtn: {
     position: 'absolute',
     zIndex: 1,
-    right: '15.5%',
-    top: '15%',
-    opacity: 1,
-    width: ratioH(380),
-    height: ratioH(380),
+    left: '15.5%',
+    top: '9.1%',
+    opacity: 0,
   },
 });
 

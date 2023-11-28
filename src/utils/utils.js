@@ -87,9 +87,14 @@ export function compareSentences(se1, se2) {
   // const percentage = (consecutiveMatches / maxLength) * 100;
 
   // return percentage;
-  const s1 = se1.replace(/\s+/g, '');
-  const s2 = se2.replace(/\s+/g, '');
-  console.log('sentence1 sentence2', s1, s2);
+  const s1 = se1
+    .replace(/\s/g, '')
+    .replace(
+      /[^\uAC00-\uD7AF\u1100-\u11FF\u3130-\u318F\uA960-\uA97F\uAC00-\uD7A3\uFFA1-\uFFDC]+/g,
+      '',
+    ); //.replace(/\s+/g, '');
+  const s2 = se2.replace(/\s/g, ''); //.replace(/\s+/g, '');
+  // console.log('sentence1 sentence2', s1, s2);
   const m = s1.length;
   const n = s2.length;
   const dp = Array.from(Array(m + 1), () => Array(n + 1).fill(0));

@@ -12,6 +12,7 @@ import GuideImage from './components/GuideImage';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import {ratioH} from '../../utils/utils';
 import {CommonSize, Images, ratioW} from '../../utils/utils';
+import AppManager from '../../utils/AppManager';
 
 const widthScreen = Dimensions.get('screen').height * 1.431;
 
@@ -28,10 +29,25 @@ const GuideScreen = ({navigation, route}) => {
     '스피커를 눌러 나오는 소리를 듣고, 들리는 순서에 맞춰 단어를 차례대로 선택해보자!',
     '스피커를 눌러 나오는 소리를 듣고, 주어진 문장들 속에서 소리와 일치하는 문장을 찾아 선택해보자!',
     '스피커를 눌렀을 때 나오는 소음 속에서 단어를 찾아보자! 찾은 단어를 보기에서 골라 선택하면 돼!',
-    // '재생되는 영상을 보며 스피커를 눌러 소리를 동시에 들은 후, 영상의 상황과 소음의 상황이 일치하는지 아닌지 찾아보자! ',
+    '재생되는 영상을 보며 스피커를 눌러 소리를 동시에 들은 후, 영상의 상황과 소음의 상황이 일치하는지 아닌지 찾아보자! ',
     '스피커를 눌러 주어지는 짧은 이야기를 집중해서 듣고 주어진 문제를 풀어보자!',
   ];
   const puzzleDescriptions = [
+    '주어진 시간 안에 카드를 뒤집어 같은 그림을 찾아보자! 제한 시간은 30초니까 서두르는게 좋을거야!',
+    '주어진 시간 안에 틀린 그림 5가지를 찾아보자! 제한 시간은 30초니까 서두르는게 좋을거야!',
+    '주어진 시간 안에 퍼즐을 맞춰보자! 제한 시간은 30초니까 서두르는게 좋을거야!',
+  ];
+
+  const descriptions = [
+    '왼쪽 박스를 눌러 단어 발음을 들은 후, 마이크를 눌러 발음 연습을 하는 훈련이야. 녹음을 하고 나서 소리를 번갈아가며듣고 발음을 고치는 훈련을 도전해보자!',
+    '문제의 빈 칸을 주어진 다섯가지 단어를 이용해 채운 후 문장을 만들어보자! 다 만든 후 마이크를 눌러 문장을 또박또박 읽어보자!',
+    '주어진 단어 중 한 개를 골라 문장의 빈칸을 채워서 문장을 완성시키고 마이크를 눌러 또박또박 읽어보자!',
+    '주어진 단어와 비슷한 발음을 가지고 있는 단어를 찾아보자! 비슷한 자음, 또는 모음을 가지고 있는 정답을 골라서 마이크를 누른 후 또박또박 읽어보자!',
+    '스피커를 눌러 나오는 소리를 듣고, 들리는 순서에 맞춰 단어를 차례대로 선택해보자!',
+    '스피커를 눌러 나오는 소리를 듣고, 주어진 문장들 속에서 소리와 일치하는 문장을 찾아 선택해보자!',
+    '스피커를 눌렀을 때 나오는 소음 속에서 단어를 찾아보자! 찾은 단어를 보기에서 골라 선택하면 돼!',
+    '재생되는 영상을 보며 스피커를 눌러 소리를 동시에 들은 후, 영상의 상황과 소음의 상황이 일치하는지 아닌지 찾아보자! ',
+    '스피커를 눌러 주어지는 짧은 이야기를 집중해서 듣고 주어진 문제를 풀어보자!',
     '주어진 시간 안에 카드를 뒤집어 같은 그림을 찾아보자! 제한 시간은 30초니까 서두르는게 좋을거야!',
     '주어진 시간 안에 틀린 그림 5가지를 찾아보자! 제한 시간은 30초니까 서두르는게 좋을거야!',
     '주어진 시간 안에 퍼즐을 맞춰보자! 제한 시간은 30초니까 서두르는게 좋을거야!',
@@ -43,15 +59,21 @@ const GuideScreen = ({navigation, route}) => {
   const onStartTraining = () => {
     switch (status) {
       case 1:
+        AppManager.shared.isFullFlow = false;
         navigation.navigate('SpeakingGame1');
         break;
       case 2:
+        AppManager.shared.isFullFlow = false;
         navigation.navigate('ListeningGame1');
         break;
       case 3:
+        AppManager.shared.isFullFlow = false;
         navigation.navigate('PuzzleGame1', {status: 3});
         break;
       default:
+        AppManager.shared.isFullFlow = true;
+        navigation.navigate('SpeakingGame1');
+        break;
       // Handle any other cases if needed
     }
   };
@@ -67,6 +89,7 @@ const GuideScreen = ({navigation, route}) => {
       case 3:
         return require('../../../assets/images/GuideScreen/puzzle-title.png');
       default:
+        return require('../../../assets/images/GuideScreen/guideTitleImg.png');
     }
   };
 
@@ -85,6 +108,8 @@ const GuideScreen = ({navigation, route}) => {
         setDescription(puzzleDescriptions);
         break;
       default:
+        setDescription(descriptions);
+        break;
     }
   }, [status]);
 

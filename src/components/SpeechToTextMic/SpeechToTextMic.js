@@ -126,7 +126,7 @@ const SpeechToTextMic = ({
       .post('https://api.openai.com/v1/audio/transcriptions', param, {
         headers: {
           Authorization:
-            'Bearer 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',
+            'Bearer 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',
         },
       })
       .then(res => {

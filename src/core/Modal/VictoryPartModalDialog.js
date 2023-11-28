@@ -14,14 +14,12 @@ import Gif from 'react-native-gif';
 import {useNavigation} from '@react-navigation/native';
 import {StackActions} from '@react-navigation/native';
 import {ratioH} from '../../utils/utils';
-import AppManager from '../../utils/AppManager';
 
 const widthScreen = Dimensions.get('screen').height * 1.431;
 
-const VictoryModalDialog = ({
+const VictoryPartModalDialog = ({
   modalVisible,
   setModalVisible,
-  gameType = 3,
   // navigation,
   destination,
   onNext,
@@ -47,7 +45,7 @@ const VictoryModalDialog = ({
       <View style={styles.container}>
         <ImageBackground
           resizeMode="cover"
-          source={require('../../../assets/images/core/StopModalDialog.png')}
+          source={require('../../../assets/images/core/StopPartModal.png')}
           style={styles.bgImg}>
           <FastImage
             style={styles.gifImage}
@@ -60,27 +58,7 @@ const VictoryModalDialog = ({
               onPress={() => {
                 setModalVisible(false);
                 //   setIsRunning(false)
-                if (AppManager.shared.isFullFlow) {
-                  AppManager.shared.isFullFlow = true;
-                  navigation.dispatch(StackActions.push('Progress'));
-                } else {
-                  AppManager.shared.isFullFlow = false;
-                  switch (gameType) {
-                    case 1:
-                      navigation.dispatch(
-                        StackActions.push('SpeakingProgress'),
-                      );
-                      break;
-                    case 2:
-                      navigation.dispatch(
-                        StackActions.push('ListeningProgress'),
-                      );
-                      break;
-                    default:
-                      navigation.dispatch(StackActions.push('PuzzleProgress'));
-                      break;
-                  }
-                }
+                navigation.dispatch(StackActions.push('PuzzleProgress'));
               }}
             />
             <TouchableOpacity
@@ -167,4 +145,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default VictoryModalDialog;
+export default VictoryPartModalDialog;

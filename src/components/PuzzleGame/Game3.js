@@ -12,6 +12,8 @@ import Card2 from '../../core/Card/Card2';
 import SpeakingModalDialog from '../../core/Modal/SpeakingModalDialog';
 import {StackActions} from '@react-navigation/native';
 import VictoryModalDialog from '../../core/Modal/VictoryModalDialog';
+import VictoryPartModalDialog from '../../core/Modal/VictoryPartModalDialog';
+import AppManager from '../../utils/AppManager';
 
 const FragImage = ({urlImage, onClick, ok}) => {
   return (
@@ -52,7 +54,7 @@ const Game3 = ({navigation}) => {
   const [selectLeft, setSelectLeft] = useState();
   const [selectRight, setSelectRight] = useState();
   const [correctModalShown, setCorrectModalShown] = useState(false);
-  const [isRunning, setIsRunning] = useState(false);
+  const [isRunning, setIsRunning] = useState(true);
   const [isCorrect, setIsCorrect] = useState(false);
 
   const [p1, setP1] = useState(false);
@@ -66,6 +68,8 @@ const Game3 = ({navigation}) => {
   const [p9, setP9] = useState(false);
 
   const onCheckResult = () => {
+    console.log('================================');
+    console.log(isCorrect);
     if (isCorrect) {
       setIsRunning(false);
       setCorrectModalShown(true);
@@ -76,7 +80,7 @@ const Game3 = ({navigation}) => {
     if (p1 && p2 && p3 && p4 && p5 && p6 && p7 && p8 && p9) {
       setIsCorrect(true);
     }
-  }, [p1, p2, p3, p4, p5, p6, p7, p8]);
+  }, [p1, p2, p3, p4, p5, p6, p7, p8, p9]);
 
   const handleCheckResult = (selectLeft, selectRight) => {
     // Implement your check result logic here
@@ -343,9 +347,10 @@ const Game3 = ({navigation}) => {
             </View>
           </View>
         </View>
-        <VictoryModalDialog
+        <VictoryPartModalDialog
           modalVisible={correctModalShown}
           setModalVisible={setCorrectModalShown}
+          gameType={1}
         />
       </View>
     </PuzzleBackground>
